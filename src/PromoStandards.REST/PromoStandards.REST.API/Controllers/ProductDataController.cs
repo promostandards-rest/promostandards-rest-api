@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace PromoStandards.REST.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class ProductDataController : ControllerBase
     {
         public ProductDataController()
