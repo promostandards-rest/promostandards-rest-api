@@ -1,5 +1,8 @@
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.StaticImplementation;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,16 +11,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "alpha",
+        Title = "PromoStandards",
+        Description = "Putting SOAP to REST"
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
+
+});
+
 builder.Services.AddSingleton<IProductDataService, StaticProductDataService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(options =>{
+    options.InjectStylesheet("/custom.css");
+});
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
