@@ -10,4 +10,13 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PromoStandards.REST.StaticImplementation\PromoStandards.REST.StaticImplementation.csproj" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
 </Project>
