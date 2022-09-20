@@ -10,9 +10,9 @@ namespace PromoStandards.REST.API.Controllers
         }
 
         [HttpGet("api/products/{id}")]
-        public object Get(string id)
+        public Product Get(string id)
         {
-            return new 
+            return new Product
             {
                 productId = "product-1"
             };
