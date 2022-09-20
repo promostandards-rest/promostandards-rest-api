@@ -1,0 +1,23 @@
+{
+  "FilterValues": {
+    "productId": "SL238PR",
+    "Filter": {
+      "partIdArray": [
+        "FP12-34-00",
+        "SL238PR-32-00",
+        "SL238PR-34-00",
+        "SL238PR-35-00",
+        "SL238PR-37-00",
+        "SL238PR-59-00"
+      ],
+      "PartColorArray": [
+        "Black",
+        "Blue",
+        "Dark Gray",
+        "Gray",
+        "White"
+      ]
+    }
+  }
+}
+

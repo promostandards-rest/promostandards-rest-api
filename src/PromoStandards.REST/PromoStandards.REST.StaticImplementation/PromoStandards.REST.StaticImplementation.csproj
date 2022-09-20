@@ -7,6 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Inventory\MockDataContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Inventory\GetInventoryFilterValuesResponse.json" />
+    <None Remove="Inventory\GetInventoryLevelsResponse.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Inventory\GetInventoryFilterValuesResponse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Inventory\GetInventoryLevelsResponse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PromoStandards.REST.Abstraction\PromoStandards.REST.Abstraction.csproj" />
   </ItemGroup>
 
