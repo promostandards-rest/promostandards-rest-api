@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PromoStandards.REST.MongoDBApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
