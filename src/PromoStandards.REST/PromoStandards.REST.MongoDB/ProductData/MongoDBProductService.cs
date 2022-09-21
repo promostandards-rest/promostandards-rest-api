@@ -63,7 +63,8 @@ namespace PromoStandards.REST.MongoDB.ProductData
                 Skip = 0,
                 Limit = 1
             });
-            return await result.FirstOrDefaultAsync();
+            var product = await result.FirstOrDefaultAsync();
+            return JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product));
         }
 
         public virtual IMongoCollection<ProductExtended> GetCollection(string databaseName, string collectionName)
