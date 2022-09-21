@@ -1,8 +1,7 @@
 ﻿using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.Inventory;
-using System.Reflection;
 
-namespace PromoStandards.REST.StaticImplementation;
+namespace PromoStandards.REST.StaticImplementation.Inventory;
 
 public class StaticInventoryService : IInventoryService
 {

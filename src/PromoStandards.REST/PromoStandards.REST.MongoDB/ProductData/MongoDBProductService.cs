@@ -4,8 +4,9 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.ProductData.Models;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
-namespace PromoStandards.REST.MongoDB
+namespace PromoStandards.REST.MongoDB.ProductData
 {
     public class MongoDBProductService : IProductDataService
     {

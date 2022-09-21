@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDBApp;
 using System.IO;
+using PromoStandards.REST.MongoDB.ProductData;
 
 var basePath = Directory.GetCurrentDirectory();
 

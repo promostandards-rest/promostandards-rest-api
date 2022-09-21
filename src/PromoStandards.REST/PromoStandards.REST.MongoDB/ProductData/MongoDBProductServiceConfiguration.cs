@@ -1,4 +1,4 @@
-﻿namespace PromoStandards.REST.MongoDB;
+﻿namespace PromoStandards.REST.MongoDB.ProductData;
 
 public class MongoDBProductServiceConfiguration
 {

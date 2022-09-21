@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\PromoStandards.REST.StaticImplementation\PromoStandards.REST.StaticImplementation.csproj" />
+		<ProjectReference Include="..\PromoStandards.REST.MongoDB\PromoStandards.REST.MongoDB.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

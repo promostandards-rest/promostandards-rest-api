@@ -1,5 +1,6 @@
 ﻿using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.ProductData.Models;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 namespace PromoStandards.REST.StaticImplementation;
 

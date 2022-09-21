@@ -1,5 +1,5 @@
-﻿using MongoDB.Bson;
-using PromoStandards.REST.Core.ProductData.Models;
+﻿using PromoStandards.REST.Core.ProductData.Models;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 namespace PromoStandards.REST.Abstraction
 {

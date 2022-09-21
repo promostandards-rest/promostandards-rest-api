@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+
 /// <summary>
 /// Product class summary
 /// </summary>
