@@ -8,7 +8,7 @@ using PromoStandards.REST.Abstraction;
 using System;
 using System.Reflection;
 using PromoStandards.REST.StaticImplementation;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace PromoStandards.REST.API
 {
@@ -25,12 +25,21 @@ namespace PromoStandards.REST.API
         {
             services.AddSingleton<IProductDataService, StaticProductDataService>();
             services.AddScoped<IInventoryService, StaticInventoryService>();
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllers();
+            services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PromoStandards.REST API DEMO", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "alpha",
+                    Title = "PromoStandards",
+                    Description = "Putting SOAP to REST"
+                });
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
 
             });
         }
@@ -47,6 +56,7 @@ namespace PromoStandards.REST.API
             {
                 //c.RoutePrefix = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PromoStandards.REST.API v1");
+                c.InjectStylesheet("/custom.css");
             });
 
 
