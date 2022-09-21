@@ -12,10 +12,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MongoDB.Driver" Version="2.17.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\PromoStandards.REST.MongoDB\PromoStandards.REST.MongoDB.csproj" />
 		<ProjectReference Include="..\PromoStandards.REST.StaticImplementation\PromoStandards.REST.StaticImplementation.csproj" />
 	</ItemGroup>
 

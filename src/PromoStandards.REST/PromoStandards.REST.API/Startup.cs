@@ -9,6 +9,8 @@ using System;
 using System.Reflection;
 using PromoStandards.REST.StaticImplementation;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using PromoStandards.REST.MongoDB;
 
 namespace PromoStandards.REST.API
 {
@@ -23,9 +25,6 @@ namespace PromoStandards.REST.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductDataService, StaticProductDataService>();
-            services.AddScoped<IInventoryService, StaticInventoryService>();
-
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
@@ -42,6 +41,19 @@ namespace PromoStandards.REST.API
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
 
             });
+
+            services.AddOptions();
+
+            services.AddSingleton<IMongoClient>(c => new MongoClient(Configuration["MongoDB:Url"]))
+                .AddScoped(c => c.GetService<IMongoClient>().StartSession());
+            services.Configure<MongoDBProductServiceConfiguration>(p =>
+            {
+                p.DatabaseName = Configuration["Config:DatabaseName"];
+                p.ProductCollectionName = Configuration["Config:ProductCollectionName"];
+            });
+
+            services.AddSingleton<IProductDataService, MongoDBProductService>();
+            services.AddScoped<IInventoryService, StaticInventoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
