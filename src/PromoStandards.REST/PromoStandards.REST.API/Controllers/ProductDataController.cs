@@ -12,9 +12,12 @@ namespace PromoStandards.REST.API.Controllers
     public class ProductDataController : ControllerBase
     {
         private readonly IProductDataService _productDataService;
-        public ProductDataController(IProductDataService productDataService)
+        private readonly IInventoryService _inventoryService;
+
+        public ProductDataController(IProductDataService productDataService, IInventoryService inventoryService)
         {
             _productDataService = productDataService;
+            _inventoryService = inventoryService;
         }
 
         /// <summary>
@@ -111,8 +114,32 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<Inventory> GetInventoryLevels(string productId) {
-            throw new NotImplementedException();
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetInventoryLevels(string productId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(productId))
+                {
+                    return BadRequest("ProductId Required");
+                }
+                var request = new GetInventoryLevelsRequest() { wsVersion = wsVersion.Item200, productId = productId.ToUpper() };
+                var response = await _inventoryService.GetInventoryLevels(request);
+                if (response == null)
+                {
+                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                }
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex.Message);
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
+
     }
 }

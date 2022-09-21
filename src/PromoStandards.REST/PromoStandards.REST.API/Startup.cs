@@ -12,6 +12,7 @@ using MongoDB.Driver;
 using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDB.ProductData;
 using Swashbuckle.AspNetCore.Newtonsoft;
+using PromoStandards.REST.MongoDB.Inventory;
 
 namespace PromoStandards.REST.API
 {
@@ -57,6 +58,13 @@ namespace PromoStandards.REST.API
                 p.ProductCollectionName = Configuration["Config:ProductCollectionName"];
             });
             services.AddSingleton<IProductDataService, MongoDBProductService>();
+
+            services.Configure<MongoDBInventoryServiceConfiguration>(c =>
+            {
+                c.DatabaseName = Configuration["Config:DatabaseName"];
+                c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
+            });
+            services.AddSingleton<IInventoryService, MongoDBInventoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

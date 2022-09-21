@@ -5,6 +5,6 @@ namespace PromoStandards.REST.Abstraction
     public interface IInventoryService
     {
         GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request);
-        GetInventoryLevelsResponse GetInventoryLevels(GetInventoryLevelsRequest request);       
+        Task<Core.Inventory.Inventory?> GetInventoryLevels(GetInventoryLevelsRequest request);       
     }
 }
