@@ -8,6 +8,7 @@ using PromoStandards.REST.Abstraction;
 using System;
 using System.Reflection;
 using PromoStandards.REST.StaticImplementation;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace PromoStandards.REST.API
 {
@@ -24,6 +25,7 @@ namespace PromoStandards.REST.API
         {
             services.AddSingleton<IProductDataService, StaticProductDataService>();
             services.AddScoped<IInventoryService, StaticInventoryService>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

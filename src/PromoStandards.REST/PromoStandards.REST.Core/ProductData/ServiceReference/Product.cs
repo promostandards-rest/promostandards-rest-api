@@ -64,7 +64,9 @@ public partial class Product
     private string imprintSizeField;
     
     private FobPoint[] fobPointArrayField;
-    
+
+    public bool? isSellable;
+
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=0)]
     public string productId

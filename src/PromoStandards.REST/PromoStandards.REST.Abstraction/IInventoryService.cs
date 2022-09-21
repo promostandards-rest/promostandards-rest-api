@@ -6,9 +6,5 @@ namespace PromoStandards.REST.Abstraction
     {
         GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request);
         GetInventoryLevelsResponse GetInventoryLevels(GetInventoryLevelsRequest request);       
-
     }
-
-
-    
 }
