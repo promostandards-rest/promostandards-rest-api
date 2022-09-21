@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
 /// <summary>
 /// Issues:
 /// 1. Authentication
@@ -138,8 +140,8 @@ namespace PromoStandards.REST.Core.Inventory
         public decimal value { get; set; }
     }
 
-    public enum QuantityUom
-    {
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum QuantityUom {
 
         /// <remarks/>
         BX,
@@ -188,6 +190,7 @@ namespace PromoStandards.REST.Core.Inventory
         public FutureAvailability[] FutureAvailabilityArray { get; set; }
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum InventoryLocationCountry
     {
 

@@ -1,4 +1,7 @@
-﻿/// <remarks/>
+﻿using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+/// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/")]
@@ -19,6 +22,8 @@ public partial class Dimension
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [EnumDataType(typeof(dimensionUom))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public dimensionUom dimensionUom
     {
         get

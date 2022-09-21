@@ -4,6 +4,8 @@ using PromoStandards.REST.Core.Inventory;
 namespace PromoStandards.REST.API.Controllers
 {
     [ApiController]
+    [Tags("Product Data")]
+    [Route("api/products")]
     public class ProductDataController : ControllerBase
     {
         public ProductDataController()
@@ -20,7 +22,7 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">All products matching the filters are returned</response>
-        [HttpGet("api/products")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerator<Product> GetProducts(DateTime? dateModified, bool? closeOut, bool? sellable)
         {
@@ -35,7 +37,7 @@ namespace PromoStandards.REST.API.Controllers
         /// </remarks>
         /// <response code="200">Returns the product</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/products/{productId}")]
+        [HttpGet("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public Product GetProduct(string productId) {
             throw new NotImplementedException();
@@ -49,7 +51,7 @@ namespace PromoStandards.REST.API.Controllers
         /// </remarks>
         /// <response code="200">Returns a collection of product colors</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/products/{productId}/colors")]
+        [HttpGet("{productId}/colors")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<string> GetProductColors(string productId) {
             throw new NotImplementedException();
@@ -63,7 +65,7 @@ namespace PromoStandards.REST.API.Controllers
         /// </remarks>
         /// <response code="200">Returns a collection of product sizes</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/products/{productId}/sizes")]
+        [HttpGet("{productId}/sizes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<string> GetProductSizes(string productId) {
             throw new NotImplementedException();
@@ -77,7 +79,7 @@ namespace PromoStandards.REST.API.Controllers
         /// </remarks>
         /// <response code="200">Returns a collection of product parts</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/products/{productId}/parts")]
+        [HttpGet("{productId}/parts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<string> GetProductParts(string productId) {
             throw new NotImplementedException();
@@ -91,7 +93,7 @@ namespace PromoStandards.REST.API.Controllers
         /// </remarks>
         /// <response code="200">Returns inventory levels</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/products/{productId}/inventory")]
+        [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<Inventory> GetInventoryLevels(string productId) {
             throw new NotImplementedException();

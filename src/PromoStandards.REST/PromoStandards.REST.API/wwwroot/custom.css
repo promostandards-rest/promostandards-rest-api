@@ -22,3 +22,7 @@ table.model tr {
 span.prop-enum > br {
     display: none;
 }
+
+.swagger-ui .model-hint {
+    display:none !important;
+}

@@ -9,6 +9,7 @@ using System;
 using System.Reflection;
 using PromoStandards.REST.StaticImplementation;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Newtonsoft;
 
 namespace PromoStandards.REST.API
 {
@@ -37,11 +38,14 @@ namespace PromoStandards.REST.API
                     Description = "Putting SOAP to REST"
                 });
 
+                c.UseInlineDefinitionsForEnums();
+
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
 
             });
+            services.AddSwaggerGenNewtonsoftSupport();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

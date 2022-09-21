@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace PromoStandards.REST.Core.Inventory
 {
-    public enum SortOrder
-    {
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum SortOrder {
         Ascending = 0,
         Descending = 1
     }
