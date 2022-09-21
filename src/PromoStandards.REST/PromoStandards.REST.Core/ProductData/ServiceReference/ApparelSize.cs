@@ -5,15 +5,15 @@
 public partial class ApparelSize
 {
     
-    private ApparelSizeApparelStyle apparelStyleField;
+    private ApparelStyle apparelStyleField;
     
-    private ApparelSizeLabelSize labelSizeField;
+    private LabelSize labelSizeField;
     
     private string customSizeField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public ApparelSizeApparelStyle apparelStyle
+    public ApparelStyle apparelStyle
     {
         get
         {
@@ -27,7 +27,7 @@ public partial class ApparelSize
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public ApparelSizeLabelSize labelSize
+    public LabelSize labelSize
     {
         get
         {

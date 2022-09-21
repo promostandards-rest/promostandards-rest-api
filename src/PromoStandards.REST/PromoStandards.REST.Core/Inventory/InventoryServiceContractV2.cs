@@ -46,73 +46,8 @@ namespace PromoStandards.REST.Core.Inventory
     public class Filter
     {
         public string[] partIdArray { get; set; }
-        public labelSize[] LabelSizeArray { get; set; }
+        public LabelSize[] LabelSizeArray { get; set; }
         public string[] PartColorArray { get; set; }
-    }
-
-    public enum labelSize
-    {
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("2XL")]
-        Item2XL,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("2XS")]
-        Item2XS,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("3XL")]
-        Item3XL,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("3XS")]
-        Item3XS,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("4XL")]
-        Item4XL,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("4XS")]
-        Item4XS,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("5XL")]
-        Item5XL,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("5XS")]
-        Item5XS,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("6XL")]
-        Item6XL,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnum("6XS")]
-        Item6XS,
-
-        /// <remarks/>
-        CUSTOM,
-
-        /// <remarks/>
-        L,
-
-        /// <remarks/>
-        M,
-
-        /// <remarks/>
-        OSFA,
-
-        /// <remarks/>
-        S,
-
-        /// <remarks/>
-        XL,
-
-        /// <remarks/>
-        XS,
     }
 
     public class ServiceMessage
@@ -176,18 +111,17 @@ namespace PromoStandards.REST.Core.Inventory
     public class Inventory
     {
         public string productId { get; set; }
-        public PartInventoryArrayPartInventory[] PartInventoryArray { get; set; }
+        public PartInventory[] PartInventoryArray { get; set; }
     }
 
-    public class PartInventoryArrayPartInventory
-    {
+    public class PartInventory {
         public string partId { get; set; }
         public bool mainPart { get; set; }
         public string partColor { get; set; }
-        public labelSize labelSize { get; set; }
+        public LabelSize labelSize { get; set; }
         public bool labelSizeSpecified { get; set; }
         public string partDescription { get; set; }
-        public quantityAvailable quantityAvailable { get; set; }
+        public Quantity quantityAvailable { get; set; }
         public bool manufacturedItem { get; set; }
         public bool buyToOrder { get; set; }
         public int replenishmentLeadTime { get; set; }
@@ -198,10 +132,6 @@ namespace PromoStandards.REST.Core.Inventory
         public bool lastModifiedSpecified { get; set; }
     }
 
-    public class quantityAvailable
-    {
-        public Quantity Quantity { get; set; }
-    }
     public class Quantity
     {
         public QuantityUom uom { get; set; }
@@ -254,7 +184,7 @@ namespace PromoStandards.REST.Core.Inventory
         public string postalCode { get; set; }
         public InventoryLocationCountry country { get; set; }
         public bool countrySpecified { get; set; }
-        public inventoryLocationQuantity inventoryLocationQuantity { get; set; }
+        public Quantity inventoryLocationQuantity { get; set; }
         public FutureAvailability[] FutureAvailabilityArray { get; set; }
     }
 
@@ -989,11 +919,6 @@ namespace PromoStandards.REST.Core.Inventory
 
         /// <remarks/>
         ZW,
-    }
-
-    public class inventoryLocationQuantity
-    {
-        public Quantity Quantity { get; set; }
     }
 
     public class FutureAvailability

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PromoStandards.REST.Core.Inventory;
 
 namespace PromoStandards.REST.API.Controllers
 {
@@ -30,19 +31,70 @@ namespace PromoStandards.REST.API.Controllers
         /// Provides the detail product data based on a specific ProductId provided at the request.
         /// </summary>
         /// <param name="productId">The supplier's ID for a given product</param>
-        /// <returns>A newly created TodoItem</returns>
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns the product</response>
         /// <response code="404">When the product is not found</response>
-        [HttpGet("api/product/{productId}")]
+        [HttpGet("api/products/{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public Product Get(string productId)
-        {
-            return new Product
-            {
-                productId = "product-1"
-            };
+        public Product GetProduct(string productId) {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Provides the available color options for a specific ProductId provided in the request.
+        /// </summary>
+        /// <param name="productId">The supplier's ID for a given product</param>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">Returns a collection of product colors</response>
+        /// <response code="404">When the product is not found</response>
+        [HttpGet("api/products/{productId}/colors")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<string> GetProductColors(string productId) {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Provides the available size options for a specific ProductId provided in the request.
+        /// </summary>
+        /// <param name="productId">The supplier's ID for a given product</param>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">Returns a collection of product sizes</response>
+        /// <response code="404">When the product is not found</response>
+        [HttpGet("api/products/{productId}/sizes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<string> GetProductSizes(string productId) {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Provides the parts of a specific ProductId provided in the request.
+        /// </summary>
+        /// <param name="productId">The supplier's ID for a given product</param>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">Returns a collection of product parts</response>
+        /// <response code="404">When the product is not found</response>
+        [HttpGet("api/products/{productId}/parts")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<string> GetProductParts(string productId) {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Provides the inventory levels of a specific ProductId provided in the request.
+        /// </summary>
+        /// <param name="productId">The supplier's ID for a given product</param>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">Returns inventory levels</response>
+        /// <response code="404">When the product is not found</response>
+        [HttpGet("api/products/{productId}/inventory")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<Inventory> GetInventoryLevels(string productId) {
+            throw new NotImplementedException();
         }
     }
 }

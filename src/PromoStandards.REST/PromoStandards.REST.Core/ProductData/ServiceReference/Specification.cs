@@ -5,7 +5,7 @@
 public partial class Specification
 {
     
-    private SpecificationSpecificationType specificationTypeField;
+    private SpecificationType specificationTypeField;
     
     private string specificationUomField;
     
@@ -13,7 +13,7 @@ public partial class Specification
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public SpecificationSpecificationType specificationType
+    public SpecificationType specificationType
     {
         get
         {

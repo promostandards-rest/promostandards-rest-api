@@ -24,7 +24,7 @@ namespace PromoStandards.REST.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IProductDataService, StaticProductDataService>();
-            services.AddScoped<IInventoryService, StaticInventoryService>();
+            //services.AddScoped<IInventoryService, StaticInventoryService>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

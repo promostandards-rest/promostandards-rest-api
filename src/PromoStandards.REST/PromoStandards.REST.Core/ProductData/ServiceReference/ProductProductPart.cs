@@ -7,7 +7,7 @@ public partial class ProductProductPart
     
     private string partIdField;
     
-    private ProductProductPartPrimaryColor primaryColorField;
+    private PrimaryColor primaryColorField;
     
     private string[] descriptionField;
     
@@ -79,7 +79,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public ProductProductPartPrimaryColor primaryColor
+    public PrimaryColor primaryColor
     {
         get
         {

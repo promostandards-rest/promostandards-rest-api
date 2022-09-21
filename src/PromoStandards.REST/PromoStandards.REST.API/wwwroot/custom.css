@@ -18,3 +18,7 @@ table.model tr {
     table.model span.model-title__text {
         font-size: 90%;
     }
+
+span.prop-enum > br {
+    display: none;
+}
