@@ -91,7 +91,7 @@ public partial class Product
     public ProductPriceGroup[]? ProductPriceGroupArray { get; set; }
 
     /// <summary>
-    /// Indicates if there is information about this product via the Product Safety & Compliance service.
+    /// Indicates if there is information about this product via the Product Safety and Compliance service.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=12)]
     public bool? complianceInfoAvailable { get; set; }
@@ -108,7 +108,7 @@ public partial class Product
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=14)]
     [System.Xml.Serialization.XmlArrayItemAttribute("LocationDecoration", IsNullable=false)]
     [Required]
-    public LocationDecorationArrayLocationDecoration[]? LocationDecorationArray { get; set; }
+    public LocationDecoration[]? LocationDecorationArray { get; set; }
 
     /// <summary>
     /// All part specific product data.  An array of ProductPart objects. 

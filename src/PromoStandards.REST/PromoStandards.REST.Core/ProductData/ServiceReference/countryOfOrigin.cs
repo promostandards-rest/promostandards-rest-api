@@ -1,8 +1,10 @@
-﻿/// <remarks/>
+﻿using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+/// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.codesynthesis.com/xmlns/xsstl")]
-public enum countryOfOrigin
-{
+[JsonConverter(typeof(StringEnumConverter))]
+public enum countryOfOrigin {
     
     /// <remarks/>
     AF,

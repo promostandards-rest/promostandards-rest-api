@@ -5,7 +5,7 @@
 public partial class RelatedProduct
 {
     
-    private RelatedProductRelationType relationTypeField;
+    private RelationType relationTypeField;
     
     private string productIdField;
     
@@ -13,7 +13,7 @@ public partial class RelatedProduct
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public RelatedProductRelationType relationType
+    public RelationType relationType
     {
         get
         {
