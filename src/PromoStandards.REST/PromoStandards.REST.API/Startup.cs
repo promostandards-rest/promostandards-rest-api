@@ -59,6 +59,7 @@ namespace PromoStandards.REST.API
                 c.InjectStylesheet("/custom.css");
             });
 
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
