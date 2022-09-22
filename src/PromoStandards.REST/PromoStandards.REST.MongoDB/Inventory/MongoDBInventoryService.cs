@@ -63,14 +63,6 @@ namespace PromoStandards.REST.MongoDB.Inventory
             return _client.GetDatabase(databaseName).GetCollection<InventoryExtended>(collectionName);
         }
 
-  
-        //public async Task<List<InventoryExtended>> GetAll()
-        //{
-        //    var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-        //    var result = await collection.FindAsync(Builders<InventoryExtended>.Filter.Empty);
-        //    return await result.ToListAsync();
-        //}
-
         public GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request)
         {
             throw new NotImplementedException();

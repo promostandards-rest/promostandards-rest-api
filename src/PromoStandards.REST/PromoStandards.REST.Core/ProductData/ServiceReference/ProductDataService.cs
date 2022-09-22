@@ -1,71 +1,8 @@
 ﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
-
-[System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-[System.ServiceModel.ServiceContractAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/", ConfigurationName="ProductDataService")]
 public interface ProductDataService
 {
-    
-    [System.ServiceModel.OperationContractAttribute(Action="getProduct", ReplyAction="*")]
-    [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductMarketingPoint[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductKeyword[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCategory[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RelatedProduct[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPrice[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPriceGroup[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Color[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Specification[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
     System.Threading.Tasks.Task<GetProductResponse> getProductAsync(GetProductRequest request);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="getProductDateModified", ReplyAction="*")]
-    [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductMarketingPoint[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductKeyword[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCategory[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RelatedProduct[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPrice[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPriceGroup[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Color[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Specification[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
     System.Threading.Tasks.Task<GetProductDateModifiedResponse> getProductDateModifiedAsync(GetProductDateModifiedRequest request);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="getProductCloseOut", ReplyAction="*")]
-    [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductMarketingPoint[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductKeyword[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCategory[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RelatedProduct[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPrice[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPriceGroup[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Color[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Specification[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
     System.Threading.Tasks.Task<GetProductCloseOutResponse> getProductCloseOutAsync(GetProductCloseOutRequest request);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="getProductSellable", ReplyAction="*")]
-    [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductMarketingPoint[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductKeyword[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCategory[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RelatedProduct[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPrice[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPriceGroup[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Color[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Specification[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
     System.Threading.Tasks.Task<GetProductSellableResponse> getProductSellableAsync(GetProductSellableRequest request);
 }
