@@ -24,7 +24,6 @@ namespace PromoStandards.REST.MongoDBApp
 
         public async Task Process()
         {
-            var list = await _productService.GetAll();
             var basicHttpsBinding = new BasicHttpsBinding()
             {
                 MaxReceivedMessageSize = int.MaxValue,
