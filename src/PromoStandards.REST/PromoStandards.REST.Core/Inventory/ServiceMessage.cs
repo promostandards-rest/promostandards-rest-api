@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.Inventory;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.Inventory;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
@@ -14,11 +16,13 @@ public partial class ServiceMessage
     private string descriptionField;
         
     private ServiceMessageSeverity severityField;
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The numerical value of the code
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public int code
-    {
+    [Required]
+    public int code {
         get
         {
             return this.codeField;
@@ -28,11 +32,13 @@ public partial class ServiceMessage
             this.codeField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Response for any message requiring notification to requestor
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string description
-    {
+    [Required]
+    public string description {
         get
         {
             return this.descriptionField;
@@ -42,9 +48,12 @@ public partial class ServiceMessage
             this.descriptionField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The severity of the message.  Values are enumerated: {Error, Information, Warning}
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+    [Required]
     public ServiceMessageSeverity severity
     {
         get

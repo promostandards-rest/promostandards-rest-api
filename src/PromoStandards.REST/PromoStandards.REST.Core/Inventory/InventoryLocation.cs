@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.Inventory;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.Inventory;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
@@ -19,14 +21,16 @@ public partial class InventoryLocation
         
     private bool countryFieldSpecified;
         
-    private inventoryLocationQuantity inventoryLocationQuantityField;
+    private Quantity inventoryLocationQuantityField;
         
     private FutureAvailability[] futureAvailabilityArrayField;
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The inventory location id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public string inventoryLocationId
-    {
+    [Required]
+    public string inventoryLocationId {
         get
         {
             return this.inventoryLocationIdField;
@@ -36,8 +40,10 @@ public partial class InventoryLocation
             this.inventoryLocationIdField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The name of the inventory location
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string inventoryLocationName
     {
@@ -50,11 +56,13 @@ public partial class InventoryLocation
             this.inventoryLocationNameField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The postal code
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    public string postalCode
-    {
+    [Required]
+    public string postalCode {
         get
         {
             return this.postalCodeField;
@@ -64,11 +72,13 @@ public partial class InventoryLocation
             this.postalCodeField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The country in ISO 3166-2 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    public InventoryLocationCountry country
-    {
+    [Required]
+    public InventoryLocationCountry country {
         get
         {
             return this.countryField;
@@ -79,23 +89,11 @@ public partial class InventoryLocation
         }
     }
         
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool countrySpecified
-    {
-        get
-        {
-            return this.countryFieldSpecified;
-        }
-        set
-        {
-            this.countryFieldSpecified = value;
-        }
-    }
-        
-    /// <remarks/>
+    /// <summary>
+    /// An object which contains available to order quantity for this inventory location
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    public inventoryLocationQuantity inventoryLocationQuantity
+    public Quantity inventoryLocationQuantity
     {
         get
         {
@@ -106,8 +104,10 @@ public partial class InventoryLocation
             this.inventoryLocationQuantityField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Array of FutureAvailability objects
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=5)]
     [System.Xml.Serialization.XmlArrayItemAttribute("FutureAvailability", IsNullable=false)]
     public FutureAvailability[] FutureAvailabilityArray

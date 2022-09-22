@@ -51,7 +51,7 @@ namespace PromoStandards.REST.MongoDB.ProductData
             {
                 Data = products,
                 Total = countResult,
-                page = page ?? 0,
+                pageNumber = page ?? 0,
                 pageSize = pageSize ?? 20
             };
         }

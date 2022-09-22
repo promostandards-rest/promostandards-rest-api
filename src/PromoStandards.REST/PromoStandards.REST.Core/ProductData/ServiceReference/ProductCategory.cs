@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,9 +12,12 @@ public partial class ProductCategory
     private string categoryField;
     
     private string subCategoryField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Product category
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
+    [Required]
     public string category
     {
         get
@@ -24,9 +29,12 @@ public partial class ProductCategory
             this.categoryField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Product subcategory
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
+    [Required]
     public string subCategory
     {
         get

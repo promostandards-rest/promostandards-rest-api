@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.Inventory;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.Inventory;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
@@ -12,9 +14,12 @@ public partial class FutureAvailability
     private Quantity quantityField;
         
     private System.DateTime availableOnField;
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Future net available inventory quantity for the part/inventory location combination indicating goods on order or future quantity at manufactured goods. 
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public Quantity Quantity
     {
         get
@@ -26,11 +31,13 @@ public partial class FutureAvailability
             this.quantityField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// A date timestamp in UTC specifying the valid timestamp depicting when the inventory will be available for allocation to sales orders.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public System.DateTime availableOn
-    {
+    [Required]
+    public System.DateTime availableOn {
         get
         {
             return this.availableOnField;

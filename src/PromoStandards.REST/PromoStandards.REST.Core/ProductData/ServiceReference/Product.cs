@@ -118,7 +118,7 @@ public partial class Product
     [System.Xml.Serialization.XmlArrayAttribute(Order=15)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPart", IsNullable=false)]
     [Required]
-    public ProductProductPart[]? ProductPartArray { get; set; }
+    public ProductPart[]? ProductPartArray { get; set; }
 
     /// <summary>
     /// The date time stamp of the most recent change to this data in ISO 8601 format

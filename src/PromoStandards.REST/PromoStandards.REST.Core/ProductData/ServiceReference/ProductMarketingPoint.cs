@@ -1,4 +1,7 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,8 +13,10 @@ public partial class ProductMarketingPoint
     private string pointTypeField;
     
     private string pointCopyField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Basic category or type of marketing point being made.e.g.Highlights, Size, Safety
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
     public string pointType
     {
@@ -24,11 +29,13 @@ public partial class ProductMarketingPoint
             this.pointTypeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Marketing bullet or point copy
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string pointCopy
-    {
+    [Required]
+    public string pointCopy {
         get
         {
             return this.pointCopyField;

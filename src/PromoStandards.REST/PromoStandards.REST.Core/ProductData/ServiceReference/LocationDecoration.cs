@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -18,9 +20,12 @@ public partial class LocationDecoration
     private bool locationDecorationComboDefaultField;
     
     private bool priceIncludesField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Location name
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
+    [Required]
     public string locationName
     {
         get
@@ -32,8 +37,10 @@ public partial class LocationDecoration
             this.locationNameField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The maximum number of imprint colors available, based on a decoration location and type.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public int maxImprintColors
     {
@@ -46,23 +53,12 @@ public partial class LocationDecoration
             this.maxImprintColorsField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool maxImprintColorsSpecified
-    {
-        get
-        {
-            return this.maxImprintColorsFieldSpecified;
-        }
-        set
-        {
-            this.maxImprintColorsFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Decoration name
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
+    [Required]
     public string decorationName
     {
         get
@@ -74,9 +70,12 @@ public partial class LocationDecoration
             this.decorationNameField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Is this the default location
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+    [Required]
     public bool locationDecorationComboDefault
     {
         get
@@ -88,9 +87,12 @@ public partial class LocationDecoration
             this.locationDecorationComboDefaultField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Does this include price
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+    [Required]
     public bool priceIncludes
     {
         get

@@ -68,3 +68,7 @@ section.response-controls {
     margin-left: 220px;
     padding: 0 0 10px 0 !important;
 }
+
+[id$='CollectionResponse'] {
+    display: none !important;
+}

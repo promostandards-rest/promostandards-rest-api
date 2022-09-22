@@ -1,9 +1,11 @@
 ﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/")]
-public partial class ProductProductPart
+public partial class ProductPart
 {
     
     private string partIdField;
@@ -63,9 +65,12 @@ public partial class ProductProductPart
     private System.Nullable<bool> isOnDemandField;
     
     private System.Nullable<bool> isHazmatField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The part Id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=0)]
+    [Required]
     public string partId
     {
         get
@@ -77,7 +82,10 @@ public partial class ProductProductPart
             this.partIdField = value;
         }
     }
-    
+
+    /// <summary>
+    /// The "go to market" color. Represented as a Color Object.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public Color primaryColor
     {
@@ -90,8 +98,10 @@ public partial class ProductProductPart
             this.primaryColorField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Description
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute("description", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=2)]
     public string[] description
     {
@@ -104,8 +114,10 @@ public partial class ProductProductPart
             this.descriptionField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Country of Origin ISO 3166-1 Alpha 2 code for Country     Example: CA=Canada; US=United States
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=3)]
     public countryOfOrigin countryOfOrigin
     {
@@ -118,22 +130,10 @@ public partial class ProductProductPart
             this.countryOfOriginField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool countryOfOriginSpecified
-    {
-        get
-        {
-            return this.countryOfOriginFieldSpecified;
-        }
-        set
-        {
-            this.countryOfOriginFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Information about the part colors
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=4)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Color", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public Color[] ColorArray
@@ -147,8 +147,10 @@ public partial class ProductProductPart
             this.colorArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Primary material of construction
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=5)]
     public string primaryMaterial
     {
@@ -161,8 +163,10 @@ public partial class ProductProductPart
             this.primaryMaterialField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Specifications
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=6)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Specification", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public Specification[] SpecificationArray
@@ -176,8 +180,10 @@ public partial class ProductProductPart
             this.specificationArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// General shape
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=7)]
     public string shape
     {
@@ -190,8 +196,10 @@ public partial class ProductProductPart
             this.shapeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Used to describe an apparel size
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=8)]
     public ApparelSize ApparelSize
     {
@@ -204,8 +212,10 @@ public partial class ProductProductPart
             this.apparelSizeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Physical dimensions and weight
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=9)]
     public Dimension Dimension
     {
@@ -218,8 +228,10 @@ public partial class ProductProductPart
             this.dimensionField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Lead time in days
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=10)]
     public int leadTime
     {
@@ -232,22 +244,10 @@ public partial class ProductProductPart
             this.leadTimeField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool leadTimeSpecified
-    {
-        get
-        {
-            return this.leadTimeFieldSpecified;
-        }
-        set
-        {
-            this.leadTimeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// United Nations Standard Products and Services Code (UNSPSC)
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=11)]
     public string unspsc
     {
@@ -260,8 +260,10 @@ public partial class ProductProductPart
             this.unspscField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Global Trade Item Number (GTIN)
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=12)]
     public string gtin
     {
@@ -274,9 +276,12 @@ public partial class ProductProductPart
             this.gtinField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Rush service
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=13)]
+    [Required]
     public System.Nullable<bool> isRushService
     {
         get
@@ -288,8 +293,10 @@ public partial class ProductProductPart
             this.isRushServiceField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Packaging option details; e.g. Gift Box, Cello Pack, Sleeve.  An array of ProductPackaging objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=14)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPackage", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ProductPackage[] ProductPackagingArray
@@ -303,8 +310,10 @@ public partial class ProductProductPart
             this.productPackagingArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Shipping package option details for the partPackaging Default package type; e.g. Carton, Box, Pallet.  An array of ShippingPackage objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=15)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ShippingPackage", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ShippingPackage[] ShippingPackageArray
@@ -318,8 +327,10 @@ public partial class ProductProductPart
             this.shippingPackageArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The date this part expires from supplier availability in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=16)]
     public System.Nullable<System.DateTime> endDate
     {
@@ -332,8 +343,10 @@ public partial class ProductProductPart
             this.endDateField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The Date this Part initially becomes available from the Supplier in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=17)]
     public System.Nullable<System.DateTime> effectiveDate
     {
@@ -346,9 +359,12 @@ public partial class ProductProductPart
             this.effectiveDateField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Indicates if a closeout
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=18)]
+    [Required]
     public System.Nullable<bool> isCloseout
     {
         get
@@ -360,9 +376,12 @@ public partial class ProductProductPart
             this.isCloseoutField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Cautionary status to review for specific warnings about using product data
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=19)]
+    [Required]
     public System.Nullable<bool> isCaution
     {
         get
@@ -374,8 +393,10 @@ public partial class ProductProductPart
             this.isCautionField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Cautionary comments
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=20)]
     public string cautionComment
     {
@@ -388,8 +409,10 @@ public partial class ProductProductPart
             this.cautionCommentField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// National Motor Freight Classification Code
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=21)]
     public decimal nmfcCode
     {
@@ -402,22 +425,10 @@ public partial class ProductProductPart
             this.nmfcCodeField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool nmfcCodeSpecified
-    {
-        get
-        {
-            return this.nmfcCodeFieldSpecified;
-        }
-        set
-        {
-            this.nmfcCodeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// National Motor Freight Classification Description
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=22)]
     public string nmfcDescription
     {
@@ -430,8 +441,10 @@ public partial class ProductProductPart
             this.nmfcDescriptionField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// National Motor Freight Classification Number
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=23)]
     public string nmfcNumber
     {
@@ -444,8 +457,10 @@ public partial class ProductProductPart
             this.nmfcNumberField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Manufactured on demand / Made to order
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=24)]
     public System.Nullable<bool> isOnDemand
     {
@@ -458,8 +473,10 @@ public partial class ProductProductPart
             this.isOnDemandField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Contains hazardous material.  A nil value indicates this it is unknown or the data is not available by the supplier.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=25)]
     public System.Nullable<bool> isHazmat
     {
