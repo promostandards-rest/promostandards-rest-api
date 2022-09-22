@@ -1,4 +1,4 @@
-﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿
 using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.ProductData.Models {

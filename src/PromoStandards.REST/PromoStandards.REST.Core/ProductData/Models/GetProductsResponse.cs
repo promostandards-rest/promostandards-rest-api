@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using PromoStandards.REST.Core.ProductData.ServiceReference;
+
 
 namespace PromoStandards.REST.Core.ProductData.Models
 {

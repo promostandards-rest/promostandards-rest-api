@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.Inventory;
 using PromoStandards.REST.Core.ProductData.Models;
-using PromoStandards.REST.Core.ProductData.ServiceReference;
+
 
 namespace PromoStandards.REST.API.Controllers
 {
@@ -52,17 +52,17 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<GetProductResponse?> GetProduct(string productId)
         {
-            var result = await _productDataService.getProductAsync(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
-            });
+            }));
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            return result;
+            return result.GetProductResponse;
         }
 
         /// <summary>
@@ -77,20 +77,20 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IEnumerable<string>> GetProductColors(string productId)
         {
-            var result = await _productDataService.getProductAsync(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
-            });
+            }));
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.Product.ProductPartArray == null)
+            if (result.GetProductResponse.Product.ProductPartArray == null)
                 return new List<string>();
 
-            var colorArray = result.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
+            var colorArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
             var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
             return colorList;
         }
@@ -105,22 +105,22 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/sizes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<ApparelStyle>> GetProductSizes(string productId)
+        public async Task<IEnumerable<ApparelSizeApparelStyle>> GetProductSizes(string productId)
         {
-            var result = await _productDataService.getProductAsync(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
-            });
+            }));
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.Product.ProductPartArray == null)
-                return new List<ApparelStyle>();
+            if (result.GetProductResponse.Product.ProductPartArray == null)
+                return new List<ApparelSizeApparelStyle>();
 
-            var sizeArray = result.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
+            var sizeArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
             var sizeList = sizeArray.Select(p => p.apparelStyle).Distinct().ToList();
             return sizeList;
         }
@@ -137,20 +137,20 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public  async Task<IEnumerable<string>> GetProductParts(string productId)
         {
-            var result = await _productDataService.getProductAsync(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
-            });
+            }));
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.Product.ProductPartArray == null)
+            if (result.GetProductResponse.Product.ProductPartArray == null)
                 return new List<string>();
 
-            var partList = result.Product.ProductPartArray.Select(p => p.partId).ToList();
+            var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
             return partList;
         }
 

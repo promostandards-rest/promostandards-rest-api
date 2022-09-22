@@ -26,15 +26,15 @@ namespace PromoStandards.REST.MongoDB.Inventory
             if (inventory == null || inventory.PartInventoryArray == null) return null;
 
             IEnumerable<PartInventory> results = inventory.PartInventoryArray;
-            if (request.Filter.partIdArray != null)
+            if (request.Filter?.partIdArray != null)
             {
                 results = results.Where(x => request.Filter.partIdArray.Contains(x.partId));
             }
-            if (request.Filter.PartColorArray != null)
+            if (request.Filter?.PartColorArray != null)
             {
                 results = results.Where(x => request.Filter.PartColorArray.Contains(x.partColor));
             }
-            if (request.Filter.LabelSizeArray != null)
+            if (request.Filter?.LabelSizeArray != null)
             {
                 results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize));
             }
