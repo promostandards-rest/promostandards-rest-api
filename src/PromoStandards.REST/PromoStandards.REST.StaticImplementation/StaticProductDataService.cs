@@ -19,28 +19,28 @@ public class StaticProductDataService : IProductDataService
         return faker.Generate<Product>();
     }
 
-    public async Task<getProductResponse1> getProductAsync(getProductRequest1 request)
+    public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
     {
         var faker = AutoFaker.Create();
-        return faker.Generate<getProductResponse1>();
+        return faker.Generate<GetProductResponse>();
     }
 
-    public async Task<getProductDateModifiedResponse1> getProductDateModifiedAsync(getProductDateModifiedRequest1 request)
+    public async Task<GetProductDateModifiedResponse> getProductDateModifiedAsync(GetProductDateModifiedRequest request)
     {
         var faker = AutoFaker.Create();
-        return faker.Generate<getProductDateModifiedResponse1>();
+        return faker.Generate<GetProductDateModifiedResponse>();
     }
 
-    public async Task<getProductCloseOutResponse1> getProductCloseOutAsync(getProductCloseOutRequest1 request)
+    public async Task<GetProductCloseOutResponse> getProductCloseOutAsync(GetProductCloseOutRequest request)
     {
         var faker = AutoFaker.Create();
-        return faker.Generate<getProductCloseOutResponse1>();
+        return faker.Generate<GetProductCloseOutResponse>();
     }
 
-    public async Task<getProductSellableResponse1> getProductSellableAsync(getProductSellableRequest1 request)
+    public async Task<GetProductSellableResponse> getProductSellableAsync(GetProductSellableRequest request)
     {
         var faker = AutoFaker.Create();
-        return faker.Generate<getProductSellableResponse1>();
+        return faker.Generate<GetProductSellableResponse>();
     }
 
     public async Task<CollectionResponse<Product>> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0,

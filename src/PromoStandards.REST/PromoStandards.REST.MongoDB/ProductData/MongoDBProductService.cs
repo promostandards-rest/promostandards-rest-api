@@ -80,10 +80,10 @@ namespace PromoStandards.REST.MongoDB.ProductData
             }
         }
 
-        public async Task<getProductResponse1> getProductAsync(getProductRequest1 request)
+        public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.GetProductRequest.productId);
+            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.productId);
             var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
             {
                 Skip = 0,
@@ -91,11 +91,11 @@ namespace PromoStandards.REST.MongoDB.ProductData
             });
             var product = await result.FirstOrDefaultAsync();
             if (product != null)
-                return new getProductResponse1(new GetProductResponse()
+                return new GetProductResponse()
                 {
                     Product = JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product)),
-                });
-            return new getProductResponse1(new GetProductResponse()
+                };
+            return new GetProductResponse()
             {
                 ServiceMessageArray = new ServiceMessage[]
                 {
@@ -106,20 +106,20 @@ namespace PromoStandards.REST.MongoDB.ProductData
                         severity = ServiceMessageSeverity.Warning
                     }
                 }
-            });
+            };
         }
 
-        public async Task<getProductDateModifiedResponse1> getProductDateModifiedAsync(getProductDateModifiedRequest1 request)
+        public async Task<GetProductDateModifiedResponse> getProductDateModifiedAsync(GetProductDateModifiedRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<getProductCloseOutResponse1> getProductCloseOutAsync(getProductCloseOutRequest1 request)
+        public async Task<GetProductCloseOutResponse> getProductCloseOutAsync(GetProductCloseOutRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<getProductSellableResponse1> getProductSellableAsync(getProductSellableRequest1 request)
+        public async Task<GetProductSellableResponse> getProductSellableAsync(GetProductSellableRequest request)
         {
             throw new NotImplementedException();
         }

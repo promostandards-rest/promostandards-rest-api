@@ -52,17 +52,17 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<GetProductResponse?> GetProduct(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            return result.GetProductResponse;
+            return result;
         }
 
         /// <summary>
@@ -77,20 +77,20 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IEnumerable<string>> GetProductColors(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result.Product.ProductPartArray == null)
                 return new List<string>();
 
-            var colorArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
+            var colorArray = result.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
             var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
             return colorList;
         }
@@ -107,20 +107,20 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IEnumerable<ApparelStyle>> GetProductSizes(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result.Product.ProductPartArray == null)
                 return new List<ApparelStyle>();
 
-            var sizeArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
+            var sizeArray = result.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
             var sizeList = sizeArray.Select(p => p.apparelStyle).Distinct().ToList();
             return sizeList;
         }
@@ -137,20 +137,20 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public  async Task<IEnumerable<string>> GetProductParts(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result.Product.ProductPartArray == null)
                 return new List<string>();
 
-            var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
+            var partList = result.Product.ProductPartArray.Select(p => p.partId).ToList();
             return partList;
         }
 

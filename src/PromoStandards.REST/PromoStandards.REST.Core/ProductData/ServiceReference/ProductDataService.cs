@@ -19,7 +19,7 @@ public interface ProductDataService
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
-    System.Threading.Tasks.Task<getProductResponse1> getProductAsync(getProductRequest1 request);
+    System.Threading.Tasks.Task<GetProductResponse> getProductAsync(GetProductRequest request);
     
     [System.ServiceModel.OperationContractAttribute(Action="getProductDateModified", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -35,7 +35,7 @@ public interface ProductDataService
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
-    System.Threading.Tasks.Task<getProductDateModifiedResponse1> getProductDateModifiedAsync(getProductDateModifiedRequest1 request);
+    System.Threading.Tasks.Task<GetProductDateModifiedResponse> getProductDateModifiedAsync(GetProductDateModifiedRequest request);
     
     [System.ServiceModel.OperationContractAttribute(Action="getProductCloseOut", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -51,7 +51,7 @@ public interface ProductDataService
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
-    System.Threading.Tasks.Task<getProductCloseOutResponse1> getProductCloseOutAsync(getProductCloseOutRequest1 request);
+    System.Threading.Tasks.Task<GetProductCloseOutResponse> getProductCloseOutAsync(GetProductCloseOutRequest request);
     
     [System.ServiceModel.OperationContractAttribute(Action="getProductSellable", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -67,5 +67,5 @@ public interface ProductDataService
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ShippingPackage[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductDateModified[]))]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProductCloseOut[]))]
-    System.Threading.Tasks.Task<getProductSellableResponse1> getProductSellableAsync(getProductSellableRequest1 request);
+    System.Threading.Tasks.Task<GetProductSellableResponse> getProductSellableAsync(GetProductSellableRequest request);
 }
