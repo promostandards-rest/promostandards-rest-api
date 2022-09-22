@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using PromoStandards.REST.Core.Inventory;
 
 namespace PromoStandards.REST.MongoDB.Inventory
 {
+    [BsonIgnoreExtraElements]
     public class InventoryExtended : Core.Inventory.Inventory
     {
         // Todo:ENum

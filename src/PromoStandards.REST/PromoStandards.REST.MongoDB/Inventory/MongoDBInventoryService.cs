@@ -44,17 +44,26 @@ namespace PromoStandards.REST.MongoDB.Inventory
 
         private async Task<Core.Inventory.Inventory?> GetInventory(string prodcutId)
         {
-            var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-            var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
-            var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
-            var entity = results.FirstOrDefault();
-            if (entity == null)
+            try
             {
-                return null;
+
+                var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
+                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
+                var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
+                var entity = results.FirstOrDefault();
+                if (entity == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return entity.Value.Inventory;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return entity.Value.Inventory;
+                Console.WriteLine(e);
+                throw;
             }
         }
 

@@ -9,7 +9,7 @@ namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 public partial class Specification
 {
     
-    private SpecificationType specificationTypeField;
+    private SpecificationSpecificationType specificationTypeField;
     
     private string specificationUomField;
     
@@ -20,7 +20,7 @@ public partial class Specification
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
-    public SpecificationType specificationType
+    public SpecificationSpecificationType specificationType
     {
         get
         {

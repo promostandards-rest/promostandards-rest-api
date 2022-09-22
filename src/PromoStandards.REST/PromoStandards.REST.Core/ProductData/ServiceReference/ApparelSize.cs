@@ -9,9 +9,9 @@ namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 public partial class ApparelSize
 {
     
-    private ApparelStyle apparelStyleField;
+    private ApparelSizeApparelStyle apparelStyleField;
     
-    private LabelSize labelSizeField;
+    private ApparelSizeLabelSize labelSizeField;
     
     private string customSizeField;
 
@@ -20,7 +20,7 @@ public partial class ApparelSize
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
-    public ApparelStyle apparelStyle
+    public ApparelSizeApparelStyle apparelStyle
     {
         get
         {
@@ -37,7 +37,7 @@ public partial class ApparelSize
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     [Required]
-    public LabelSize labelSize {
+    public ApparelSizeLabelSize labelSize {
         get
         {
             return this.labelSizeField;
