@@ -35,3 +35,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+src/PromoStandards.REST/PromoStandards.REST.API/Properties/launchSettings.json
+src/PromoStandards.REST/PromoStandards.REST.MongoDBApp/Properties/launchSettings.json

@@ -20,23 +20,23 @@ namespace PromoStandards.REST.MongoDB.Inventory
             _config = config.Value;
         }
 
-        public async Task<CollectionResponse<PartInventory>> GetInventoryLevels(String productId, String[]? parts, String[]? colors, String[]? sizes)
+        public async Task<CollectionResponse<PartInventory>> GetInventoryLevels(GetInventoryLevelsRequest request)
         {
-            var inventory = await GetInventory(productId);
+            var inventory = await GetInventory(request.productId);
             if (inventory == null || inventory.PartInventoryArray == null) return null;
 
             IEnumerable<PartInventory> results = inventory.PartInventoryArray;
-            if (parts != null)
+            if (request.Filter?.partIdArray != null)
             {
-                results = results.Where(x => parts.Contains(x.partId));
+                results = results.Where(x => request.Filter.partIdArray.Contains(x.partId));
             }
-            if (colors != null)
+            if (request.Filter?.PartColorArray != null)
             {
-                results = results.Where(x => colors.Contains(x.partColor));
+                results = results.Where(x => request.Filter.PartColorArray.Contains(x.partColor));
             }
-            if (sizes != null)
+            if (request.Filter?.LabelSizeArray != null)
             {
-                results = results.Where(x => sizes.Contains(x.labelSize.ToString()));
+                results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize));
             }
             
             return new CollectionResponse<PartInventory>(results.ToList());
@@ -44,17 +44,26 @@ namespace PromoStandards.REST.MongoDB.Inventory
 
         private async Task<Core.Inventory.Inventory?> GetInventory(string prodcutId)
         {
-            var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-            var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
-            var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
-            var entity = results.FirstOrDefault();
-            if (entity == null)
+            try
             {
-                return null;
+
+                var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
+                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
+                var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
+                var entity = results.FirstOrDefault();
+                if (entity == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return entity.Value.Inventory;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return entity.Value.Inventory;
+                Console.WriteLine(e);
+                throw;
             }
         }
 
@@ -63,19 +72,9 @@ namespace PromoStandards.REST.MongoDB.Inventory
             return _client.GetDatabase(databaseName).GetCollection<InventoryExtended>(collectionName);
         }
 
-  
-        //public async Task<List<InventoryExtended>> GetAll()
-        //{
-        //    var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-        //    var result = await collection.FindAsync(Builders<InventoryExtended>.Filter.Empty);
-        //    return await result.ToListAsync();
-        //}
-
         public GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request)
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

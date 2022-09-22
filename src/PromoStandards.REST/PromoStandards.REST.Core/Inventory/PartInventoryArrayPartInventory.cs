@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Security.Cryptography.Xml;
 using System.Security.Policy;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace PromoStandards.REST.Core.Inventory;
 
@@ -12,6 +13,7 @@ namespace PromoStandards.REST.Core.Inventory;
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/Inventory/2.0.0/SharedObjects/")]
+[BsonIgnoreExtraElements]
 public partial class PartInventory
 {
         

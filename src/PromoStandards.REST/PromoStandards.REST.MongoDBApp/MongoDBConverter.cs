@@ -5,7 +5,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using PromoStandards.REST.Core.ProductData.Models;
-using PromoStandards.REST.Core.ProductData.ServiceReference;
+
 using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDB.ProductData;
 
@@ -24,7 +24,6 @@ namespace PromoStandards.REST.MongoDBApp
 
         public async Task Process()
         {
-            var list = await _productService.GetAll();
             var basicHttpsBinding = new BasicHttpsBinding()
             {
                 MaxReceivedMessageSize = int.MaxValue,
