@@ -74,6 +74,14 @@ namespace PromoStandards.REST.API
 
             //services.AddSingleton<IProductDataService, MongoDBProductService>();
             //services.AddSingleton<IInventoryService, MongoDBInventoryService>();
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.SetIsOriginAllowed(_ => true)
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials();
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -97,6 +105,8 @@ namespace PromoStandards.REST.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
