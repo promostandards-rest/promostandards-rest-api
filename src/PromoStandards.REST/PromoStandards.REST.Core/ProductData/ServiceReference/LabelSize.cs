@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -11,25 +12,24 @@ public enum LabelSize {
     /// <remarks/>
     OSFA,
     
-    /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("6XS")]
-    Item6XS,
+    _6XS,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("5XS")]
-    Item5XS,
+    _5XS,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("4XS")]
-    Item4XS,
+    _4XS,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("3XS")]
-    Item3XS,
+    _3XS,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("2XS")]
-    Item2XS,
+    _2XS,
     
     /// <remarks/>
     XS,
@@ -48,23 +48,23 @@ public enum LabelSize {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("2XL")]
-    Item2XL,
+    _2XL,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("3XL")]
-    Item3XL,
+    _3XL,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("4XL")]
-    Item4XL,
+    _4XL,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("5XL")]
-    Item5XL,
+    _5XL,
     
     /// <remarks/>
     [System.Xml.Serialization.XmlEnumAttribute("6XL")]
-    Item6XL,
+    _6XL,
     
     /// <remarks/>
     CUSTOM,

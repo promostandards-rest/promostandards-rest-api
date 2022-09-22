@@ -20,7 +20,7 @@ namespace PromoStandards.REST.MongoDB.ProductData
             _config = config.Value;
         }
 
-        public async Task<GetProductsResponse> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0, int pageSize = 20, Dictionary<string, string>? additionalParameters = null)
+        public async Task<CollectionResponse<Product>> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int? page = 0, int? pageSize = 20, Dictionary<string, string>? additionalParameters = null)
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
             var filters = Builders<ProductExtended>.Filter.Empty;
@@ -48,10 +48,12 @@ namespace PromoStandards.REST.MongoDB.ProductData
             {
                 products.Add(JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(item)));
             }
-            return new GetProductsResponse()
+            return new CollectionResponse<Product>()
             {
-                Products = products,
-                Total = countResult
+                Data = products,
+                Total = countResult,
+                page = page ?? 0,
+                pageSize = pageSize ?? 20
             };
         }
 

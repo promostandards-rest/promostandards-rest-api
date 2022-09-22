@@ -6,7 +6,7 @@
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/Inventory/2.0.0/SharedObjects/")]
-public partial class PartInventoryArrayPartInventory
+public partial class PartInventory
 {
         
     private string partIdField;

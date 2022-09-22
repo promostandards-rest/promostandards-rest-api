@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using AutoBogus;
 using PromoStandards.REST.StaticImplementation;
 using System;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace PromoStandards.REST.API
 {
@@ -47,7 +48,7 @@ namespace PromoStandards.REST.API
                 });
 
                 c.UseInlineDefinitionsForEnums();
-
+                
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
