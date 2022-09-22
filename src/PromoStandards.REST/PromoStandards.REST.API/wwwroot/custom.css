@@ -2,8 +2,8 @@
     min-width: 200px;
 }
 
-table.model tr {
-    border-bottom: 1px solid #d9d9d9;
+table.model tr, tr.response {
+    border-bottom: 1px solid #afafaf;
 }
 
     table.model tr td {
@@ -25,4 +25,46 @@ span.prop-enum > br {
 
 .swagger-ui .model-hint {
     display:none !important;
+}
+
+td.response-col_status {
+    font-size: 110% !important;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0 5px 0 !important;
+    min-width: 60px !important;
+}
+
+.response p {
+    margin: 0 !important;
+}
+
+.highlight-code {
+    margin-bottom: 5px;
+}
+
+.curl-command {
+    display: none;
+}
+
+.response-control-media-type.response-control-media-type--accept-controller {
+    display: none !important;
+}
+
+section.response-controls {
+    padding: 0 !important;
+}
+
+.execute-wrapper {
+    padding: 0 0 10px 0 !important;
+    text-align: left !important;
+    margin-left: 220px;
+}
+.btn{
+    max-width: 180px !important;
+}
+
+.opblock-section ~ .btn-group {
+    margin-left: 220px;
+    padding: 0 0 10px 0 !important;
 }

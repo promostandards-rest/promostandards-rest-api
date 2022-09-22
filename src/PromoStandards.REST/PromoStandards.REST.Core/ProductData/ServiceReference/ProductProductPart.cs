@@ -1,5 +1,4 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
-
+﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]

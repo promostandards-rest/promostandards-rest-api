@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.Linq;
+using System.Text.Json;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.Inventory;
+using PromoStandards.REST.Core.ProductData.Models;
 
 namespace PromoStandards.REST.MongoDB.Inventory
 {
@@ -18,38 +20,26 @@ namespace PromoStandards.REST.MongoDB.Inventory
             _config = config.Value;
         }
 
-        public async Task<Core.Inventory.Inventory?> GetInventoryLevels(GetInventoryLevelsRequest request)
+        public async Task<CollectionResponse<PartInventory>> GetInventoryLevels(String productId, String[]? parts, String[]? colors, String[]? sizes)
         {
-            var inventory = await GetInventory(request.productId);
-            if (inventory == null) return null;
+            var inventory = await GetInventory(productId);
+            if (inventory == null || inventory.PartInventoryArray == null) return null;
 
-            var filters = Builders<Core.Inventory.PartInventoryArrayPartInventory>.Filter.Empty;
-            IEnumerable<PartInventoryArrayPartInventory> results = inventory.PartInventoryArray;
-            if (request.Filter != null)
+            IEnumerable<PartInventory> results = inventory.PartInventoryArray;
+            if (parts != null)
             {
-                if (request.Filter.partIdArray != null)
-                {
-                   results = results.Where(x => request.Filter.partIdArray.Contains(x.partId));
-                }
-                if (request.Filter.PartColorArray != null)
-                {
-                   results= results.Where(x => request.Filter.PartColorArray.Contains(x.partColor));
-                }
-                if (request.Filter.partIdArray != null)
-                {
-                   results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize));
-                }
+                results = results.Where(x => parts.Contains(x.partId));
             }
-            if (inventory.PartInventoryArray != null)
+            if (colors != null)
             {
-                inventory.PartInventoryArray = results.ToArray();
+                results = results.Where(x => colors.Contains(x.partColor));
             }
-            else
+            if (sizes != null)
             {
-                return null;
+                results = results.Where(x => sizes.Contains(x.labelSize.ToString()));
             }
-
-            return inventory;
+            
+            return new CollectionResponse<PartInventory>(results.ToList());
         }
 
         private async Task<Core.Inventory.Inventory?> GetInventory(string prodcutId)

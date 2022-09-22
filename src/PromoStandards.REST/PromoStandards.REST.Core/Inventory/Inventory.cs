@@ -11,7 +11,7 @@ public partial class Inventory
         
     private string productIdField;
         
-    private PartInventoryArrayPartInventory[] partInventoryArrayField;
+    private PartInventory[] partInventoryArrayField;
         
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -30,7 +30,7 @@ public partial class Inventory
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
     [System.Xml.Serialization.XmlArrayItemAttribute("PartInventory", IsNullable=false)]
-    public PartInventoryArrayPartInventory[] PartInventoryArray
+    public PartInventory[] PartInventoryArray
     {
         get
         {
