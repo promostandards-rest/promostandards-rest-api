@@ -72,3 +72,7 @@ section.response-controls {
 [id$='CollectionResponse'] {
     display: none !important;
 }
+
+span.opblock-summary-path {
+    min-width: 350px;
+}
