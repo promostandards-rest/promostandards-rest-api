@@ -6,97 +6,102 @@ namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/")]
-public partial class FobPoint
+public partial class LocationDecoration
 {
     
-    private string fobIdField;
+    private string locationNameField;
     
-    private string fobCityField;
+    private int maxImprintColorsField;
     
-    private string fobStateField;
+    private bool maxImprintColorsFieldSpecified;
     
-    private string fobPostalCodeField;
+    private string decorationNameField;
     
-    private string fobCountryField;
+    private bool locationDecorationComboDefaultField;
+    
+    private bool priceIncludesField;
 
     /// <summary>
-    /// The Id of the FOB Point
+    /// Location name
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
     [Required]
-    public string fobId {
-        get
-        {
-            return this.fobIdField;
-        }
-        set
-        {
-            this.fobIdField = value;
-        }
-    }
-
-    /// <summary>
-    /// The city of the FOB Point
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    [Required]
-    public string fobCity {
-        get
-        {
-            return this.fobCityField;
-        }
-        set
-        {
-            this.fobCityField = value;
-        }
-    }
-
-    /// <summary>
-    /// The state of the FOB Point in ISO 3166-2 format.
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    [Required]
-    public string fobState {
-        get
-        {
-            return this.fobStateField;
-        }
-        set
-        {
-            this.fobStateField = value;
-        }
-    }
-
-    /// <summary>
-    /// The Postal or Zip Code of the fob Point
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    [Required]
-    public string fobPostalCode
+    public string locationName
     {
         get
         {
-            return this.fobPostalCodeField;
+            return this.locationNameField;
         }
         set
         {
-            this.fobPostalCodeField = value;
+            this.locationNameField = value;
         }
     }
 
     /// <summary>
-    /// The country of the FOB Point in Alpha 2 ISO3166 “CODE” format.
+    /// The maximum number of imprint colors available, based on a decoration location and type.
     /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    [Required]
-    public string fobCountry {
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    public int maxImprintColors
+    {
         get
         {
-            return this.fobCountryField;
+            return this.maxImprintColorsField;
         }
         set
         {
-            this.fobCountryField = value;
+            this.maxImprintColorsField = value;
+        }
+    }
+
+    /// <summary>
+    /// Decoration name
+    /// </summary>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
+    [Required]
+    public string decorationName
+    {
+        get
+        {
+            return this.decorationNameField;
+        }
+        set
+        {
+            this.decorationNameField = value;
+        }
+    }
+
+    /// <summary>
+    /// Is this the default location
+    /// </summary>
+    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+    [Required]
+    public bool locationDecorationComboDefault
+    {
+        get
+        {
+            return this.locationDecorationComboDefaultField;
+        }
+        set
+        {
+            this.locationDecorationComboDefaultField = value;
+        }
+    }
+
+    /// <summary>
+    /// Does this include price
+    /// </summary>
+    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+    [Required]
+    public bool priceIncludes
+    {
+        get
+        {
+            return this.priceIncludesField;
+        }
+        set
+        {
+            this.priceIncludesField = value;
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿namespace PromoStandards.REST.Core.Inventory;
+﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+using System.Security.Cryptography.Xml;
+using System.Security.Policy;
+
+namespace PromoStandards.REST.Core.Inventory;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
@@ -21,7 +27,7 @@ public partial class PartInventory
         
     private string partDescriptionField;
         
-    private quantityAvailable quantityAvailableField;
+    private Quantity quantityAvailableField;
         
     private bool manufacturedItemField;
         
@@ -38,9 +44,12 @@ public partial class PartInventory
     private System.DateTime lastModifiedField;
         
     private bool lastModifiedFieldSpecified;
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The part id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public string partId
     {
         get
@@ -52,9 +61,12 @@ public partial class PartInventory
             this.partIdField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// A boolean value indicating if this is a main part of the product. In a tumbler with an optional lid configuration, the parts associated with the tumbler would be set to TRUE. The parts associated with the Lid would be set to false.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    [Required]
     public bool mainPart
     {
         get
@@ -66,8 +78,10 @@ public partial class PartInventory
             this.mainPartField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Description of the color of the part
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string partColor
     {
@@ -81,7 +95,9 @@ public partial class PartInventory
         }
     }
         
-    /// <remarks/>
+    /// <summary>
+    /// The apparel items tagged size.  Enumerated values: {6XS,5XS,4XS,3XS,2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL,CUSTOM} CUSTOM is used for any size that does not match one of the other sizes.For example 7XL and 8XL would return CUSTOM.To identify the actual size when CUSTOM is returned, reference the Product Data endpoint.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public labelSize labelSize
     {
@@ -94,22 +110,10 @@ public partial class PartInventory
             this.labelSizeField = value;
         }
     }
-        
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool labelSizeSpecified
-    {
-        get
-        {
-            return this.labelSizeFieldSpecified;
-        }
-        set
-        {
-            this.labelSizeFieldSpecified = value;
-        }
-    }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Description of the part
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string partDescription
     {
@@ -122,10 +126,12 @@ public partial class PartInventory
             this.partDescriptionField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// A quantity object containing the sum of inventory of all inventory locations of the part
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-    public quantityAvailable quantityAvailable
+    public Quantity quantityAvailable
     {
         get
         {
@@ -136,9 +142,12 @@ public partial class PartInventory
             this.quantityAvailableField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Indicates that the supplier produces this part according to demand. The supplier may keep a limited amount of inventory or inventory may be 0.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+    [Required]
     public bool manufacturedItem
     {
         get
@@ -150,9 +159,12 @@ public partial class PartInventory
             this.manufacturedItemField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Indicates that the supplier purchases this product to order. The supplier may keep a limited amount of inventory, show available inventory to buy, or it might be 0.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+    [Required]
     public bool buyToOrder
     {
         get
@@ -164,8 +176,10 @@ public partial class PartInventory
             this.buyToOrderField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// Time to replenish buy to order or made to order
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public int replenishmentLeadTime
     {
@@ -178,22 +192,10 @@ public partial class PartInventory
             this.replenishmentLeadTimeField = value;
         }
     }
-        
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool replenishmentLeadTimeSpecified
-    {
-        get
-        {
-            return this.replenishmentLeadTimeFieldSpecified;
-        }
-        set
-        {
-            this.replenishmentLeadTimeFieldSpecified = value;
-        }
-    }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// A string describing the attribute of the product other than size and color
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=9)]
     public string attributeSelection
     {
@@ -206,8 +208,10 @@ public partial class PartInventory
             this.attributeSelectionField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// An array of InventoryLocation objects
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=10)]
     [System.Xml.Serialization.XmlArrayItemAttribute("InventoryLocation", IsNullable=false)]
     public InventoryLocation[] InventoryLocationArray
@@ -221,8 +225,10 @@ public partial class PartInventory
             this.inventoryLocationArrayField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// A date timestamp in UTC specifying the last time inventory was modified.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=11)]
     public System.DateTime lastModified
     {
@@ -233,20 +239,6 @@ public partial class PartInventory
         set
         {
             this.lastModifiedField = value;
-        }
-    }
-        
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool lastModifiedSpecified
-    {
-        get
-        {
-            return this.lastModifiedFieldSpecified;
-        }
-        set
-        {
-            this.lastModifiedFieldSpecified = value;
         }
     }
 }

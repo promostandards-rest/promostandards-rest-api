@@ -7,8 +7,6 @@ using PromoStandards.REST.MongoDB.Inventory;
 using System.Text.Json.Serialization;
 using AutoBogus;
 using PromoStandards.REST.StaticImplementation;
-using System;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace PromoStandards.REST.API
 {
@@ -91,6 +89,7 @@ namespace PromoStandards.REST.API
                 //c.RoutePrefix = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PromoStandards.REST.API v1");
                 c.InjectStylesheet("/custom.css");
+                c.InjectJavascript("/custom.js");
             });
 
             app.UseStaticFiles();

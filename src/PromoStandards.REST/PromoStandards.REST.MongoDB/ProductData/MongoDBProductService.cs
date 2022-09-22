@@ -4,7 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.ProductData.Models;
-
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 namespace PromoStandards.REST.MongoDB.ProductData
 {
@@ -19,9 +19,7 @@ namespace PromoStandards.REST.MongoDB.ProductData
             _config = config.Value;
         }
 
-
-        public async Task<CollectionResponse<Product>> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0,
-            int pageSize = 20, Dictionary<string, string>? additionalParameters = null)
+        public async Task<CollectionResponse<Product>> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int? page = 0, int? pageSize = 20, Dictionary<string, string>? additionalParameters = null)
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
             var filters = Builders<ProductExtended>.Filter.Empty;
@@ -53,9 +51,22 @@ namespace PromoStandards.REST.MongoDB.ProductData
             {
                 Data = products,
                 Total = countResult,
-                page = page,
-                pageSize = pageSize
+                pageNumber = page ?? 0,
+                pageSize = pageSize ?? 20
             };
+        }
+
+        public async Task<Product?> GetProduct(string id)
+        {
+            var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
+            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == id);
+            var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
+            {
+                Skip = 0,
+                Limit = 1
+            });
+            var product = await result.FirstOrDefaultAsync();
+            return JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product));
         }
 
         public virtual IMongoCollection<ProductExtended> GetCollection(string databaseName, string collectionName)
@@ -80,92 +91,11 @@ namespace PromoStandards.REST.MongoDB.ProductData
             }
         }
 
-        public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
+        public async Task<List<ProductExtended>> GetAll()
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.productId);
-            var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
-            {
-                Skip = 0,
-                Limit = 1
-            });
-            var product = await result.FirstOrDefaultAsync();
-            if (product != null)
-                return new GetProductResponse()
-                {
-                    Product = JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product)),
-                };
-            return new GetProductResponse()
-            {
-                ServiceMessageArray = new ServiceMessage[]
-                {
-                    new ServiceMessage()
-                    {
-                        code = 404,
-                        description = "Product not found",
-                        severity = ServiceMessageSeverity.Warning
-                    }
-                }
-            };
-        }
-
-        public async Task<GetProductDateModifiedResponse> getProductDateModifiedAsync(GetProductDateModifiedRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<GetProductCloseOutResponse> getProductCloseOutAsync(GetProductCloseOutRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<GetProductSellableResponse> getProductSellableAsync(GetProductSellableRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<getProductResponse1> getProductAsync(getProductRequest1 request)
-        {
-            var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.GetProductRequest.productId);
-            var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
-            {
-                Skip = 0,
-                Limit = 1
-            });
-            var product = await result.FirstOrDefaultAsync();
-            if (product != null)
-                return new getProductResponse1(new GetProductResponse()
-                {
-                    Product = JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product)),
-                });
-            return new getProductResponse1(new GetProductResponse()
-            {
-                ServiceMessageArray = new ServiceMessage[]
-                {
-                    new ServiceMessage()
-                    {
-                        code = 404,
-                        description = "Product not found",
-                        severity = ServiceMessageSeverity.Warning
-                    }
-                }
-            });
-        }
-
-        public Task<getProductDateModifiedResponse1> getProductDateModifiedAsync(getProductDateModifiedRequest1 request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<getProductCloseOutResponse1> getProductCloseOutAsync(getProductCloseOutRequest1 request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<getProductSellableResponse1> getProductSellableAsync(getProductSellableRequest1 request)
-        {
-            throw new NotImplementedException();
+            var result = await collection.FindAsync(Builders<ProductExtended>.Filter.Empty);
+            return await result.ToListAsync();
         }
     }
 }

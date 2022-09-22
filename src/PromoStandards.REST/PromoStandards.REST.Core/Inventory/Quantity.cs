@@ -1,4 +1,7 @@
-﻿namespace PromoStandards.REST.Core.Inventory;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.Inventory;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
@@ -12,9 +15,12 @@ public partial class Quantity
     private QuantityUom uomField;
         
     private decimal valueField;
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The quantity value
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public QuantityUom uom
     {
         get
@@ -26,9 +32,24 @@ public partial class Quantity
             this.uomField = value;
         }
     }
-        
-    /// <remarks/>
+
+    /// <summary>
+    /// The unit of measure; values are enumerated.
+    /// Values are: {BX, CA, DZ, EA, KT, PR, PK, RL, ST, SL, TH}
+    ///   BX - Box
+    ///   CA - Case
+    ///   DZ - Dozen
+    ///   EA - Each
+    ///   KT - Kit
+    ///   PR - Pair
+    ///   PK - Package
+    ///   RL - Roll
+    ///   ST - Set
+    ///   SL - Sleeve
+    ///   TH – Thousand
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    [Required]
     public decimal value
     {
         get

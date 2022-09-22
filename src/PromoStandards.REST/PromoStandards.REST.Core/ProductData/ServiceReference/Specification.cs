@@ -6,61 +6,63 @@ namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/")]
-public partial class RelatedProduct
+public partial class Specification
 {
     
-    private RelationType relationTypeField;
+    private SpecificationType specificationTypeField;
     
-    private string productIdField;
+    private string specificationUomField;
     
-    private string partIdField;
+    private string measurementValueField;
 
     /// <summary>
-    /// The relationship type between two products
+    /// The type of specification
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
-    public RelationType relationType
+    public SpecificationType specificationType
     {
         get
         {
-            return this.relationTypeField;
+            return this.specificationTypeField;
         }
         set
         {
-            this.relationTypeField = value;
+            this.specificationTypeField = value;
         }
     }
 
     /// <summary>
-    /// Product Id
+    /// Specification unit of measure  
     /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string productId
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", IsNullable=true, Order=1)]
+    [Required]
+    public string SpecificationUom
     {
         get
         {
-            return this.productIdField;
+            return this.specificationUomField;
         }
         set
         {
-            this.productIdField = value;
+            this.specificationUomField = value;
         }
     }
 
     /// <summary>
-    /// Part specific Id
+    /// Specification Measurement Value
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
-    public string partId
+    [Required]
+    public string measurementValue
     {
         get
         {
-            return this.partIdField;
+            return this.measurementValueField;
         }
         set
         {
-            this.partIdField = value;
+            this.measurementValueField = value;
         }
     }
 }

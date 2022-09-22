@@ -6,61 +6,61 @@ namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/")]
-public partial class RelatedProduct
+public partial class ApparelSize
 {
     
-    private RelationType relationTypeField;
+    private ApparelStyle apparelStyleField;
     
-    private string productIdField;
+    private LabelSize labelSizeField;
     
-    private string partIdField;
+    private string customSizeField;
 
     /// <summary>
-    /// The relationship type between two products
+    /// List of possible values. e.g. Ladies, Men, Youth, etc.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
-    public RelationType relationType
+    public ApparelStyle apparelStyle
     {
         get
         {
-            return this.relationTypeField;
+            return this.apparelStyleField;
         }
         set
         {
-            this.relationTypeField = value;
+            this.apparelStyleField = value;
         }
     }
 
     /// <summary>
-    /// Product Id
+    /// List of possible values.  The apparel items tagged size. e.g. XS, S, M, XL, etc.
     /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string productId
-    {
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    [Required]
+    public LabelSize labelSize {
         get
         {
-            return this.productIdField;
+            return this.labelSizeField;
         }
         set
         {
-            this.productIdField = value;
+            this.labelSizeField = value;
         }
     }
 
     /// <summary>
-    /// Part specific Id
+    /// Used to communicate custom size when labelSize is CUSTOM.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
-    public string partId
+    public string customSize
     {
         get
         {
-            return this.partIdField;
+            return this.customSizeField;
         }
         set
         {
-            this.partIdField = value;
+            this.customSizeField = value;
         }
     }
 }
