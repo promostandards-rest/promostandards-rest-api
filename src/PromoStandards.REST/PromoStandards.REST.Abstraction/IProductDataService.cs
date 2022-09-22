@@ -1,6 +1,5 @@
 ﻿using PromoStandards.REST.Core.ProductData.Models;
 using PromoStandards.REST.Core.ProductData.ServiceReference;
-using Product = PromoStandards.REST.Core.ProductPricingConfiguration.ServiceReference.Product;
 
 namespace PromoStandards.REST.Abstraction
 {
