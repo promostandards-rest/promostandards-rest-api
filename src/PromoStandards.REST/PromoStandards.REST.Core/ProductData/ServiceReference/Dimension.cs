@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -26,7 +25,7 @@ public partial class Dimension
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [EnumDataType(typeof(dimensionUom))]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public dimensionUom dimensionUom
     {
         get

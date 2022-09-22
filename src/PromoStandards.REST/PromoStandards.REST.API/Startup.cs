@@ -1,18 +1,13 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PromoStandards.REST.Abstraction;
-using System;
 using System.Reflection;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDB.ProductData;
-using Swashbuckle.AspNetCore.Newtonsoft;
 using PromoStandards.REST.MongoDB.Inventory;
+using System.Text.Json.Serialization;
+using AutoBogus;
+using PromoStandards.REST.StaticImplementation;
+using System;
 
 namespace PromoStandards.REST.API
 {
@@ -27,8 +22,20 @@ namespace PromoStandards.REST.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+            AutoFaker.Configure(builder =>
+            {
+                builder
+                    .WithLocale("en_US")        // Configures the locale to use
+                    .WithRepeatCount(2)         // Configures the number of items in a collection
+                    .WithDataTableRowCount(2)   // Configures the number of data table rows to generate
+                    .WithRecursiveDepth(10)      // Configures how deep nested types should recurse
+                    .WithTreeDepth(10);          // Configures the tree depth of an object graph
+            });
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
@@ -46,7 +53,6 @@ namespace PromoStandards.REST.API
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
 
             });
-            services.AddSwaggerGenNewtonsoftSupport();
 
             services.AddOptions();
 
@@ -57,14 +63,14 @@ namespace PromoStandards.REST.API
                 p.DatabaseName = Configuration["Config:DatabaseName"];
                 p.ProductCollectionName = Configuration["Config:ProductCollectionName"];
             });
-            services.AddSingleton<IProductDataService, MongoDBProductService>();
 
             services.Configure<MongoDBInventoryServiceConfiguration>(c =>
             {
                 c.DatabaseName = Configuration["Config:DatabaseName"];
                 c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
             });
-            services.AddSingleton<IInventoryService, MongoDBInventoryService>();
+            services.AddSingleton<IProductDataService, StaticProductDataService>();
+            services.AddSingleton<IInventoryService, StaticInventoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

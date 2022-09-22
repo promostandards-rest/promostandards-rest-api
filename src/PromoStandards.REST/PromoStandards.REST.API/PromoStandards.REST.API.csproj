@@ -16,24 +16,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoBogus" Version="2.13.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\PromoStandards.REST.MongoDB\PromoStandards.REST.MongoDB.csproj" />
+		<ProjectReference Include="..\PromoStandards.REST.StaticImplementation\PromoStandards.REST.StaticImplementation.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="wwwroot\custom.css" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Update="StaticData\GetInventoryFilterValuesResponse.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Update="StaticData\GetInventoryLevelsResponse.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 </Project>

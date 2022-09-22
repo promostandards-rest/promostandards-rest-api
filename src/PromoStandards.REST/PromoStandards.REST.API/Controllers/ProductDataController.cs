@@ -72,8 +72,21 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/colors")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<string> GetProductColors(string productId) {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<string>> GetProductColors(string productId)
+        {
+            var result = await _productDataService.GetProduct(productId);
+            if (result == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            if (result.ProductPartArray == null)
+                return new List<string>();
+
+            var colorArray = result.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
+            var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
+            return colorList;
         }
 
         /// <summary>
@@ -86,8 +99,21 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/sizes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<string> GetProductSizes(string productId) {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<ApparelStyle>> GetProductSizes(string productId)
+        {
+            var result = await _productDataService.GetProduct(productId);
+            if (result == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            if (result.ProductPartArray == null)
+                return new List<ApparelStyle>();
+
+            var sizeArray = result.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
+            var sizeList = sizeArray.Select(p => p.apparelStyle).Distinct().ToList();
+            return sizeList;
         }
 
         /// <summary>
@@ -100,8 +126,20 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/parts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<string> GetProductParts(string productId) {
-            throw new NotImplementedException();
+        public  async Task<IEnumerable<string>> GetProductParts(string productId)
+        {
+            var result = await _productDataService.GetProduct(productId);
+            if (result == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            if (result.ProductPartArray == null)
+                return new List<string>();
+
+            var partList = result.ProductPartArray.Select(p => p.partId).ToList();
+            return partList;
         }
 
         /// <summary>
@@ -136,7 +174,6 @@ namespace PromoStandards.REST.API.Controllers
             }
             catch (Exception ex)
             {
-                //_logger.LogError(ex.Message);
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }

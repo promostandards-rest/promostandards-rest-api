@@ -1,4 +1,5 @@
-﻿using PromoStandards.REST.Abstraction;
+﻿using AutoBogus;
+using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.ProductData.Models;
 using PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -6,14 +7,15 @@ namespace PromoStandards.REST.StaticImplementation;
 
 public class StaticProductDataService : IProductDataService
 {
-    public Task<GetProductsResponse> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0,
-        int pageSize = 20, Dictionary<string, string>? additionalParameters = null)
+    public async Task<GetProductsResponse> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0, int pageSize = 20, Dictionary<string, string>? additionalParameters = null)
     {
-        throw new NotImplementedException();
+        var faker = AutoFaker.Create();
+        return faker.Generate<GetProductsResponse>();
     }
 
-    public Task<Product?> GetProduct(string id)
+    public async Task<Product?> GetProduct(string id)
     {
-        throw new NotImplementedException();
+        var faker = AutoFaker.Create();
+        return faker.Generate<Product>();
     }
 }

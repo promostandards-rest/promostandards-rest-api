@@ -17,6 +17,7 @@
       "applicationUrl": "https://localhost:7149;http://localhost:5149",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "MongoDB__Url": "mongodb+srv://admin:puXJngS1uuyUWwjP@promostandardsrest.xvajo4e.mongodb.net/?retryWrites=true&w=majority"
       }
     },
     "IIS Express": {
@@ -25,6 +26,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "MongoDB__Url": "mongodb+srv://admin:puXJngS1uuyUWwjP@promostandardsrest.xvajo4e.mongodb.net/?retryWrites=true&w=majority"
       }
     }
   }
