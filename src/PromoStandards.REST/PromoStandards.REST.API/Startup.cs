@@ -69,8 +69,12 @@ namespace PromoStandards.REST.API
                 c.DatabaseName = Configuration["Config:DatabaseName"];
                 c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
             });
+
             services.AddSingleton<IProductDataService, StaticProductDataService>();
             services.AddSingleton<IInventoryService, StaticInventoryService>();
+
+            //services.AddSingleton<IProductDataService, MongoDBProductService>();
+            //services.AddSingleton<IInventoryService, MongoDBInventoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

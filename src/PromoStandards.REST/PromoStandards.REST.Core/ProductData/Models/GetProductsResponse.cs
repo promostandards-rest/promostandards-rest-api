@@ -10,9 +10,9 @@ namespace PromoStandards.REST.Core.ProductData.Models
 {
     public class GetProductsResponse
     {
-        [JsonPropertyName("products")]
-        public List<Product> Products { get; set; }
         [JsonPropertyName("total")]
         public long Total { get; set; }
+        [JsonPropertyName("products")]
+        public List<Product> Products { get; set; }
     }
 }
