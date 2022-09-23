@@ -19,19 +19,6 @@ namespace PromoStandards.REST.MongoDB.ProductData
             _config = config.Value;
         }
 
-        public async Task<Product?> GetProduct(string id)
-        {
-            var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == id);
-            var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
-            {
-                Skip = 0,
-                Limit = 1
-            });
-            var product = await result.FirstOrDefaultAsync();
-            return JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product));
-        }
-
         public virtual IMongoCollection<ProductExtended> GetCollection(string databaseName, string collectionName)
         {
             return _client.GetDatabase(databaseName).GetCollection<ProductExtended>(collectionName);
@@ -52,13 +39,6 @@ namespace PromoStandards.REST.MongoDB.ProductData
                 product.Id = existing.Id;
                 await collection.ReplaceOneAsync(filter, product);
             }
-        }
-
-        public async Task<List<ProductExtended>> GetAll()
-        {
-            var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var result = await collection.FindAsync(Builders<ProductExtended>.Filter.Empty);
-            return await result.ToListAsync();
         }
 
         public async Task<GetProductResponse> getProductAsync(GetProductRequest request)

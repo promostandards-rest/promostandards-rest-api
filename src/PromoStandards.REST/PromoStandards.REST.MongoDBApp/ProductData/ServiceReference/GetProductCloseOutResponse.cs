@@ -7,7 +7,7 @@ public partial class GetProductCloseOutResponse
     
     private ProductCloseOut[] productCloseOutArrayField;
     
-    private ServiceMessage[] serviceMessageArrayField;
+    private PromoStandards.REST.MongoDBApp.Inventory.ServiceReference.ServiceMessage[] serviceMessageArrayField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
@@ -27,7 +27,7 @@ public partial class GetProductCloseOutResponse
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=1)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ServiceMessage", IsNullable=false)]
-    public ServiceMessage[] ServiceMessageArray
+    public PromoStandards.REST.MongoDBApp.Inventory.ServiceReference.ServiceMessage[] ServiceMessageArray
     {
         get
         {

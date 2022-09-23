@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDBApp;
 using System.IO;
+using PromoStandards.REST.MongoDB.Inventory;
 using PromoStandards.REST.MongoDB.ProductData;
 
 var basePath = Directory.GetCurrentDirectory();
@@ -20,11 +21,17 @@ services.AddOptions();
 services.AddSingleton<IMongoClient>(c => new MongoClient(configuration["MongoDB:Url"]))
     .AddScoped(c => c.GetService<IMongoClient>().StartSession());
 services.AddSingleton<MongoDBProductService>();
+services.AddSingleton<MongoDBInventoryService>();
 services.AddSingleton<MongoDBConverter>();
 services.Configure<MongoDBProductServiceConfiguration>(p =>
 {
     p.DatabaseName = configuration["Config:DatabaseName"];
     p.ProductCollectionName = configuration["Config:ProductCollectionName"];
+});
+services.Configure<MongoDBInventoryServiceConfiguration>(p =>
+{
+    p.DatabaseName = configuration["Config:DatabaseName"];
+    p.InventoryCollectionName = configuration["Config:InventoryCollectionName"];
 });
 services.Configure<MongoDBConverterConfig>(p =>
 {
@@ -35,6 +42,7 @@ services.Configure<MongoDBConverterConfig>(p =>
     p.LocalizationLanguage = configuration["Config:LocalizationLanguage"];
     p.Password = configuration["Config:Password"];
     p.Throttling = configuration["Config:Throttling"];
+    p.InventoryEndpoint = configuration["Config:InventoryEndpoint"];
 });
 
 var serviceProvider = services.BuildServiceProvider();

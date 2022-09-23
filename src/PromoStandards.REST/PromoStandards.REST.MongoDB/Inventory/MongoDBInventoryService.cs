@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.Inventory;
 using PromoStandards.REST.Core.ProductData.Models;
+using PromoStandards.REST.MongoDB.ProductData;
 
 namespace PromoStandards.REST.MongoDB.Inventory
 {
@@ -26,15 +27,15 @@ namespace PromoStandards.REST.MongoDB.Inventory
             if (inventory == null || inventory.PartInventoryArray == null) return null;
 
             IEnumerable<PartInventory> results = inventory.PartInventoryArray;
-            if (request.Filter?.partIdArray != null)
+            if (request.Filter?.partIdArray != null && request.Filter.partIdArray.Length > 0)
             {
                 results = results.Where(x => request.Filter.partIdArray.Contains(x.partId));
             }
-            if (request.Filter?.PartColorArray != null)
+            if (request.Filter?.PartColorArray != null && request.Filter.PartColorArray.Length > 0)
             {
                 results = results.Where(x => request.Filter.PartColorArray.Contains(x.partColor));
             }
-            if (request.Filter?.LabelSizeArray != null)
+            if (request.Filter?.LabelSizeArray != null && request.Filter.LabelSizeArray.Length > 0)
             {
                 results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize.ToString()));
             }
@@ -46,9 +47,8 @@ namespace PromoStandards.REST.MongoDB.Inventory
         {
             try
             {
-
                 var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
+                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.productId == prodcutId);
                 var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
                 var entity = results.FirstOrDefault();
                 if (entity == null)
@@ -57,7 +57,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
                 }
                 else
                 {
-                    return entity.Value.Inventory;
+                    return JsonSerializer.Deserialize<Core.Inventory.Inventory>(JsonSerializer.Serialize(entity));
                 }
             }
             catch (Exception e)
@@ -70,6 +70,23 @@ namespace PromoStandards.REST.MongoDB.Inventory
         public virtual IMongoCollection<InventoryExtended> GetCollection(string databaseName, string collectionName)
         {
             return _client.GetDatabase(databaseName).GetCollection<InventoryExtended>(collectionName);
+        }
+
+        public async Task InsertUpdate(InventoryExtended inventory)
+        {
+            var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
+            var filter = new ExpressionFilterDefinition<InventoryExtended>(p => p.productId == inventory.productId);
+            var existingFind = await collection.FindAsync(filter);
+            var existing = await existingFind.FirstOrDefaultAsync();
+            if (existing == null)
+            {
+                await collection.InsertOneAsync(inventory);
+            }
+            else
+            {
+                inventory.Id = existing.Id;
+                await collection.ReplaceOneAsync(filter, inventory);
+            }
         }
 
         public GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request)
