@@ -3,35 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PromoStandards.REST.Core.Inventory;
 
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.0.30319.33440")]
-[Serializable()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/Inventory/2.0.0/SharedObjects/")]
 public partial class Quantity
 {
-        
-    private QuantityUom uomField;
-        
-    private decimal valueField;
-
     /// <summary>
     /// The quantity value
     /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
-    public QuantityUom uom
-    {
-        get
-        {
-            return this.uomField;
-        }
-        set
-        {
-            this.uomField = value;
-        }
-    }
+    public QuantityUom uom { get; set; }
 
     /// <summary>
     /// The unit of measure; values are enumerated.
@@ -48,17 +26,6 @@ public partial class Quantity
     ///   SL - Sleeve
     ///   TH – Thousand
     /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     [Required]
-    public decimal value
-    {
-        get
-        {
-            return this.valueField;
-        }
-        set
-        {
-            this.valueField = value;
-        }
-    }
+    public decimal value { get; set; }
 }

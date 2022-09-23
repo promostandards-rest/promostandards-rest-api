@@ -48,7 +48,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
             try
             {
                 var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.productId == prodcutId);
+                var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.Inventory.productId == prodcutId);
                 var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
                 var entity = results.FirstOrDefault();
                 if (entity == null)
@@ -57,7 +57,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
                 }
                 else
                 {
-                    return JsonSerializer.Deserialize<Core.Inventory.Inventory>(JsonSerializer.Serialize(entity));
+                    return entity.Inventory;
                 }
             }
             catch (Exception e)
@@ -75,7 +75,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
         public async Task InsertUpdate(InventoryExtended inventory)
         {
             var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-            var filter = new ExpressionFilterDefinition<InventoryExtended>(p => p.productId == inventory.productId);
+            var filter = new ExpressionFilterDefinition<InventoryExtended>(p => p.Inventory.productId == inventory.Inventory.productId);
             var existingFind = await collection.FindAsync(filter);
             var existing = await existingFind.FirstOrDefaultAsync();
             if (existing == null)
