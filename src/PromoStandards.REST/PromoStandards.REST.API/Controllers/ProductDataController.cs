@@ -12,10 +12,10 @@ namespace PromoStandards.REST.API.Controllers
     public class ProductDataController : ControllerBase
     {
         private readonly IProductDataService _productDataService;
-        private readonly IInventoryService _inventoryService;
-        private readonly IInventoryFilterService _inventoryFilterService;
+        private readonly IMyInventoryService _inventoryService;
+        private readonly IMyInventoryFilterService _inventoryFilterService;
 
-        public ProductDataController(IProductDataService productDataService, IInventoryService inventoryService, IInventoryFilterService inventoryFilterService)
+        public ProductDataController(IProductDataService productDataService, IMyInventoryService inventoryService, IMyInventoryFilterService inventoryFilterService)
         {
             _productDataService = productDataService;
             _inventoryService = inventoryService;
@@ -155,6 +155,14 @@ namespace PromoStandards.REST.API.Controllers
             var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
             return partList;
         }
+
+
+
+
+
+
+        #region ---------------- Inventory     -------------------- 
+
         /// <summary>
         /// Provides the inventory levels of a specific ProductId provided in the request.
         /// </summary>
@@ -168,7 +176,7 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter)
+        public async Task<IActionResult> MyGetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter)
         {
             try
             {
@@ -262,7 +270,7 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetInventoryFilterValues(string productId)
+        public async Task<IActionResult> MyGetInventoryFilterValues(string productId)
         {
             try
             {
@@ -284,5 +292,7 @@ namespace PromoStandards.REST.API.Controllers
             }
         }
 
+        #endregion
+        
     }
 }

@@ -7,12 +7,12 @@ using PromoStandards.REST.Core.Inventory;
 
 namespace PromoStandards.REST.MongoDB.Inventory
 {
-    public class MongoDBInventoryFilterService : IInventoryFilterService
+    public class MyMongoDBInventoryFilterService : IMyInventoryFilterService
     {
         private readonly IMongoClient _client;
-        private readonly MongoDBInventoryServiceConfiguration _config;
+        private readonly MyMongoDBInventoryServiceConfiguration _config;
 
-        public MongoDBInventoryFilterService(IOptions<MongoDBInventoryServiceConfiguration> config, IMongoClient client)
+        public MyMongoDBInventoryFilterService(IOptions<MyMongoDBInventoryServiceConfiguration> config, IMongoClient client)
         {
             _client = client;
             _config = config.Value;
@@ -21,8 +21,8 @@ namespace PromoStandards.REST.MongoDB.Inventory
         public async Task<Core.Inventory.GetFilterValuesResponse?> GetFilterValues(wsVersion wsVersion, string prodcutId)
         {
             var collection = GetCollection(_config.DatabaseName, _config.InventoryFilterCollectionName);
-            var filters = new ExpressionFilterDefinition<InventoryFilterExtended>(x => x.MyProductId == prodcutId);
-            var results = await collection.FindAsync(filters, new FindOptions<InventoryFilterExtended>());
+            var filters = new ExpressionFilterDefinition<MyInventoryFilterExtended>(x => x.MyProductId == prodcutId);
+            var results = await collection.FindAsync(filters, new FindOptions<MyInventoryFilterExtended>());
             
             var entities = await results.ToListAsync();
             var entity = entities.FirstOrDefault();
@@ -37,9 +37,9 @@ namespace PromoStandards.REST.MongoDB.Inventory
         }
 
         
-        public virtual IMongoCollection<InventoryFilterExtended> GetCollection(string databaseName, string collectionName)
+        public virtual IMongoCollection<MyInventoryFilterExtended> GetCollection(string databaseName, string collectionName)
         {
-            return _client.GetDatabase(databaseName).GetCollection<InventoryFilterExtended>(collectionName);
+            return _client.GetDatabase(databaseName).GetCollection<MyInventoryFilterExtended>(collectionName);
         }
 
     }

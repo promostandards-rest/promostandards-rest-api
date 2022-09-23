@@ -5,7 +5,7 @@ using PromoStandards.REST.Core.ProductData.Models;
 
 namespace PromoStandards.REST.StaticImplementation;
 
-public class StaticInventoryService : IInventoryService
+public class StaticInventoryService : IMyInventoryService
 {
     public GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request)
     {
@@ -13,7 +13,7 @@ public class StaticInventoryService : IInventoryService
         return faker.Generate<GetFilterValuesResponse>();
     }
 
-    Task<Inventory?> IInventoryService.GetInventoryLevels(GetInventoryLevelsRequest request)
+    Task<Inventory?> IMyInventoryService.GetInventoryLevels(GetInventoryLevelsRequest request)
     {
         throw new NotImplementedException();
     }

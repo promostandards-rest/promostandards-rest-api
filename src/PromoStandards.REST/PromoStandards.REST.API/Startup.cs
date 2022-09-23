@@ -63,7 +63,7 @@ namespace PromoStandards.REST.API
                 p.ProductCollectionName = Configuration["Config:ProductCollectionName"];
             });
 
-            services.Configure<MongoDBInventoryServiceConfiguration>(c =>
+            services.Configure<MyMongoDBInventoryServiceConfiguration>(c =>
             {
                 c.DatabaseName = Configuration["Config:DatabaseName"];
                 c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
@@ -81,8 +81,8 @@ namespace PromoStandards.REST.API
                        .AllowCredentials();
             }));
             services.AddSingleton<IProductDataService, MongoDBProductService>();
-            services.AddSingleton<IInventoryService, MongoDBInventoryService>();
-            services.AddSingleton<IInventoryFilterService, MongoDBInventoryFilterService>();
+            services.AddSingleton<IMyInventoryService, MyMongoDBInventoryService>();
+            services.AddSingleton<IMyInventoryFilterService, MyMongoDBInventoryFilterService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -7,12 +7,12 @@ using PromoStandards.REST.Core.Inventory;
 
 namespace PromoStandards.REST.MongoDB.Inventory
 {
-    public class MongoDBInventoryService : IInventoryService
+    public class MyMongoDBInventoryService : IMyInventoryService
     {
         private readonly IMongoClient _client;
-        private readonly MongoDBInventoryServiceConfiguration _config;
+        private readonly MyMongoDBInventoryServiceConfiguration _config;
 
-        public MongoDBInventoryService(IOptions<MongoDBInventoryServiceConfiguration> config, IMongoClient client)
+        public MyMongoDBInventoryService(IOptions<MyMongoDBInventoryServiceConfiguration> config, IMongoClient client)
         {
             _client = client;
             _config = config.Value;
@@ -54,8 +54,8 @@ namespace PromoStandards.REST.MongoDB.Inventory
         private async Task<Core.Inventory.Inventory?> GetInventory(string prodcutId)
         {
             var collection = GetCollection(_config.DatabaseName, _config.InventoryCollectionName);
-            var filters = new ExpressionFilterDefinition<InventoryExtended>(x => x.MyProductId == prodcutId);
-            var results = await collection.FindAsync(filters, new FindOptions<InventoryExtended>());
+            var filters = new ExpressionFilterDefinition<MyInventoryExtended>(x => x.MyProductId == prodcutId);
+            var results = await collection.FindAsync(filters, new FindOptions<MyInventoryExtended>());
             var entity = results.FirstOrDefault();
             if (entity == null)
             {
@@ -68,9 +68,9 @@ namespace PromoStandards.REST.MongoDB.Inventory
         }
 
         
-        public virtual IMongoCollection<InventoryExtended> GetCollection(string databaseName, string collectionName)
+        public virtual IMongoCollection<MyInventoryExtended> GetCollection(string databaseName, string collectionName)
         {
-            return _client.GetDatabase(databaseName).GetCollection<InventoryExtended>(collectionName);
+            return _client.GetDatabase(databaseName).GetCollection<MyInventoryExtended>(collectionName);
         }
 
 
