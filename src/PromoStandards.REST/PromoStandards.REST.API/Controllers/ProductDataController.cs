@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.Core.Inventory;
 using PromoStandards.REST.Core.ProductData.Models;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 
 namespace PromoStandards.REST.API.Controllers
@@ -55,16 +56,16 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Product?>> GetProduct(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
             {
                 return new NotFoundResult();
             }
 
-            return result.GetProductResponse.Product;
+            return result.Product;
         }
 
         /// <summary>
@@ -81,17 +82,17 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CollectionResponse<string>>> GetProductColors(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
                 return new NoContentResult();
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result?.Product?.ProductPartArray == null)
                 return new NoContentResult();
 
-            var colorArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
+            var colorArray = result.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
             var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
             return new CollectionResponse<string>(colorList); ;
         }
@@ -110,17 +111,17 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CollectionResponse<ApparelSizeLabelSize>>> GetProductSizes(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
                 return new NoContentResult();
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result.Product.ProductPartArray == null)
                 return new NoContentResult();
 
-            var sizeArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
+            var sizeArray = result.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
             var sizeList = sizeArray.Select(p => p.labelSize).Distinct().ToList();
             return new CollectionResponse<ApparelSizeLabelSize>(sizeList);
         }
@@ -139,17 +140,17 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CollectionResponse<string>>> GetProductParts(string productId)
         {
-            var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
+            var result = await _productDataService.getProductAsync(new GetProductRequest()
             {
                 productId = productId
-            }));
+            });
             if (result == null)
                 return new NoContentResult();
 
-            if (result.GetProductResponse.Product.ProductPartArray == null)
+            if (result.Product.ProductPartArray == null)
                 return new NoContentResult();
 
-            var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
+            var partList = result.Product.ProductPartArray.Select(p => p.partId).ToList();
             return new CollectionResponse<string>(partList);
         }
 

@@ -61,35 +61,20 @@ namespace PromoStandards.REST.MongoDB.ProductData
             return await result.ToListAsync();
         }
 
-        public async Task<getProductResponse1> getProductAsync(getProductRequest1 request)
+        public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
-            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.GetProductRequest.productId);
+            var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.productId);
             var result = await collection.FindAsync(filters, new FindOptions<ProductExtended>()
             {
                 Skip = 0,
                 Limit = 1
             });
             var product = await result.FirstOrDefaultAsync();
-            return new getProductResponse1(new GetProductResponse()
+            return new GetProductResponse()
             {
                 Product = JsonSerializer.Deserialize<Product>(JsonSerializer.Serialize(product))
-            });
-        }
-
-        public Task<getProductDateModifiedResponse1> getProductDateModifiedAsync(getProductDateModifiedRequest1 request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<getProductCloseOutResponse1> getProductCloseOutAsync(getProductCloseOutRequest1 request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<getProductSellableResponse1> getProductSellableAsync(getProductSellableRequest1 request)
-        {
-            throw new NotImplementedException();
+            };
         }
 
         public async Task<CollectionResponse<Product>> GetProducts(bool? isSellable = null, bool? isCloseout = null, DateTime? modifiedDate = null, int page = 0,

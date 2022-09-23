@@ -1,5 +1,4 @@
-﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Security.Cryptography.Xml;
 using System.Security.Policy;
