@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -21,14 +18,9 @@ public partial class Dimension
     private weightUom weightUomField;
     
     private System.Nullable<decimal> weightField;
-
-    /// <summary>
-    /// The dimensional unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    [EnumDataType(typeof(dimensionUom))]
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    [Required]
     public dimensionUom dimensionUom
     {
         get
@@ -40,10 +32,8 @@ public partial class Dimension
             this.dimensionUomField = value;
         }
     }
-
-    /// <summary>
-    /// The depth/length of the part using the unit of measure specified in dimensionUom
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
     public System.Nullable<decimal> depth
     {
@@ -56,10 +46,8 @@ public partial class Dimension
             this.depthField = value;
         }
     }
-
-    /// <summary>
-    /// The height of the part using the unit of measure specified in dimensionUom
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
     public System.Nullable<decimal> height
     {
@@ -72,10 +60,8 @@ public partial class Dimension
             this.heightField = value;
         }
     }
-
-    /// <summary>
-    /// The width of the part using the unit of measure specified in dimensionUom
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
     public System.Nullable<decimal> width
     {
@@ -88,13 +74,11 @@ public partial class Dimension
             this.widthField = value;
         }
     }
-
-    /// <summary>
-    /// The weight unit of measure for the part
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    [Required]
-    public weightUom weightUom {
+    public weightUom weightUom
+    {
         get
         {
             return this.weightUomField;
@@ -104,10 +88,8 @@ public partial class Dimension
             this.weightUomField = value;
         }
     }
-
-    /// <summary>
-    /// The weight of the part using the unit of measure specified in dimensionUom
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
     public System.Nullable<decimal> weight
     {

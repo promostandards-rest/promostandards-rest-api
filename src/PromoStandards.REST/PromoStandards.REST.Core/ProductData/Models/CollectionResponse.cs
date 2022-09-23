@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
-using PromoStandards.REST.Core.ProductData.ServiceReference;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json.Serialization;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 namespace PromoStandards.REST.Core.ProductData.Models {
     public class CollectionResponse<t> {

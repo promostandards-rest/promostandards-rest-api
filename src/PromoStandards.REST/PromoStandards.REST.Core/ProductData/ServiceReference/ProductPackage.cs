@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -28,12 +26,9 @@ public partial class ProductPackage
     private weightUom weightUomField;
     
     private System.Nullable<decimal> weightField;
-
-    /// <summary>
-    /// Boolean flag identifying the single default packaging for this package
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    [Required]
     public bool @default
     {
         get
@@ -45,13 +40,11 @@ public partial class ProductPackage
             this.defaultField = value;
         }
     }
-
-    /// <summary>
-    /// The packaging specific type for this partId e.g. Gift Box, Cello Pack, Sleeve
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    [Required]
-    public string packageType {
+    public string packageType
+    {
         get
         {
             return this.packageTypeField;
@@ -61,10 +54,8 @@ public partial class ProductPackage
             this.packageTypeField = value;
         }
     }
-
-    /// <summary>
-    /// The Packaging specific description
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
     public string description
     {
@@ -77,13 +68,11 @@ public partial class ProductPackage
             this.descriptionField = value;
         }
     }
-
-    /// <summary>
-    /// The partId unit Quantity included within this specific Packaging Option
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    [Required]
-    public decimal quantity {
+    public decimal quantity
+    {
         get
         {
             return this.quantityField;
@@ -93,13 +82,11 @@ public partial class ProductPackage
             this.quantityField = value;
         }
     }
-
-    /// <summary>
-    /// The unit of measure for the package
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    [Required]
-    public dimensionUom dimensionUom {
+    public dimensionUom dimensionUom
+    {
         get
         {
             return this.dimensionUomField;
@@ -109,10 +96,8 @@ public partial class ProductPackage
             this.dimensionUomField = value;
         }
     }
-
-    /// <summary>
-    /// The depth/length of the package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
     public System.Nullable<decimal> depth
     {
@@ -125,10 +110,8 @@ public partial class ProductPackage
             this.depthField = value;
         }
     }
-
-    /// <summary>
-    /// The height of the package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=6)]
     public System.Nullable<decimal> height
     {
@@ -141,10 +124,8 @@ public partial class ProductPackage
             this.heightField = value;
         }
     }
-
-    /// <summary>
-    /// The width of the package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
     public System.Nullable<decimal> width
     {
@@ -157,13 +138,11 @@ public partial class ProductPackage
             this.widthField = value;
         }
     }
-
-    /// <summary>
-    /// The weight unit of measure for the packageType
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-    [Required]
-    public weightUom weightUom {
+    public weightUom weightUom
+    {
         get
         {
             return this.weightUomField;
@@ -173,10 +152,8 @@ public partial class ProductPackage
             this.weightUomField = value;
         }
     }
-
-    /// <summary>
-    /// The weight of the specific packageType
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=9)]
     public System.Nullable<decimal> weight
     {

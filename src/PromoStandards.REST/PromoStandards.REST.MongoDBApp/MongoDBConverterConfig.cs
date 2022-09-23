@@ -15,5 +15,6 @@ namespace PromoStandards.REST.MongoDBApp
         public string Password { get; set; }
         public string LocalizationCountry { get; set; }
         public string LocalizationLanguage { get; set; }
+        public string InventoryEndpoint { get; set; }
     }
 }

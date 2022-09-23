@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -16,25 +14,9 @@ public partial class Color
     private string approximatePmsField;
     
     private string colorNameField;
-
-    /// <summary>
-    /// Supplier specific color name.  Go to market color
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "token", Order = 1)]
-    [Required]
-    public string colorName {
-        get {
-            return this.colorNameField;
-        }
-        set {
-            this.colorNameField = value;
-        }
-    }
-
-    /// <summary>
-    /// The standard color that best describes this color. Eventually may become an enumeration.
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=4)]
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
     public string standardColorName
     {
         get
@@ -46,11 +28,9 @@ public partial class Color
             this.standardColorNameField = value;
         }
     }
-
-    /// <summary>
-    /// The HEX code representation.  This is not a supplement for product color but data used for generating web user interfaces.
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
     public string hex
     {
         get
@@ -62,11 +42,9 @@ public partial class Color
             this.hexField = value;
         }
     }
-
-    /// <summary>
-    /// The PMS code representation.  This is not a supplement for product color.
-    /// </summary>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=3)]
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
     public string approximatePms
     {
         get
@@ -76,6 +54,20 @@ public partial class Color
         set
         {
             this.approximatePmsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=3)]
+    public string colorName
+    {
+        get
+        {
+            return this.colorNameField;
+        }
+        set
+        {
+            this.colorNameField = value;
         }
     }
 }

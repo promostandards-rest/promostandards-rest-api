@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,12 +8,9 @@ public partial class ProductKeyword
 {
     
     private string keywordField;
-
-    /// <summary>
-    /// A product keyword commonly utilized for search or other functions
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
-    [Required]
     public string keyword
     {
         get

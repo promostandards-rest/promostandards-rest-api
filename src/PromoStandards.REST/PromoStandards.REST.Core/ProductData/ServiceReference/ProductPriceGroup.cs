@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -16,13 +14,10 @@ public partial class ProductPriceGroup
     private CurrencyCodeType currencyField;
     
     private string descriptionField;
-
-    /// <summary>
-    /// An array of Product Price objects
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPrice", IsNullable=false)]
-    [Required]
     public ProductPrice[] ProductPriceArray
     {
         get
@@ -34,10 +29,8 @@ public partial class ProductPriceGroup
             this.productPriceArrayField = value;
         }
     }
-
-    /// <summary>
-    /// Price group description
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
     public string groupName
     {
@@ -50,10 +43,8 @@ public partial class ProductPriceGroup
             this.groupNameField = value;
         }
     }
-
-    /// <summary>
-    /// The currency supported in ISO4217 format.
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public CurrencyCodeType currency
     {
@@ -66,10 +57,8 @@ public partial class ProductPriceGroup
             this.currencyField = value;
         }
     }
-
-    /// <summary>
-    /// The description of the product price
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=3)]
     public string description
     {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -14,12 +12,9 @@ public partial class Specification
     private string specificationUomField;
     
     private string measurementValueField;
-
-    /// <summary>
-    /// The type of specification
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    [Required]
     public SpecificationSpecificationType specificationType
     {
         get
@@ -31,12 +26,9 @@ public partial class Specification
             this.specificationTypeField = value;
         }
     }
-
-    /// <summary>
-    /// Specification unit of measure  
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", IsNullable=true, Order=1)]
-    [Required]
     public string SpecificationUom
     {
         get
@@ -48,12 +40,9 @@ public partial class Specification
             this.specificationUomField = value;
         }
     }
-
-    /// <summary>
-    /// Specification Measurement Value
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
-    [Required]
     public string measurementValue
     {
         get

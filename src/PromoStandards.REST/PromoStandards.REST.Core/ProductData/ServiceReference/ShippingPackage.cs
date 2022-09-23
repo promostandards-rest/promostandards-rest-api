@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -26,12 +24,9 @@ public partial class ShippingPackage
     private weightUom weightUomField;
     
     private System.Nullable<decimal> weightField;
-
-    /// <summary>
-    /// The shipping package specific type for this shipping package e.g. Box, Carton, etc.
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
-    [Required]
     public string packageType
     {
         get
@@ -43,10 +38,8 @@ public partial class ShippingPackage
             this.packageTypeField = value;
         }
     }
-
-    /// <summary>
-    /// The shipping package specific description
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
     public string description
     {
@@ -59,12 +52,9 @@ public partial class ShippingPackage
             this.descriptionField = value;
         }
     }
-
-    /// <summary>
-    /// The partId unit quantity included within this specific shipping packaging option
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    [Required]
     public decimal quantity
     {
         get
@@ -76,12 +66,9 @@ public partial class ShippingPackage
             this.quantityField = value;
         }
     }
-
-    /// <summary>
-    /// The weight unit of measure for the packageType
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    [Required]
     public dimensionUom dimensionUom
     {
         get
@@ -93,10 +80,8 @@ public partial class ShippingPackage
             this.dimensionUomField = value;
         }
     }
-
-    /// <summary>
-    /// The depth/length of the shipping package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
     public System.Nullable<decimal> depth
     {
@@ -109,10 +94,8 @@ public partial class ShippingPackage
             this.depthField = value;
         }
     }
-
-    /// <summary>
-    /// The height of the shipping package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
     public System.Nullable<decimal> height
     {
@@ -125,10 +108,8 @@ public partial class ShippingPackage
             this.heightField = value;
         }
     }
-
-    /// <summary>
-    /// The width of the shipping package in the dimensionUom unit of measure
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=6)]
     public System.Nullable<decimal> width
     {
@@ -141,12 +122,9 @@ public partial class ShippingPackage
             this.widthField = value;
         }
     }
-
-    /// <summary>
-    /// The weight unit of measure for the packageType
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-    [Required]
     public weightUom weightUom
     {
         get
@@ -158,10 +136,8 @@ public partial class ShippingPackage
             this.weightUomField = value;
         }
     }
-
-    /// <summary>
-    /// The weight of the specific packageType
-    /// </summary>
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=8)]
     public System.Nullable<decimal> weight
     {

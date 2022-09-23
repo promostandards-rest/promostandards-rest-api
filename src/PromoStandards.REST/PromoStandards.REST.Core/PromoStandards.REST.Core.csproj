@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Inventory\Filter.cs" />
+    <Compile Remove="Inventory\Inventory.cs" />
     <Compile Remove="Inventory\InventoryServiceV2.cs" />
+    <Compile Remove="Inventory\PartInventoryArrayPartInventory.cs" />
+    <Compile Remove="Inventory\Quantity.cs" />
   </ItemGroup>
 
   <ItemGroup>

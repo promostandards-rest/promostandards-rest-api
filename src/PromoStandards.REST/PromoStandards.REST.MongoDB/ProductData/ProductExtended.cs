@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using PromoStandards.REST.Core.ProductData.ServiceReference;
 
 
 namespace PromoStandards.REST.MongoDB.ProductData

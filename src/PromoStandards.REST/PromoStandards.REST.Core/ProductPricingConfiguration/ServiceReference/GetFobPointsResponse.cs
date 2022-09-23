@@ -7,14 +7,14 @@
 public partial class GetFobPointsResponse
 {
     
-    private FobPoint[] fobPointArrayField;
+    private ProductData.ServiceReference.FobPoint[] fobPointArrayField;
     
     private ErrorMessage errorMessageField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
     [System.Xml.Serialization.XmlArrayItemAttribute("FobPoint", IsNullable=false)]
-    public FobPoint[] FobPointArray
+    public ProductData.ServiceReference.FobPoint[] FobPointArray
     {
         get
         {
