@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PromoStandards.REST.Abstraction;
+using PromoStandards.REST.API.Common;
 using PromoStandards.REST.Core.Inventory;
 using PromoStandards.REST.Core.ProductData.Models;
-
 
 namespace PromoStandards.REST.API.Controllers
 {
@@ -13,11 +13,13 @@ namespace PromoStandards.REST.API.Controllers
     {
         private readonly IProductDataService _productDataService;
         private readonly IInventoryService _inventoryService;
+        private readonly IInventoryFilterService _inventoryFilterService;
 
-        public ProductDataController(IProductDataService productDataService, IInventoryService inventoryService)
+        public ProductDataController(IProductDataService productDataService, IInventoryService inventoryService, IInventoryFilterService inventoryFilterService)
         {
             _productDataService = productDataService;
             _inventoryService = inventoryService;
+            _inventoryFilterService = inventoryFilterService;
         }
 
         /// <summary>
@@ -153,22 +155,20 @@ namespace PromoStandards.REST.API.Controllers
             var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
             return partList;
         }
-
         /// <summary>
         /// Provides the inventory levels of a specific ProductId provided in the request.
         /// </summary>
         /// <param name="productId">The supplier's ID for a given product</param>
+        /// <param name="filter"></param>
         /// <remarks>
         /// </remarks>
-        /// <response code="200">Returns inventory levels</response>
-        /// <response code="404">When the product is not found</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetInventoryLevels(string productId)
+        public async Task<IActionResult> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter)
         {
             try
             {
@@ -176,8 +176,102 @@ namespace PromoStandards.REST.API.Controllers
                 {
                     return BadRequest("ProductId Required");
                 }
-                var request = new GetInventoryLevelsRequest() { wsVersion = wsVersion.Item200, productId = productId.ToUpper() };
+                var request = new GetInventoryLevelsRequest()
+                {
+                    wsVersion = wsVersion.Item200,
+                    productId = productId.ToUpper(),
+                    Filter = new Filter()
+                };
+
+                var filterPartIds = Helpers.GetStringList(filter.PartIds);
+                var filterColors = Helpers.GetStringList(filter.PartColors);
+                //var filterSizes = Helpers.GetStringList(filter.PartSizes);
+
+                if (Helpers.ObjectsAny(filterPartIds) | Helpers.ObjectsAny(filterColors))
+                {
+                    var validatorFilter = await _inventoryFilterService.GetFilterValues(wsVersion.Item200, productId.Trim().ToUpper());
+                    if (validatorFilter != null)
+                    {
+                        if (validatorFilter.FilterValues == null || validatorFilter.FilterValues.Filter == null)
+                        {
+                            return BadRequest("FilterValues.Filter not supported for this product");
+                        }
+                        
+                        if (Helpers.ObjectsAny(filterPartIds))
+                        {
+                            var validatorPartIds = validatorFilter.FilterValues.Filter.partIdArray;
+                            if (!Helpers.ObjectsAny(validatorPartIds))
+                            {
+                                return BadRequest("Invalid PartIds");
+                            }
+                            
+                            var invalidPartIds = filterPartIds.Except(validatorPartIds);
+                            if (Helpers.ObjectsAny(invalidPartIds))
+                            {
+                                return BadRequest("Invalid PartIds: " + string.Join(",", invalidPartIds));
+                            }
+                            request.Filter.partIdArray = filterPartIds.ToArray();
+                        }
+
+
+                        if (Helpers.ObjectsAny(filterColors))
+                        {
+                            var validatorColors = validatorFilter.FilterValues.Filter.PartColorArray;
+                            
+                            if (!Helpers.ObjectsAny(validatorColors))
+                            {
+                                return BadRequest("Invalid Colors");
+                            }
+                            var upercaseColors = validatorColors.Select(x => x.ToUpperInvariant()).ToArray();
+
+                            var invalidColors = filterColors.Except(upercaseColors);
+                            
+                            if (Helpers.ObjectsAny(invalidColors))
+                            {
+                                return BadRequest("Invalid Colors: " + string.Join(",", invalidColors));
+                            }
+
+                            request.Filter.PartColorArray = validatorColors.Where(x => filterColors.Contains(x.ToUpper())).ToArray();
+                        }
+                    }
+                }
+
                 var response = await _inventoryService.GetInventoryLevels(request);
+                if (response == null)
+                {
+                    //return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    return Ok("No Content for the Specified Product");
+                }
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Provides the inventory filters of a specific ProductId provided in the request.
+        /// </summary>
+        /// <param name="productId">The supplier's ID for a given product</param>
+        /// <remarks>
+        /// </remarks>
+        [HttpGet("{productId}/inventory/filterValues")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetInventoryFilterValues(string productId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(productId))
+                {
+                    return BadRequest("ProductId Required");
+                }
+                
+                var response = await _inventoryFilterService.GetFilterValues(wsVersion.Item200, productId.Trim().ToUpper());
                 if (response == null)
                 {
                     return new StatusCodeResult(StatusCodes.Status204NoContent);

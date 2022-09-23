@@ -4,4 +4,5 @@ public class MongoDBInventoryServiceConfiguration
 {
     public string DatabaseName { get; set; }
     public string InventoryCollectionName { get; set; }
+    public string InventoryFilterCollectionName { get; set; }
 }

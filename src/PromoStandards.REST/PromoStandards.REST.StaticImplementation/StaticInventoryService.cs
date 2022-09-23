@@ -13,9 +13,14 @@ public class StaticInventoryService : IInventoryService
         return faker.Generate<GetFilterValuesResponse>();
     }
 
-    public async Task<CollectionResponse<PartInventory>> GetInventoryLevels(GetInventoryLevelsRequest request)
+    Task<Inventory?> IInventoryService.GetInventoryLevels(GetInventoryLevelsRequest request)
     {
-        var faker = AutoFaker.Create();
-        return faker.Generate<CollectionResponse<PartInventory>>();
+        throw new NotImplementedException();
     }
+
+    //public async Task<CollectionResponse<PartInventory>> GetInventoryLevels(GetInventoryLevelsRequest request)
+    //{
+    //    var faker = AutoFaker.Create();
+    //    return faker.Generate<CollectionResponse<PartInventory>>();
+    //}
 }

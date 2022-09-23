@@ -1,11 +1,15 @@
 ﻿using PromoStandards.REST.Core.Inventory;
-using PromoStandards.REST.Core.ProductData.Models;
 
 namespace PromoStandards.REST.Abstraction
 {
     public interface IInventoryService
     {
-        GetFilterValuesResponse GetFilterValues(GetFilterValuesRequest request);
-        Task<CollectionResponse<PartInventory>> GetInventoryLevels(GetInventoryLevelsRequest request);       
+        //Task<CollectionResponse<PartInventory>> GetInventoryLevels(GetInventoryLevelsRequest request);
+        Task<Core.Inventory.Inventory?> GetInventoryLevels(GetInventoryLevelsRequest request);
+    }
+
+    public interface IInventoryFilterService
+    {
+       Task<GetFilterValuesResponse?> GetFilterValues(wsVersion wsVersion, string productId);
     }
 }

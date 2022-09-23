@@ -46,7 +46,7 @@ namespace PromoStandards.REST.API
                 });
 
                 c.UseInlineDefinitionsForEnums();
-                
+
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
@@ -67,11 +67,11 @@ namespace PromoStandards.REST.API
             {
                 c.DatabaseName = Configuration["Config:DatabaseName"];
                 c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
+                c.InventoryFilterCollectionName = Configuration["Config:InventoryFilterCollectionName"];
             });
 
             //services.AddSingleton<IProductDataService, StaticProductDataService>();
             //services.AddSingleton<IInventoryService, StaticInventoryService>();
-
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
@@ -82,6 +82,7 @@ namespace PromoStandards.REST.API
             }));
             services.AddSingleton<IProductDataService, MongoDBProductService>();
             services.AddSingleton<IInventoryService, MongoDBInventoryService>();
+            services.AddSingleton<IInventoryFilterService, MongoDBInventoryFilterService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
