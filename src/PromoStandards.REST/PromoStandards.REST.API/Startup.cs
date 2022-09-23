@@ -69,8 +69,6 @@ namespace PromoStandards.REST.API
                 c.InventoryCollectionName = Configuration["Config:InventoryCollectionName"];
             });
 
-            //services.AddSingleton<IProductDataService, StaticProductDataService>();
-            //services.AddSingleton<IInventoryService, StaticInventoryService>();
 
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
@@ -80,8 +78,13 @@ namespace PromoStandards.REST.API
                        .AllowAnyHeader()
                        .AllowCredentials();
             }));
+
             services.AddSingleton<IProductDataService, MongoDBProductService>();
             services.AddSingleton<IInventoryService, MongoDBInventoryService>();
+
+            services.AddSingleton<IMediaContentService, StaticMediaService>();
+            //services.AddSingleton<IProductDataService, StaticProductDataService>();
+            //services.AddSingleton<IInventoryService, StaticInventoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -8,7 +8,7 @@ namespace PromoStandards.REST.StaticImplementation;
 
 public class StaticProductDataService : IProductDataService
 {
-    public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
+    public async Task<GetProductResponse> GetProduct(GetProductRequest request)
     {
         var faker = AutoFaker.Create();
         return faker.Generate<GetProductResponse>();

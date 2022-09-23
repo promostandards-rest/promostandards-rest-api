@@ -41,7 +41,7 @@ namespace PromoStandards.REST.MongoDB.ProductData
             }
         }
 
-        public async Task<GetProductResponse> getProductAsync(GetProductRequest request)
+        public async Task<GetProductResponse> GetProduct(GetProductRequest request)
         {
             var collection = GetCollection(_config.DatabaseName, _config.ProductCollectionName);
             var filters = new ExpressionFilterDefinition<ProductExtended>(p => p.productId == request.productId);
