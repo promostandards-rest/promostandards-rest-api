@@ -36,7 +36,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
             }
             if (request.Filter?.LabelSizeArray != null)
             {
-                results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize));
+                results = results.Where(x => request.Filter.LabelSizeArray.Contains(x.labelSize.ToString()));
             }
             
             return new CollectionResponse<PartInventory>(results.ToList());

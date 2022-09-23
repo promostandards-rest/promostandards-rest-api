@@ -32,11 +32,13 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">All products matching the filters are returned</response>
+        /// <response code="204">No products found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<CollectionResponse<Product>> GetProducts(DateTime? dateModified, bool? closeOut, bool? sellable, int page = 0, int pageSize = 20)
+        public async Task<ActionResult<CollectionResponse<Product>>> GetProducts(DateTime? dateModified, bool? closeOut, bool? sellable, [FromQuery] PagingRequest paging)
         {
-            var result = await _productDataService.GetProducts(sellable, closeOut, dateModified, page, pageSize);
+            var result = await _productDataService.GetProducts(sellable, closeOut, dateModified, paging.page, paging.pageSize);
             return result;
         }
 
@@ -47,10 +49,11 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns the product</response>
-        /// <response code="404">When the product is not found</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetProductResponse?> GetProduct(string productId)
+        public async Task<ActionResult<Product?>> GetProduct(string productId)
         {
             var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
@@ -58,11 +61,10 @@ namespace PromoStandards.REST.API.Controllers
             }));
             if (result == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return new NotFoundResult();
             }
 
-            return result.GetProductResponse;
+            return result.GetProductResponse.Product;
         }
 
         /// <summary>
@@ -72,27 +74,26 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns a collection of product colors</response>
-        /// <response code="404">When the product is not found</response>
+        /// <response code="204">Product does not have colors</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/colors")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<string>> GetProductColors(string productId)
+        public async Task<ActionResult<CollectionResponse<string>>> GetProductColors(string productId)
         {
             var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
             }));
             if (result == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+                return new NoContentResult();
 
             if (result.GetProductResponse.Product.ProductPartArray == null)
-                return new List<string>();
+                return new NoContentResult();
 
             var colorArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
             var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
-            return colorList;
+            return new CollectionResponse<string>(colorList); ;
         }
 
         /// <summary>
@@ -102,27 +103,26 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns a collection of product sizes</response>
-        /// <response code="404">When the product is not found</response>
+        /// <response code="204">Product does not sizes</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/sizes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<ApparelSizeApparelStyle>> GetProductSizes(string productId)
+        public async Task<ActionResult<CollectionResponse<ApparelSizeLabelSize>>> GetProductSizes(string productId)
         {
             var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
             }));
             if (result == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+                return new NoContentResult();
 
             if (result.GetProductResponse.Product.ProductPartArray == null)
-                return new List<ApparelSizeApparelStyle>();
+                return new NoContentResult();
 
             var sizeArray = result.GetProductResponse.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
-            var sizeList = sizeArray.Select(p => p.apparelStyle).Distinct().ToList();
-            return sizeList;
+            var sizeList = sizeArray.Select(p => p.labelSize).Distinct().ToList();
+            return new CollectionResponse<ApparelSizeLabelSize>(sizeList);
         }
 
         /// <summary>
@@ -132,43 +132,47 @@ namespace PromoStandards.REST.API.Controllers
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns a collection of product parts</response>
-        /// <response code="404">When the product is not found</response>
+        /// <response code="204">Product does not have parts</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/parts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public  async Task<IEnumerable<string>> GetProductParts(string productId)
+        public async Task<ActionResult<CollectionResponse<string>>> GetProductParts(string productId)
         {
             var result = await _productDataService.getProductAsync(new getProductRequest1(new GetProductRequest()
             {
                 productId = productId
             }));
             if (result == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+                return new NoContentResult();
 
             if (result.GetProductResponse.Product.ProductPartArray == null)
-                return new List<string>();
+                return new NoContentResult();
 
             var partList = result.GetProductResponse.Product.ProductPartArray.Select(p => p.partId).ToList();
-            return partList;
+            return new CollectionResponse<string>(partList);
         }
 
         /// <summary>
         /// Provides the inventory levels of a specific ProductId provided in the request.
         /// </summary>
         /// <param name="productId">The supplier's ID for a given product</param>
+        /// <param name="parts">List of partIds to filter on</param>
+        /// <param name="colors">List of colors to filter on</param>
+        /// <param name="sizes">List of sizes to filter on</param>
         /// <remarks>
         /// </remarks>
         /// <response code="200">Returns inventory levels</response>
-        /// <response code="404">When the product is not found</response>
+        /// <response code="204">Product does not have inventory levels</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetInventoryLevels(string productId)
+        public async Task<ActionResult<CollectionResponse<PartInventory>>> GetInventoryLevels(String productId, [FromQuery] String[]? parts, [FromQuery] String[]? colors, [FromQuery] String[]? sizes)
         {
             try
             {
@@ -176,11 +180,19 @@ namespace PromoStandards.REST.API.Controllers
                 {
                     return BadRequest("ProductId Required");
                 }
-                var request = new GetInventoryLevelsRequest() { wsVersion = wsVersion.Item200, productId = productId.ToUpper() };
-                var response = await _inventoryService.GetInventoryLevels(request);
+                var response = await _inventoryService.GetInventoryLevels(new GetInventoryLevelsRequest()
+                {
+                    productId = productId,
+                    Filter = new Filter()
+                    {
+                        LabelSizeArray = sizes,
+                        PartColorArray = colors,
+                        partIdArray = parts
+                    }
+                });
                 if (response == null)
                 {
-                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    return new NoContentResult();
                 }
                 return Ok(response);
             }

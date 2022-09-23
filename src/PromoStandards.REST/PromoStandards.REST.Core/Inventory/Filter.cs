@@ -11,7 +11,7 @@ public partial class Filter
         
     private string[] partIdArrayField;
         
-    private labelSize[] labelSizeArrayField;
+    private string[] labelSizeArrayField;
         
     private string[] partColorArrayField;
         
@@ -32,7 +32,7 @@ public partial class Filter
         
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
-    public labelSize[] LabelSizeArray
+    public string[] LabelSizeArray
     {
         get
         {
