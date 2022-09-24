@@ -1,3 +1,1 @@
-# promostandards-rest-api
-
-## Putting SOAP to REST
+# Putting SOAP to REST
