@@ -119,15 +119,17 @@ namespace PromoStandards.REST.API.Controllers
         /// Provides the inventory levels of a specific ProductId provided in the request.
         /// </summary>
         /// <param name="productId">The supplier's ID for a given product</param>
-        /// <param name="filter"></param>
+        /// <param name="parts">List of partIds to filter on</param>
+        /// <param name="colors">List of colors to filter on</param>
+        /// <param name="sizes">List of sizes to filter on</param>
         /// <remarks>
         /// </remarks>
+        /// <response code="200">Returns inventory levels</response>
+        /// <response code="204">Product does not have inventory levels</response>
+        /// <response code="404">Product using productId is not found</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter)
         {
             try
@@ -211,40 +213,40 @@ namespace PromoStandards.REST.API.Controllers
         }
 
 
-        /// <summary>
-        /// Provides the inventory filters of a specific ProductId provided in the request.
-        /// </summary>
-        /// <param name="productId">The supplier's ID for a given product</param>
-        /// <remarks>
-        /// </remarks>
-        ///
-        [HttpGet("{productId}/inventory/filterValues")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetInventoryFilterValues(string productId)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(productId))
-                {
-                    return BadRequest("ProductId Required");
-                }
+        ///// <summary>
+        ///// Provides the inventory filters of a specific ProductId provided in the request.
+        ///// </summary>
+        ///// <param name="productId">The supplier's ID for a given product</param>
+        ///// <remarks>
+        ///// </remarks>
+        /////
+        //[HttpGet("{productId}/inventory/filterValues")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> GetInventoryFilterValues(string productId)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(productId))
+        //        {
+        //            return BadRequest("ProductId Required");
+        //        }
 
-                var response = await _inventoryFilterService.GetFilterValues(wsVersion.Item200, productId.Trim().ToUpper());
-                if (response == null)
-                {
-                    return new StatusCodeResult(StatusCodes.Status204NoContent);
-                }
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-        }
+        //        var response = await _inventoryFilterService.GetFilterValues(wsVersion.Item200, productId.Trim().ToUpper());
+        //        if (response == null)
+        //        {
+        //            return new StatusCodeResult(StatusCodes.Status204NoContent);
+        //        }
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        //    }
+        //}
 
         #endregion
         

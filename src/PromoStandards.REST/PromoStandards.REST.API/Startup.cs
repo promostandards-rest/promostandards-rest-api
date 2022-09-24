@@ -88,11 +88,13 @@ namespace PromoStandards.REST.API
             services.AddSingleton<IProductDataService, MongoDBProductService>();
             services.AddSingleton<IMyInventoryService, MyMongoDBInventoryService>();
             services.AddSingleton<IMyInventoryFilterService, MyMongoDBInventoryFilterService>();
-            //services.AddSingleton<IInventoryService, MongoDBInventoryService>();
-
             services.AddSingleton<IMediaContentService, MongoDBMediaContentService>();
+
+            // Uncomment for local:
             //services.AddSingleton<IProductDataService, StaticProductDataService>();
-            //services.AddSingleton<IInventoryService, StaticInventoryService>();
+            //services.AddSingleton<IMyInventoryService, StaticInventoryService>();
+            //services.AddSingleton<IMyInventoryFilterService, StaticInventoryFilterService>();
+            //services.AddSingleton<IMediaContentService, StaticMediaService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

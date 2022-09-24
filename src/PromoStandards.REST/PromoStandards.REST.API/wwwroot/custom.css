@@ -1,4 +1,4 @@
-﻿th.col_header.parameters-col_name{
+﻿th.col_header.parameters-col_name {
     min-width: 200px;
 }
 
@@ -15,16 +15,16 @@ table.model tr, tr.response {
         margin: 0 !important;
     }
 
-    table.model span.model-title__text {
-        font-size: 90%;
-    }
+table.model span.model-title__text {
+    font-size: 90%;
+}
 
 span.prop-enum > br {
     display: none;
 }
 
 .swagger-ui .model-hint {
-    display:none !important;
+    display: none !important;
 }
 
 td.response-col_status {
@@ -60,7 +60,8 @@ section.response-controls {
     text-align: left !important;
     margin-left: 220px;
 }
-.btn{
+
+.btn {
     max-width: 180px !important;
 }
 
@@ -95,3 +96,27 @@ span.opblock-summary-path {
     #swagger-ui > section > div.swagger-ui > div:nth-child(2) > div:nth-child(3) > section > div > span:nth-child(3) {
         order: 1;
     }
+
+#model-ProblemDetails {
+    display: none;
+}
+
+table.parameters p {
+    margin: 0 !important;
+}
+
+.responses-inner {
+}
+
+    .responses-inner > div > div {
+        margin-bottom: 10px;
+    }
+
+        .responses-inner > div > div + h4,
+        .responses-inner > div + .responses-table {
+            display: none;
+        }
+
+.parameters tr {
+    border-bottom: 1px solid lightgrey;
+}
