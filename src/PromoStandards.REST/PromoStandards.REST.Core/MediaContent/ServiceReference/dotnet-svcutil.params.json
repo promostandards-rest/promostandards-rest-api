@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "options": {
     "inputs": [
-      "../MediaContentService.wsdl"
+      "https://services.starline.com/MediaContentService/WSDL/1.0.0/MediaContentService.wsdl"
     ],
     "outputFile": "Reference.cs",
     "targetFramework": "net6.0",

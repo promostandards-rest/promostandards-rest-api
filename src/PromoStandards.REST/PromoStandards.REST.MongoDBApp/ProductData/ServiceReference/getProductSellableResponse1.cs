@@ -1,4 +1,6 @@
-﻿[System.Diagnostics.DebuggerStepThroughAttribute()]
+﻿namespace PromoStandards.REST.MongoDBApp.ProductData.ServiceReference;
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
 [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]

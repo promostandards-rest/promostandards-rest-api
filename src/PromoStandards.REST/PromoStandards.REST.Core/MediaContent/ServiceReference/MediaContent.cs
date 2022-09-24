@@ -35,9 +35,9 @@ public partial class MediaContent
     
     private string colorField;
     
-    private ProductPricingConfiguration.ServiceReference.Decoration[] decorationArrayField;
+    private Decoration[] decorationArrayField;
     
-    private ProductPricingConfiguration.ServiceReference.Location[] locationArrayField;
+    private Location[] locationArrayField;
     
     private int decorationIdField;
     
@@ -251,7 +251,7 @@ public partial class MediaContent
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=10)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Decoration", IsNullable=false)]
-    public ProductPricingConfiguration.ServiceReference.Decoration[] DecorationArray
+    public Decoration[] DecorationArray
     {
         get
         {
@@ -266,7 +266,7 @@ public partial class MediaContent
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Order=11)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Location", IsNullable=false)]
-    public ProductPricingConfiguration.ServiceReference.Location[] LocationArray
+    public Location[] LocationArray
     {
         get
         {

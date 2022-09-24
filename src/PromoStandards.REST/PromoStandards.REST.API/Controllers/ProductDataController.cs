@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using PromoStandards.REST.Abstraction;
 using PromoStandards.REST.API.Common;
 using PromoStandards.REST.Core.Inventory;

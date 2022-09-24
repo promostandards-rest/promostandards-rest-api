@@ -1,4 +1,6 @@
-﻿[System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+﻿namespace PromoStandards.REST.MongoDBApp.ProductData.ServiceReference;
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/", ConfigurationName="ProductDataService")]
 public interface ProductDataService
 {

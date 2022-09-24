@@ -9,6 +9,7 @@ using PromoStandards.REST.Core.Inventory;
 using PromoStandards.REST.MongoDB.Inventory;
 using PromoStandards.REST.MongoDB.ProductData;
 using PromoStandards.REST.MongoDBApp.Inventory.ServiceReference;
+using PromoStandards.REST.MongoDBApp.ProductData.ServiceReference;
 using FutureAvailability = PromoStandards.REST.Core.Inventory.FutureAvailability;
 using GetInventoryLevelsRequest = PromoStandards.REST.MongoDBApp.Inventory.ServiceReference.GetInventoryLevelsRequest;
 using InventoryLocation = PromoStandards.REST.Core.Inventory.InventoryLocation;
