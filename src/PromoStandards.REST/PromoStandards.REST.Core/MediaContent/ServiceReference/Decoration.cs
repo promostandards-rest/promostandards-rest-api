@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,9 +12,12 @@ public partial class Decoration
     private int decorationIdField;
     
     private string decorationNameField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The decoration id associated with the media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public int decorationId
     {
         get
@@ -24,9 +29,12 @@ public partial class Decoration
             this.decorationIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The name of the decoration associated with the id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
+    [Required]
     public string decorationName
     {
         get

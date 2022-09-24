@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,9 +12,12 @@ public partial class Location
     private int locationIdField;
     
     private string locationNameField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The location id associated with the media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public int locationId
     {
         get
@@ -24,11 +29,13 @@ public partial class Location
             this.locationIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The name of the location associated with the id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string locationName
-    {
+    [Required]
+    public string locationName {
         get
         {
             return this.locationNameField;

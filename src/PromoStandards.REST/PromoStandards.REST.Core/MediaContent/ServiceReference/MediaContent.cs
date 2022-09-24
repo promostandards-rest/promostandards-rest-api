@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -50,9 +52,12 @@ public partial class MediaContent
     private System.DateTime changeTimeStampField;
     
     private bool changeTimeStampFieldSpecified;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The associated Product Id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/", DataType="token", Order=0)]
+    [Required]
     public string productId
     {
         get
@@ -64,8 +69,10 @@ public partial class MediaContent
             this.productIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The part Id associated to the product Id.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/", DataType="token", Order=1)]
     public string partId
     {
@@ -78,9 +85,12 @@ public partial class MediaContent
             this.partIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The URL of the media location.  Any valid URL can be returned including prefixes like http and ftp.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
+    [Required]
     public string url
     {
         get
@@ -93,10 +103,12 @@ public partial class MediaContent
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// The type of media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/", Order=3)]
-    public mediaTypeType mediaType
-    {
+    [Required]
+    public mediaTypeType mediaType {
         get
         {
             return this.mediaTypeField;
@@ -106,10 +118,13 @@ public partial class MediaContent
             this.mediaTypeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// An array of ClassType objects that classify of the media
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=4)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ClassType", IsNullable=false)]
+    [Required]
     public ClassType[] ClassTypeArray
     {
         get
@@ -122,7 +137,9 @@ public partial class MediaContent
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// The file size
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public double fileSize
     {
@@ -138,7 +155,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool fileSizeSpecified
+    internal bool fileSizeSpecified
     {
         get
         {
@@ -150,7 +167,9 @@ public partial class MediaContent
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// Width
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public decimal width
     {
@@ -166,7 +185,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool widthSpecified
+    internal bool widthSpecified
     {
         get
         {
@@ -178,7 +197,9 @@ public partial class MediaContent
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// Height
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public decimal height
     {
@@ -194,7 +215,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool heightSpecified
+    internal bool heightSpecified
     {
         get
         {
@@ -205,8 +226,10 @@ public partial class MediaContent
             this.heightFieldSpecified = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Dots per inch
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public int dpi
     {
@@ -222,7 +245,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool dpiSpecified
+    internal bool dpiSpecified
     {
         get
         {
@@ -234,7 +257,9 @@ public partial class MediaContent
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// The color description
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=9)]
     public string color
     {
@@ -247,8 +272,10 @@ public partial class MediaContent
             this.colorField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// An array of decoration objects that describe the decorations associated with the media
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=10)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Decoration", IsNullable=false)]
     public Decoration[] DecorationArray
@@ -262,8 +289,10 @@ public partial class MediaContent
             this.decorationArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// An array of location objects that describe the locations associated with the media
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=11)]
     [System.Xml.Serialization.XmlArrayItemAttribute("Location", IsNullable=false)]
     public Location[] LocationArray
@@ -277,9 +306,12 @@ public partial class MediaContent
             this.locationArrayField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The decoration id associated with the media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+    [Required]
     public int decorationId
     {
         get
@@ -294,7 +326,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool decorationIdSpecified
+    internal bool decorationIdSpecified
     {
         get
         {
@@ -305,8 +337,10 @@ public partial class MediaContent
             this.decorationIdFieldSpecified = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Information about the media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=13)]
     public string description
     {
@@ -319,9 +353,12 @@ public partial class MediaContent
             this.descriptionField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Identifies whether the partId one to one corresponds with the image.  (Use FALSE for group shots)
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+    [Required]
     public bool singlePart
     {
         get
@@ -333,8 +370,10 @@ public partial class MediaContent
             this.singlePartField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The date time since last change in UTC
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/", Order=15)]
     public System.DateTime changeTimeStamp
     {
@@ -350,7 +389,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool changeTimeStampSpecified
+    internal bool changeTimeStampSpecified
     {
         get
         {

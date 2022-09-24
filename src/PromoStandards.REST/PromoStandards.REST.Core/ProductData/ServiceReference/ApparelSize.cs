@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -12,9 +14,12 @@ public partial class ApparelSize
     private ApparelSizeLabelSize labelSizeField;
     
     private string customSizeField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// List of possible values. e.g. Ladies, Men, Youth, etc.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public ApparelSizeApparelStyle apparelStyle
     {
         get
@@ -26,11 +31,13 @@ public partial class ApparelSize
             this.apparelStyleField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// List of possible values.  The apparel items tagged size. e.g. XS, S, M, XL, etc.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public ApparelSizeLabelSize labelSize
-    {
+    [Required]
+    public ApparelSizeLabelSize labelSize {
         get
         {
             return this.labelSizeField;
@@ -40,8 +47,10 @@ public partial class ApparelSize
             this.labelSizeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Used to communicate custom size when labelSize is CUSTOM.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
     public string customSize
     {

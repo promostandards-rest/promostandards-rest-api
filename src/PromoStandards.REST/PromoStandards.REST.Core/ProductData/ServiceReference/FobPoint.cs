@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -16,11 +18,13 @@ public partial class FobPoint
     private string fobPostalCodeField;
     
     private string fobCountryField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The Id of the FOB Point
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
-    public string fobId
-    {
+    [Required]
+    public string fobId {
         get
         {
             return this.fobIdField;
@@ -30,11 +34,13 @@ public partial class FobPoint
             this.fobIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The city of the FOB Point
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public string fobCity
-    {
+    [Required]
+    public string fobCity {
         get
         {
             return this.fobCityField;
@@ -44,11 +50,13 @@ public partial class FobPoint
             this.fobCityField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The state of the FOB Point in ISO 3166-2 format.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    public string fobState
-    {
+    [Required]
+    public string fobState {
         get
         {
             return this.fobStateField;
@@ -58,9 +66,12 @@ public partial class FobPoint
             this.fobStateField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The Postal or Zip Code of the fob Point
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+    [Required]
     public string fobPostalCode
     {
         get
@@ -72,11 +83,13 @@ public partial class FobPoint
             this.fobPostalCodeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The country of the FOB Point in Alpha 2 ISO3166 “CODE” format.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    public string fobCountry
-    {
+    [Required]
+    public string fobCountry {
         get
         {
             return this.fobCountryField;

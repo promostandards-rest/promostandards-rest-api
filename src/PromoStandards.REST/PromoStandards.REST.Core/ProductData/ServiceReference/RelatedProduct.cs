@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -12,9 +14,12 @@ public partial class RelatedProduct
     private string productIdField;
     
     private string partIdField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The relationship type between two products
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public RelatedProductRelationType relationType
     {
         get
@@ -26,8 +31,10 @@ public partial class RelatedProduct
             this.relationTypeField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Product Id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
     public string productId
     {
@@ -40,8 +47,10 @@ public partial class RelatedProduct
             this.productIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Part specific Id
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
     public string partId
     {

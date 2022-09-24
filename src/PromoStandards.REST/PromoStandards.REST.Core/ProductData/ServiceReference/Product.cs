@@ -1,6 +1,10 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
 
-/// <remarks/>
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+
+/// <summary>
+/// Product class summary
+/// </summary>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/")]
@@ -67,8 +71,11 @@ public partial class Product
     
     private FobPoint[] fobPointArrayField;
     
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=0)]
+    /// <summary>
+    /// The associated product.
+    /// </summary>
+    [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType = "token", Order = 0)]
+    [Required]
     public string productId
     {
         get
@@ -80,9 +87,11 @@ public partial class Product
             this.productIdField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The Supplier name for the product
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=1)]
+    [Required]
     public string productName
     {
         get
@@ -94,9 +103,11 @@ public partial class Product
             this.productNameField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Basic product description or bulleted list of descriptions.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute("description", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=2)]
+    [Required]
     public string[] description
     {
         get
@@ -108,8 +119,9 @@ public partial class Product
             this.descriptionField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The date that the pricing in the ProductPriceGroupArray portion of the response expires.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=3)]
     public System.Nullable<System.DateTime> priceExpiresDate
     {
@@ -125,7 +137,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool priceExpiresDateSpecified
+    internal bool priceExpiresDateSpecified
     {
         get
         {
@@ -136,8 +148,10 @@ public partial class Product
             this.priceExpiresDateFieldSpecified = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// Marketing points type and content.  An array of MarketingPoint objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=4)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductMarketingPoint", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ProductMarketingPoint[] ProductMarketingPointArray
@@ -151,8 +165,9 @@ public partial class Product
             this.productMarketingPointArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Array of keywords often used in searching for this product.  An array of ProductKeyword objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=5)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductKeyword", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ProductKeyword[] ProductKeywordArray
@@ -166,8 +181,9 @@ public partial class Product
             this.productKeywordArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The specific product brand
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=6)]
     public string productBrand
     {
@@ -180,9 +196,11 @@ public partial class Product
             this.productBrandField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Product status for export
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
+    [Required]
     public System.Nullable<bool> export
     {
         get
@@ -194,8 +212,9 @@ public partial class Product
             this.exportField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The product’s categorization array.  An array of ProductCategory objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=8)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductCategory", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ProductCategory[] ProductCategoryArray
@@ -209,8 +228,9 @@ public partial class Product
             this.productCategoryArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Products related to the quested product as Substitutable, CompanionSell, or Common Grouping (Family).  An array of RelatedProduct objects.
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=9)]
     [System.Xml.Serialization.XmlArrayItemAttribute("RelatedProduct", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public RelatedProduct[] RelatedProductArray
@@ -224,8 +244,9 @@ public partial class Product
             this.relatedProductArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The URL of the product’s primary image. Any valid URL can be returned including prefixes like http and ftp.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=10)]
     public string primaryImageUrl
     {
@@ -238,8 +259,9 @@ public partial class Product
             this.primaryImageUrlField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// All part specific product data.  An array of ProductPart objects. 
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=11)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPriceGroup", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
     public ProductPriceGroup[] ProductPriceGroupArray
@@ -253,8 +275,9 @@ public partial class Product
             this.productPriceGroupArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Indicates if there is information about this product via the Product Safety and Compliance service.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=12)]
     public System.Nullable<bool> complianceInfoAvailable
     {
@@ -267,8 +290,9 @@ public partial class Product
             this.complianceInfoAvailableField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The United Nations Standard Products and Services Code® (UNSPSC®) that best describes this product. Note that the enumerated values are the UNSPSC "Commodity" codes. For more information, refer to https://www.unspsc.org.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=13)]
     public int unspscCommodityCode
     {
@@ -284,7 +308,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool unspscCommodityCodeSpecified
+    internal bool unspscCommodityCodeSpecified
     {
         get
         {
@@ -296,9 +320,12 @@ public partial class Product
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// An array of Location Decoration objects
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=14)]
     [System.Xml.Serialization.XmlArrayItemAttribute("LocationDecoration", IsNullable=false)]
+    [Required]
     public LocationDecorationArrayLocationDecoration[] LocationDecorationArray
     {
         get
@@ -310,10 +337,12 @@ public partial class Product
             this.locationDecorationArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// All part specific product data.  An array of ProductPart objects. 
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=15)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPart", IsNullable=false)]
+    [Required]
     public ProductProductPart[] ProductPartArray
     {
         get
@@ -325,9 +354,11 @@ public partial class Product
             this.productPartArrayField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The date time stamp of the most recent change to this data in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+    [Required]
     public System.DateTime lastChangeDate
     {
         get
@@ -339,9 +370,11 @@ public partial class Product
             this.lastChangeDateField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The date time stamp when this products data initially became available in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+    [Required]
     public System.DateTime creationDate
     {
         get
@@ -353,8 +386,9 @@ public partial class Product
             this.creationDateField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The date this part expires from supplier availability in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=18)]
     public System.Nullable<System.DateTime> endDate
     {
@@ -367,8 +401,9 @@ public partial class Product
             this.endDateField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The Date this Part initially becomes available from the Supplier in ISO 8601 format
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=19)]
     public System.Nullable<System.DateTime> effectiveDate
     {
@@ -381,8 +416,9 @@ public partial class Product
             this.effectiveDateField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Cautionary status to review for specific warnings about using product data
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=20)]
     public System.Nullable<bool> isCaution
     {
@@ -395,8 +431,9 @@ public partial class Product
             this.isCautionField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Cautionary comments
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=21)]
     public string cautionComment
     {
@@ -409,8 +446,9 @@ public partial class Product
             this.cautionCommentField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// Indicates if a closeout
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=22)]
     public System.Nullable<bool> isCloseout
     {
@@ -423,8 +461,9 @@ public partial class Product
             this.isCloseoutField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The line name (ex : Trimark, Hit)
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=23)]
     public string lineName
     {
@@ -437,8 +476,9 @@ public partial class Product
             this.lineNameField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The default setup charge for this product. Can be a textual description.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=24)]
     public string defaultSetupCharge
     {
@@ -451,8 +491,9 @@ public partial class Product
             this.defaultSetupChargeField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The default RUN charge for this product. Can be a textual description
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=25)]
     public string defaultRunCharge
     {
@@ -465,8 +506,9 @@ public partial class Product
             this.defaultRunChargeField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// The imprint size
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=26)]
     public string imprintSize
     {
@@ -479,10 +521,12 @@ public partial class Product
             this.imprintSizeField = value;
         }
     }
-    
-    /// <remarks/>
+    /// <summary>
+    /// An array of FOB points object
+    /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=27)]
     [System.Xml.Serialization.XmlArrayItemAttribute("FobPoint", IsNullable=false)]
+    [Required]
     public FobPoint[] FobPointArray
     {
         get

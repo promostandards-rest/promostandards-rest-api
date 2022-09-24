@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -10,11 +12,13 @@ public partial class ClassType
     private int classTypeIdField;
     
     private string classTypeNameField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The classification of the media
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public int classTypeId
-    {
+    [Required]
+    public int classTypeId {
         get
         {
             return this.classTypeIdField;
@@ -24,9 +28,12 @@ public partial class ClassType
             this.classTypeIdField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The classification short name
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
+    [Required]
     public string classTypeName
     {
         get

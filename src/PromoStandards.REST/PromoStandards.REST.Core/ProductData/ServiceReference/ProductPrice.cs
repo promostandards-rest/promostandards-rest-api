@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductData.ServiceReference;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -16,9 +18,12 @@ public partial class ProductPrice
     private decimal priceField;
     
     private string discountCodeField;
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The minimum quantity for which this price applies.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    [Required]
     public int quantityMin
     {
         get
@@ -30,9 +35,12 @@ public partial class ProductPrice
             this.quantityMinField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The maximum quantity for which this price applies.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    [Required]
     public int quantityMax
     {
         get
@@ -47,7 +55,7 @@ public partial class ProductPrice
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool quantityMaxSpecified
+    internal bool quantityMaxSpecified
     {
         get
         {
@@ -58,8 +66,10 @@ public partial class ProductPrice
             this.quantityMaxFieldSpecified = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The price value.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public decimal price
     {
@@ -72,8 +82,10 @@ public partial class ProductPrice
             this.priceField = value;
         }
     }
-    
-    /// <remarks/>
+
+    /// <summary>
+    /// The discount code.
+    /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=3)]
     public string discountCode
     {
