@@ -1,0 +1,2486 @@
+{
+    openapi: "3.0.1",
+    info: {
+    title: "PromoStandards",
+    description: "Putting SOAP to REST",
+    version: "alpha"
+    },
+    paths: {
+    /api/products: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides a collection of Products based on any optional subset filtering provided at the request.",
+    description: "",
+    parameters: [
+    {
+    name: "dateModified",
+    in: "query",
+    description: "Beginning date time since last change in UTC",
+    schema: {
+    type: "string",
+    format: "date-time"
+    }
+    },
+    {
+    name: "closeOut",
+    in: "query",
+    description: "Return all items that are closed out or not",
+    schema: {
+    type: "boolean"
+    }
+    },
+    {
+    name: "sellable",
+    in: "query",
+    description: "Return all items that are sellable or not",
+    schema: {
+    type: "boolean"
+    }
+    },
+    {
+    name: "page",
+    in: "query",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    },
+    {
+    name: "pageSize",
+    in: "query",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "All products matching the filters are returned",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProductCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProductCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProductCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "No products found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the detail product data based on a specific ProductId provided at the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns the product",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/Product"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/Product"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/Product"
+    }
+    }
+    }
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/colors: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the available color options for a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns a collection of product colors",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have colors"
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/sizes: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the available size options for a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns a collection of product sizes",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ApparelSizeLabelSizeCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ApparelSizeLabelSizeCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ApparelSizeLabelSizeCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not sizes"
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/parts: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the parts of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns a collection of product parts",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/StringCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have parts"
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/images: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the images of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "cultureName",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "partId",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "classType",
+    in: "query",
+    description: "",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    },
+    {
+    name: "lastModifiedDate",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string",
+    format: "date-time"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns product images",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have any images"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/audios: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the audios of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "cultureName",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "partId",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "classType",
+    in: "query",
+    description: "",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    },
+    {
+    name: "lastModifiedDate",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string",
+    format: "date-time"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns product audios",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have any audios"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/documents: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the documents of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "cultureName",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "partId",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "classType",
+    in: "query",
+    description: "",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    },
+    {
+    name: "lastModifiedDate",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string",
+    format: "date-time"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns product documents",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have any documents"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/videos: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the videos of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "cultureName",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "partId",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "classType",
+    in: "query",
+    description: "",
+    schema: {
+    type: "integer",
+    format: "int32"
+    }
+    },
+    {
+    name: "lastModifiedDate",
+    in: "query",
+    description: "",
+    schema: {
+    type: "string",
+    format: "date-time"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Returns product videos",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/MediaContentCollectionResponse"
+    }
+    }
+    }
+    },
+    204: {
+    description: "Product does not have any videos"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    404: {
+    description: "Product using productId is not found"
+    },
+    500: {
+    description: "Internal Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/inventory: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the inventory levels of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "PartIds",
+    in: "query",
+    description: "Filter.partIdArray, implemented as a comma separated list of partIds
+    Example: SL238PR-32,SL238PR-37",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "PartColors",
+    in: "query",
+    description: "Filter.colorArray, implemented as a comma separated list of partColors
+    Example: Black,Blue",
+    schema: {
+    type: "string"
+    }
+    },
+    {
+    name: "LableSizes",
+    in: "query",
+    description: "Filter.LabelSizes, not implemented, always returns all label sizes",
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Success"
+    },
+    204: {
+    description: "No Content"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    500: {
+    description: "Server Error"
+    }
+    }
+    }
+    },
+    /api/products/{productId}/inventory/filterValues: {
+    get: {
+    tags: [
+    "Product Data"
+    ],
+    summary: "Provides the inventory filters of a specific ProductId provided in the request.",
+    description: "",
+    parameters: [
+    {
+    name: "productId",
+    in: "path",
+    description: "The supplier's ID for a given product",
+    required: true,
+    schema: {
+    type: "string"
+    }
+    }
+    ],
+    responses: {
+    200: {
+    description: "Success"
+    },
+    204: {
+    description: "No Content"
+    },
+    400: {
+    description: "Bad Request",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    401: {
+    description: "Unauthorized",
+    content: {
+    text/plain: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    application/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    },
+    text/json: {
+    schema: {
+    $ref: "#/components/schemas/ProblemDetails"
+    }
+    }
+    }
+    },
+    500: {
+    description: "Server Error"
+    }
+    }
+    }
+    }
+    },
+    components: {
+    schemas: {
+    ApparelSize: {
+    type: "object",
+    properties: {
+    apparelStyle: {
+    enum: [
+    "Unisex",
+    "Youth",
+    "Girls",
+    "Boys",
+    "Womens",
+    "WomensTall",
+    "Mens",
+    "MensTall"
+    ],
+    type: "string"
+    },
+    labelSize: {
+    enum: [
+    "OSFA",
+    "_6XS",
+    "_5XS",
+    "_4XS",
+    "_3XS",
+    "_2XS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "_2XL",
+    "_3XL",
+    "_4XL",
+    "_5XL",
+    "_6XL",
+    "CUSTOM"
+    ],
+    type: "string"
+    },
+    customSize: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ApparelSizeLabelSizeCollectionResponse: {
+    type: "object",
+    properties: {
+    data: {
+    type: "array",
+    items: {
+    enum: [
+    "OSFA",
+    "_6XS",
+    "_5XS",
+    "_4XS",
+    "_3XS",
+    "_2XS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "_2XL",
+    "_3XL",
+    "_4XL",
+    "_5XL",
+    "_6XL",
+    "CUSTOM"
+    ],
+    type: "string"
+    },
+    description: "The collection of objects",
+    nullable: true
+    },
+    serviceMessages: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ServiceMessage"
+    },
+    description: "Error message object array",
+    nullable: true
+    },
+    pageNumber: {
+    type: "integer",
+    description: "The current page number. Ommitted on single record calls",
+    format: "int32",
+    nullable: true
+    },
+    pageSize: {
+    type: "integer",
+    description: "The maximum size of the collection",
+    format: "int32",
+    nullable: true
+    },
+    total: {
+    type: "integer",
+    description: "The total count of records in the collection",
+    format: "int64"
+    }
+    },
+    additionalProperties: false
+    },
+    ClassType: {
+    type: "object",
+    properties: {
+    classTypeId: {
+    type: "integer",
+    format: "int32"
+    },
+    classTypeName: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    Color: {
+    type: "object",
+    properties: {
+    standardColorName: {
+    type: "string",
+    nullable: true
+    },
+    hex: {
+    type: "string",
+    nullable: true
+    },
+    approximatePms: {
+    type: "string",
+    nullable: true
+    },
+    colorName: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    Decoration: {
+    type: "object",
+    properties: {
+    decorationId: {
+    type: "integer",
+    format: "int32"
+    },
+    decorationName: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    Dimension: {
+    type: "object",
+    properties: {
+    dimensionUom: {
+    enum: [
+    "MM",
+    "CM",
+    "MR",
+    "IN",
+    "FT",
+    "YD"
+    ],
+    type: "string"
+    },
+    depth: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    height: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    width: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    weightUom: {
+    enum: [
+    "ME",
+    "KG",
+    "OZ",
+    "LB"
+    ],
+    type: "string"
+    },
+    weight: {
+    type: "number",
+    format: "double",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    FobPoint: {
+    type: "object",
+    properties: {
+    fobId: {
+    type: "string",
+    nullable: true
+    },
+    fobCity: {
+    type: "string",
+    nullable: true
+    },
+    fobState: {
+    type: "string",
+    nullable: true
+    },
+    fobPostalCode: {
+    type: "string",
+    nullable: true
+    },
+    fobCountry: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    Location: {
+    type: "object",
+    properties: {
+    locationId: {
+    type: "integer",
+    format: "int32"
+    },
+    locationName: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    LocationDecorationArrayLocationDecoration: {
+    type: "object",
+    properties: {
+    locationName: {
+    type: "string",
+    nullable: true
+    },
+    maxImprintColors: {
+    type: "integer",
+    format: "int32"
+    },
+    maxImprintColorsSpecified: {
+    type: "boolean"
+    },
+    decorationName: {
+    type: "string",
+    nullable: true
+    },
+    locationDecorationComboDefault: {
+    type: "boolean"
+    },
+    priceIncludes: {
+    type: "boolean"
+    }
+    },
+    additionalProperties: false
+    },
+    MediaContent: {
+    type: "object",
+    properties: {
+    productId: {
+    type: "string",
+    nullable: true
+    },
+    partId: {
+    type: "string",
+    nullable: true
+    },
+    url: {
+    type: "string",
+    nullable: true
+    },
+    mediaType: {
+    enum: [
+    "Image",
+    "Video",
+    "Audio",
+    "Document"
+    ],
+    type: "string"
+    },
+    classTypeArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ClassType"
+    },
+    nullable: true
+    },
+    fileSize: {
+    type: "number",
+    format: "double"
+    },
+    fileSizeSpecified: {
+    type: "boolean"
+    },
+    width: {
+    type: "number",
+    format: "double"
+    },
+    widthSpecified: {
+    type: "boolean"
+    },
+    height: {
+    type: "number",
+    format: "double"
+    },
+    heightSpecified: {
+    type: "boolean"
+    },
+    dpi: {
+    type: "integer",
+    format: "int32"
+    },
+    dpiSpecified: {
+    type: "boolean"
+    },
+    color: {
+    type: "string",
+    nullable: true
+    },
+    decorationArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/Decoration"
+    },
+    nullable: true
+    },
+    locationArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/Location"
+    },
+    nullable: true
+    },
+    decorationId: {
+    type: "integer",
+    format: "int32"
+    },
+    decorationIdSpecified: {
+    type: "boolean"
+    },
+    description: {
+    type: "string",
+    nullable: true
+    },
+    singlePart: {
+    type: "boolean"
+    },
+    changeTimeStamp: {
+    type: "string",
+    format: "date-time"
+    },
+    changeTimeStampSpecified: {
+    type: "boolean"
+    }
+    },
+    additionalProperties: false
+    },
+    MediaContentCollectionResponse: {
+    type: "object",
+    properties: {
+    data: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/MediaContent"
+    },
+    description: "The collection of objects",
+    nullable: true
+    },
+    serviceMessages: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ServiceMessage"
+    },
+    description: "Error message object array",
+    nullable: true
+    },
+    pageNumber: {
+    type: "integer",
+    description: "The current page number. Ommitted on single record calls",
+    format: "int32",
+    nullable: true
+    },
+    pageSize: {
+    type: "integer",
+    description: "The maximum size of the collection",
+    format: "int32",
+    nullable: true
+    },
+    total: {
+    type: "integer",
+    description: "The total count of records in the collection",
+    format: "int64"
+    }
+    },
+    additionalProperties: false
+    },
+    ProblemDetails: {
+    type: "object",
+    properties: {
+    type: {
+    type: "string",
+    nullable: true
+    },
+    title: {
+    type: "string",
+    nullable: true
+    },
+    status: {
+    type: "integer",
+    format: "int32",
+    nullable: true
+    },
+    detail: {
+    type: "string",
+    nullable: true
+    },
+    instance: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: { }
+    },
+    Product: {
+    type: "object",
+    properties: {
+    productId: {
+    type: "string",
+    nullable: true
+    },
+    productName: {
+    type: "string",
+    nullable: true
+    },
+    description: {
+    type: "array",
+    items: {
+    type: "string"
+    },
+    nullable: true
+    },
+    priceExpiresDate: {
+    type: "string",
+    format: "date-time",
+    nullable: true
+    },
+    priceExpiresDateSpecified: {
+    type: "boolean"
+    },
+    productMarketingPointArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductMarketingPoint"
+    },
+    nullable: true
+    },
+    productKeywordArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductKeyword"
+    },
+    nullable: true
+    },
+    productBrand: {
+    type: "string",
+    nullable: true
+    },
+    export: {
+    type: "boolean",
+    nullable: true
+    },
+    productCategoryArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductCategory"
+    },
+    nullable: true
+    },
+    relatedProductArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/RelatedProduct"
+    },
+    nullable: true
+    },
+    primaryImageUrl: {
+    type: "string",
+    nullable: true
+    },
+    productPriceGroupArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductPriceGroup"
+    },
+    nullable: true
+    },
+    complianceInfoAvailable: {
+    type: "boolean",
+    nullable: true
+    },
+    unspscCommodityCode: {
+    type: "integer",
+    format: "int32"
+    },
+    unspscCommodityCodeSpecified: {
+    type: "boolean"
+    },
+    locationDecorationArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/LocationDecorationArrayLocationDecoration"
+    },
+    nullable: true
+    },
+    productPartArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductProductPart"
+    },
+    nullable: true
+    },
+    lastChangeDate: {
+    type: "string",
+    format: "date-time"
+    },
+    creationDate: {
+    type: "string",
+    format: "date-time"
+    },
+    endDate: {
+    type: "string",
+    format: "date-time",
+    nullable: true
+    },
+    effectiveDate: {
+    type: "string",
+    format: "date-time",
+    nullable: true
+    },
+    isCaution: {
+    type: "boolean",
+    nullable: true
+    },
+    cautionComment: {
+    type: "string",
+    nullable: true
+    },
+    isCloseout: {
+    type: "boolean",
+    nullable: true
+    },
+    lineName: {
+    type: "string",
+    nullable: true
+    },
+    defaultSetupCharge: {
+    type: "string",
+    nullable: true
+    },
+    defaultRunCharge: {
+    type: "string",
+    nullable: true
+    },
+    imprintSize: {
+    type: "string",
+    nullable: true
+    },
+    fobPointArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/FobPoint"
+    },
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductCategory: {
+    type: "object",
+    properties: {
+    category: {
+    type: "string",
+    nullable: true
+    },
+    subCategory: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductCollectionResponse: {
+    type: "object",
+    properties: {
+    data: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/Product"
+    },
+    description: "The collection of objects",
+    nullable: true
+    },
+    serviceMessages: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ServiceMessage"
+    },
+    description: "Error message object array",
+    nullable: true
+    },
+    pageNumber: {
+    type: "integer",
+    description: "The current page number. Ommitted on single record calls",
+    format: "int32",
+    nullable: true
+    },
+    pageSize: {
+    type: "integer",
+    description: "The maximum size of the collection",
+    format: "int32",
+    nullable: true
+    },
+    total: {
+    type: "integer",
+    description: "The total count of records in the collection",
+    format: "int64"
+    }
+    },
+    additionalProperties: false
+    },
+    ProductKeyword: {
+    type: "object",
+    properties: {
+    keyword: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductMarketingPoint: {
+    type: "object",
+    properties: {
+    pointType: {
+    type: "string",
+    nullable: true
+    },
+    pointCopy: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductPackage: {
+    type: "object",
+    properties: {
+    default: {
+    type: "boolean"
+    },
+    packageType: {
+    type: "string",
+    nullable: true
+    },
+    description: {
+    type: "string",
+    nullable: true
+    },
+    quantity: {
+    type: "number",
+    format: "double"
+    },
+    dimensionUom: {
+    enum: [
+    "MM",
+    "CM",
+    "MR",
+    "IN",
+    "FT",
+    "YD"
+    ],
+    type: "string"
+    },
+    depth: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    height: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    width: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    weightUom: {
+    enum: [
+    "ME",
+    "KG",
+    "OZ",
+    "LB"
+    ],
+    type: "string"
+    },
+    weight: {
+    type: "number",
+    format: "double",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductPrice: {
+    type: "object",
+    properties: {
+    quantityMin: {
+    type: "integer",
+    format: "int32"
+    },
+    quantityMax: {
+    type: "integer",
+    format: "int32"
+    },
+    quantityMaxSpecified: {
+    type: "boolean"
+    },
+    price: {
+    type: "number",
+    format: "double"
+    },
+    discountCode: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductPriceGroup: {
+    type: "object",
+    properties: {
+    productPriceArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductPrice"
+    },
+    nullable: true
+    },
+    groupName: {
+    type: "string",
+    nullable: true
+    },
+    currency: {
+    enum: [
+    "AFA",
+    "ALL",
+    "DZD",
+    "AON",
+    "ARS",
+    "AMD",
+    "AWG",
+    "AUD",
+    "ATS",
+    "AZM",
+    "BSD",
+    "BHD",
+    "BDT",
+    "BBD",
+    "BYR",
+    "BEF",
+    "BZD",
+    "BMD",
+    "BTN",
+    "BOB",
+    "BAM",
+    "BWP",
+    "BRL",
+    "BND",
+    "BGL",
+    "BIF",
+    "KHR",
+    "CAD",
+    "CVE",
+    "KYD",
+    "XOF",
+    "XAF",
+    "XPF",
+    "CLP",
+    "CNY",
+    "COP",
+    "KMF",
+    "CDF",
+    "CRC",
+    "HRK",
+    "CUP",
+    "CYP",
+    "CZK",
+    "DKK",
+    "DEM",
+    "DJF",
+    "DOP",
+    "NLG",
+    "XCD",
+    "ECS",
+    "EGP",
+    "SVC",
+    "ERN",
+    "EEK",
+    "ETB",
+    "EUR",
+    "FKP",
+    "FJD",
+    "FIM",
+    "FRF",
+    "GMD",
+    "GEL",
+    "GHC",
+    "GIP",
+    "GRD",
+    "GTQ",
+    "GYD",
+    "HTG",
+    "HNL",
+    "HKD",
+    "HUF",
+    "ISK",
+    "INR",
+    "IDR",
+    "IRR",
+    "IQD",
+    "IEP",
+    "ILS",
+    "ITL",
+    "JMD",
+    "JPY",
+    "JOD",
+    "KZT",
+    "KES",
+    "KWD",
+    "KGS",
+    "LAK",
+    "LVL",
+    "LBP",
+    "LSL",
+    "LRD",
+    "LYD",
+    "LTL",
+    "LUF",
+    "MOP",
+    "MKD",
+    "MGF",
+    "MWK",
+    "MYR",
+    "MVR",
+    "MTL",
+    "MRO",
+    "MUR",
+    "MXN",
+    "MDL",
+    "MNT",
+    "MAD",
+    "MZM",
+    "MMK",
+    "NAD",
+    "NPR",
+    "ANG",
+    "ZRN",
+    "NZD",
+    "NIC",
+    "NGN",
+    "KPW",
+    "NOK",
+    "PKR",
+    "PAB",
+    "PGK",
+    "PYG",
+    "PEN",
+    "PHP",
+    "PLN",
+    "PTE",
+    "QAR",
+    "OMR",
+    "ROL",
+    "RUR",
+    "RWF",
+    "STD",
+    "SAR",
+    "SCR",
+    "SLL",
+    "SGD",
+    "SKK",
+    "SIT",
+    "SBD",
+    "SOS",
+    "ZAR",
+    "KRW",
+    "ESP",
+    "LKR",
+    "SHP",
+    "GBP",
+    "SDP",
+    "SRG",
+    "SZL",
+    "SEK",
+    "CHF",
+    "SYP",
+    "TWD",
+    "TJR",
+    "TZS",
+    "THB",
+    "TPE",
+    "TOP",
+    "TTD",
+    "TND",
+    "TRL",
+    "TMM",
+    "AED",
+    "UGX",
+    "UAH",
+    "UYU",
+    "USD",
+    "UZS",
+    "VUV",
+    "VEB",
+    "VND",
+    "WST",
+    "YER",
+    "YUM",
+    "ZMK",
+    "ZWD"
+    ],
+    type: "string"
+    },
+    description: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductProductPart: {
+    type: "object",
+    properties: {
+    partId: {
+    type: "string",
+    nullable: true
+    },
+    primaryColor: {
+    $ref: "#/components/schemas/ProductProductPartPrimaryColor"
+    },
+    description: {
+    type: "array",
+    items: {
+    type: "string"
+    },
+    nullable: true
+    },
+    countryOfOrigin: {
+    enum: [
+    "AF",
+    "AX",
+    "AL",
+    "DZ",
+    "AS",
+    "AD",
+    "AO",
+    "AI",
+    "AQ",
+    "AG",
+    "AR",
+    "AM",
+    "AW",
+    "AU",
+    "AT",
+    "AZ",
+    "BS",
+    "BH",
+    "BD",
+    "BB",
+    "BY",
+    "BE",
+    "BZ",
+    "BJ",
+    "BM",
+    "BT",
+    "BO",
+    "BA",
+    "BW",
+    "BV",
+    "BR",
+    "IO",
+    "BN",
+    "BG",
+    "BF",
+    "BI",
+    "KH",
+    "CM",
+    "CA",
+    "CV",
+    "KY",
+    "CF",
+    "TD",
+    "CL",
+    "CN",
+    "CX",
+    "CC",
+    "CO",
+    "KM",
+    "CG",
+    "CD",
+    "CK",
+    "CR",
+    "CI",
+    "HR",
+    "CU",
+    "CY",
+    "CZ",
+    "DK",
+    "DJ",
+    "DM",
+    "DO",
+    "EC",
+    "EG",
+    "SV",
+    "GQ",
+    "ER",
+    "EE",
+    "ET",
+    "FK",
+    "FO",
+    "FJ",
+    "FI",
+    "FR",
+    "GF",
+    "PF",
+    "TF",
+    "GA",
+    "GM",
+    "GE",
+    "DE",
+    "GH",
+    "GI",
+    "GR",
+    "GL",
+    "GD",
+    "GP",
+    "GU",
+    "GT",
+    "GG",
+    "GN",
+    "GW",
+    "GY",
+    "HT",
+    "HM",
+    "VA",
+    "HN",
+    "HK",
+    "HU",
+    "IS",
+    "IN",
+    "ID",
+    "IR",
+    "IQ",
+    "IE",
+    "IM",
+    "IL",
+    "IT",
+    "JM",
+    "JP",
+    "JE",
+    "JO",
+    "KZ",
+    "KE",
+    "KI",
+    "KP",
+    "KR",
+    "KW",
+    "KG",
+    "LA",
+    "LV",
+    "LB",
+    "LS",
+    "LR",
+    "LY",
+    "LI",
+    "LT",
+    "LU",
+    "MO",
+    "MK",
+    "MG",
+    "MW",
+    "MY",
+    "MV",
+    "ML",
+    "MT",
+    "MH",
+    "MQ",
+    "MR",
+    "MU",
+    "YT",
+    "MX",
+    "FM",
+    "MD",
+    "MC",
+    "MN",
+    "MS",
+    "MA",
+    "MZ",
+    "MM",
+    "NA",
+    "NR",
+    "NP",
+    "NL",
+    "AN",
+    "NC",
+    "NZ",
+    "NI",
+    "NE",
+    "NG",
+    "NU",
+    "NF",
+    "MP",
+    "NO",
+    "OM",
+    "PK",
+    "PW",
+    "PS",
+    "PA",
+    "PG",
+    "PY",
+    "PE",
+    "PH",
+    "PN",
+    "PL",
+    "PT",
+    "PR",
+    "QA",
+    "RE",
+    "RO",
+    "RU",
+    "RW",
+    "SH",
+    "KN",
+    "LC",
+    "PM",
+    "VC",
+    "WS",
+    "SM",
+    "ST",
+    "SA",
+    "SN",
+    "CS",
+    "SC",
+    "SL",
+    "SG",
+    "SK",
+    "SI",
+    "SB",
+    "SO",
+    "ZA",
+    "GS",
+    "ES",
+    "LK",
+    "SD",
+    "SR",
+    "SJ",
+    "SZ",
+    "SE",
+    "CH",
+    "SY",
+    "TW",
+    "TJ",
+    "TZ",
+    "TH",
+    "TL",
+    "TG",
+    "TK",
+    "TO",
+    "TT",
+    "TN",
+    "TR",
+    "TM",
+    "TC",
+    "TV",
+    "UG",
+    "UA",
+    "AE",
+    "GB",
+    "US",
+    "UM",
+    "UY",
+    "UZ",
+    "VU",
+    "VE",
+    "VN",
+    "VG",
+    "VI",
+    "WF",
+    "EH",
+    "YE",
+    "ZM",
+    "ZW"
+    ],
+    type: "string"
+    },
+    countryOfOriginSpecified: {
+    type: "boolean"
+    },
+    colorArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/Color"
+    },
+    nullable: true
+    },
+    primaryMaterial: {
+    type: "string",
+    nullable: true
+    },
+    specificationArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/Specification"
+    },
+    nullable: true
+    },
+    shape: {
+    type: "string",
+    nullable: true
+    },
+    apparelSize: {
+    $ref: "#/components/schemas/ApparelSize"
+    },
+    dimension: {
+    $ref: "#/components/schemas/Dimension"
+    },
+    leadTime: {
+    type: "integer",
+    format: "int32"
+    },
+    leadTimeSpecified: {
+    type: "boolean"
+    },
+    unspsc: {
+    type: "string",
+    nullable: true
+    },
+    gtin: {
+    type: "string",
+    nullable: true
+    },
+    isRushService: {
+    type: "boolean",
+    nullable: true
+    },
+    productPackagingArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ProductPackage"
+    },
+    nullable: true
+    },
+    shippingPackageArray: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ShippingPackage"
+    },
+    nullable: true
+    },
+    endDate: {
+    type: "string",
+    format: "date-time",
+    nullable: true
+    },
+    effectiveDate: {
+    type: "string",
+    format: "date-time",
+    nullable: true
+    },
+    isCloseout: {
+    type: "boolean",
+    nullable: true
+    },
+    isCaution: {
+    type: "boolean",
+    nullable: true
+    },
+    cautionComment: {
+    type: "string",
+    nullable: true
+    },
+    nmfcCode: {
+    type: "number",
+    format: "double"
+    },
+    nmfcCodeSpecified: {
+    type: "boolean"
+    },
+    nmfcDescription: {
+    type: "string",
+    nullable: true
+    },
+    nmfcNumber: {
+    type: "string",
+    nullable: true
+    },
+    isOnDemand: {
+    type: "boolean",
+    nullable: true
+    },
+    isHazmat: {
+    type: "boolean",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ProductProductPartPrimaryColor: {
+    type: "object",
+    properties: {
+    color: {
+    $ref: "#/components/schemas/Color"
+    }
+    },
+    additionalProperties: false
+    },
+    RelatedProduct: {
+    type: "object",
+    properties: {
+    relationType: {
+    enum: [
+    "Substitute",
+    "CompanionSell",
+    "CommonGrouping"
+    ],
+    type: "string"
+    },
+    productId: {
+    type: "string",
+    nullable: true
+    },
+    partId: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    ServiceMessage: {
+    type: "object",
+    properties: {
+    code: {
+    type: "integer",
+    format: "int32"
+    },
+    description: {
+    type: "string",
+    nullable: true
+    },
+    severity: {
+    enum: [
+    "Error",
+    "Information",
+    "Warning"
+    ],
+    type: "string"
+    }
+    },
+    additionalProperties: false
+    },
+    ShippingPackage: {
+    type: "object",
+    properties: {
+    packageType: {
+    type: "string",
+    nullable: true
+    },
+    description: {
+    type: "string",
+    nullable: true
+    },
+    quantity: {
+    type: "number",
+    format: "double"
+    },
+    dimensionUom: {
+    enum: [
+    "MM",
+    "CM",
+    "MR",
+    "IN",
+    "FT",
+    "YD"
+    ],
+    type: "string"
+    },
+    depth: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    height: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    width: {
+    type: "number",
+    format: "double",
+    nullable: true
+    },
+    weightUom: {
+    enum: [
+    "ME",
+    "KG",
+    "OZ",
+    "LB"
+    ],
+    type: "string"
+    },
+    weight: {
+    type: "number",
+    format: "double",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    Specification: {
+    type: "object",
+    properties: {
+    specificationType: {
+    enum: [
+    "Length",
+    "Thickness",
+    "Radius",
+    "Volume",
+    "Capacity",
+    "Memory",
+    "DataPorts",
+    "Capacitance",
+    "Voltage",
+    "PointSize",
+    "SheetSize",
+    "SheetCount",
+    "Pockets",
+    "Inseam",
+    "Bust",
+    "Chest",
+    "Waist",
+    "Hips",
+    "Cup",
+    "Rise",
+    "Neck",
+    "Thigh",
+    "Shoulders",
+    "Sleeve",
+    "DeviceSize"
+    ],
+    type: "string"
+    },
+    specificationUom: {
+    type: "string",
+    nullable: true
+    },
+    measurementValue: {
+    type: "string",
+    nullable: true
+    }
+    },
+    additionalProperties: false
+    },
+    StringCollectionResponse: {
+    type: "object",
+    properties: {
+    data: {
+    type: "array",
+    items: {
+    type: "string"
+    },
+    description: "The collection of objects",
+    nullable: true
+    },
+    serviceMessages: {
+    type: "array",
+    items: {
+    $ref: "#/components/schemas/ServiceMessage"
+    },
+    description: "Error message object array",
+    nullable: true
+    },
+    pageNumber: {
+    type: "integer",
+    description: "The current page number. Ommitted on single record calls",
+    format: "int32",
+    nullable: true
+    },
+    pageSize: {
+    type: "integer",
+    description: "The maximum size of the collection",
+    format: "int32",
+    nullable: true
+    },
+    total: {
+    type: "integer",
+    description: "The total count of records in the collection",
+    format: "int64"
+    }
+    },
+    additionalProperties: false
+    }
+    }
+    }
+    }
