@@ -88,7 +88,7 @@ namespace PromoStandards.REST.API
             services.AddSingleton<IProductDataService, MongoDBProductService>();
             services.AddSingleton<IMyInventoryService, MyMongoDBInventoryService>();
             services.AddSingleton<IMyInventoryFilterService, MyMongoDBInventoryFilterService>();
-//            services.AddSingleton<IInventoryService, MongoDBInventoryService>();
+            //services.AddSingleton<IInventoryService, MongoDBInventoryService>();
 
             services.AddSingleton<IMediaContentService, MongoDBMediaContentService>();
             //services.AddSingleton<IProductDataService, StaticProductDataService>();
