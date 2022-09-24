@@ -5,6 +5,7 @@ using PromoStandards.REST.MongoDB;
 using PromoStandards.REST.MongoDBApp;
 using System.IO;
 using PromoStandards.REST.MongoDB.Inventory;
+using PromoStandards.REST.MongoDB.MediaContent;
 using PromoStandards.REST.MongoDB.ProductData;
 
 var basePath = Directory.GetCurrentDirectory();
@@ -21,6 +22,7 @@ services.AddOptions();
 services.AddSingleton<IMongoClient>(c => new MongoClient(configuration["MongoDB:Url"]))
     .AddScoped(c => c.GetService<IMongoClient>().StartSession());
 services.AddSingleton<MongoDBProductService>();
+services.AddSingleton<MongoDBMediaContentService>();
 //services.AddSingleton<MongoDBInventoryService>();
 services.AddSingleton<MongoDBConverter>();
 services.Configure<MongoDBProductServiceConfiguration>(p =>
@@ -33,6 +35,11 @@ services.Configure<MyMongoDBInventoryServiceConfiguration>(p =>
     p.DatabaseName = configuration["Config:DatabaseName"];
     p.InventoryCollectionName = configuration["Config:InventoryCollectionName"];
 });
+services.Configure<MongoDBMediaContentServiceConfiguration>(p =>
+{
+    p.DatabaseName = configuration["Config:DatabaseName"];
+    p.MediaCollectionName = configuration["Config:MediaCollectionName"];
+});
 services.Configure<MongoDBConverterConfig>(p =>
 {
     p.WsVersion = configuration["Config:WsVersion"];
@@ -43,6 +50,7 @@ services.Configure<MongoDBConverterConfig>(p =>
     p.Password = configuration["Config:Password"];
     p.Throttling = configuration["Config:Throttling"];
     p.InventoryEndpoint = configuration["Config:InventoryEndpoint"];
+    p.MediaEndpoint = configuration["Config:MediaEndpoint"];
 });
 
 var serviceProvider = services.BuildServiceProvider();

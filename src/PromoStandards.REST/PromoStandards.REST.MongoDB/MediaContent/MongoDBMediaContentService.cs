@@ -29,7 +29,7 @@ namespace PromoStandards.REST.MongoDB.MediaContent
         public async Task InsertUpdate(MediaContentExtended product)
         {
             var collection = GetCollection(_config.DatabaseName, _config.MediaCollectionName);
-            var filter = new ExpressionFilterDefinition<MediaContentExtended>(p => p.ProductId == product.ProductId);
+            var filter = new ExpressionFilterDefinition<MediaContentExtended>(p => p.ProductId == product.ProductId && p.MediaType == product.MediaType);
             var existingFind = await collection.FindAsync(filter);
             var existing = await existingFind.FirstOrDefaultAsync();
             if (existing == null)
@@ -53,6 +53,8 @@ namespace PromoStandards.REST.MongoDB.MediaContent
                 Limit = 1
             });
             var product = await result.FirstOrDefaultAsync();
+            if (product == null)
+                return null;
             var response = new CollectionResponse<Core.MediaContent.ServiceReference.MediaContent>(product.MediaContent);
             return response;
         }

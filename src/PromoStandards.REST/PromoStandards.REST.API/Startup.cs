@@ -6,6 +6,7 @@ using PromoStandards.REST.MongoDB.ProductData;
 using PromoStandards.REST.MongoDB.Inventory;
 using System.Text.Json.Serialization;
 using AutoBogus;
+using PromoStandards.REST.MongoDB.MediaContent;
 using PromoStandards.REST.StaticImplementation;
 
 namespace PromoStandards.REST.API
@@ -63,6 +64,11 @@ namespace PromoStandards.REST.API
                 p.ProductCollectionName = Configuration["Config:ProductCollectionName"];
             });
 
+            services.Configure<MongoDBMediaContentServiceConfiguration>(p =>
+            {
+                p.DatabaseName = Configuration["Config:DatabaseName"];
+                p.MediaCollectionName = Configuration["Config:MediaCollectionName"];
+            });
             services.Configure<MyMongoDBInventoryServiceConfiguration>(c =>
             {
                 c.DatabaseName = Configuration["Config:DatabaseName"];
@@ -84,7 +90,7 @@ namespace PromoStandards.REST.API
             services.AddSingleton<IMyInventoryFilterService, MyMongoDBInventoryFilterService>();
 //            services.AddSingleton<IInventoryService, MongoDBInventoryService>();
 
-            services.AddSingleton<IMediaContentService, StaticMediaService>();
+            services.AddSingleton<IMediaContentService, MongoDBMediaContentService>();
             //services.AddSingleton<IProductDataService, StaticProductDataService>();
             //services.AddSingleton<IInventoryService, StaticInventoryService>();
         }

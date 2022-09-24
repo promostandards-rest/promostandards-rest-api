@@ -5,25 +5,17 @@ using System.ServiceModel;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
-using PromoStandards.REST.Core.Inventory;
-using PromoStandards.REST.MongoDB.Inventory;
+using PromoStandards.REST.MongoDB.MediaContent;
 using PromoStandards.REST.MongoDB.ProductData;
-using PromoStandards.REST.MongoDBApp.Inventory.ServiceReference;
 using PromoStandards.REST.MongoDBApp.ProductData.ServiceReference;
-using FutureAvailability = PromoStandards.REST.Core.Inventory.FutureAvailability;
-using GetInventoryLevelsRequest = PromoStandards.REST.MongoDBApp.Inventory.ServiceReference.GetInventoryLevelsRequest;
-using InventoryLocation = PromoStandards.REST.Core.Inventory.InventoryLocation;
-using InventoryLocationCountry = PromoStandards.REST.Core.Inventory.InventoryLocationCountry;
-using labelSize = PromoStandards.REST.Core.Inventory.labelSize;
-using QuantityUom = PromoStandards.REST.Core.Inventory.QuantityUom;
-using wsVersion = PromoStandards.REST.MongoDBApp.Inventory.ServiceReference.wsVersion;
 
 namespace PromoStandards.REST.MongoDBApp
 {
     public class MongoDBConverter
     {
         private readonly MongoDBProductService _productService;
-   //     private readonly MongoDBInventoryService _inventoryService;
+        private readonly MongoDBMediaContentService _mediaContentService;
+        //private readonly MongoDBInventoryService _inventoryService;
         private readonly MongoDBConverterConfig _config;
         private static BasicHttpsBinding BasicHttpsBinding = new BasicHttpsBinding()
         {
@@ -32,17 +24,19 @@ namespace PromoStandards.REST.MongoDBApp
             MaxBufferSize = int.MaxValue,
         };
 
-        public MongoDBConverter(IOptions<MongoDBConverterConfig> config, MongoDBProductService productService) //, MongoDBInventoryService inventoryService)
+        public MongoDBConverter(IOptions<MongoDBConverterConfig> config, MongoDBProductService productService, MongoDBMediaContentService mediaContentService) //, MongoDBInventoryService inventoryService)
         {
             _productService = productService;
-       //     _inventoryService = inventoryService;
+            _mediaContentService = mediaContentService;
+            //_inventoryService = inventoryService;
             _config = config.Value;
         }
 
         public async Task Process()
         {
             //await ProductData();
- //           await Inventory();
+            //await Inventory();
+            await MediaContent();
         }
 
         private async Task ProductData()
@@ -117,7 +111,102 @@ namespace PromoStandards.REST.MongoDBApp
                 }
             }
         }
+        private async Task MediaContent()
+        {
+            var client = new ProductDataServiceClient(BasicHttpsBinding, new EndpointAddress(_config.Endpoint));
+            var mediaClient = new MediaContentServiceClient(BasicHttpsBinding, new EndpointAddress(_config.MediaEndpoint));
 
+            var sellable = await client.getProductSellableAsync(new GetProductSellableRequest()
+            {
+                wsVersion = _config.WsVersion,
+                id = _config.Id,
+                password = _config.Password,
+                isSellable = true,
+                localizationCountry = _config.LocalizationCountry,
+                localizationLanguage = _config.LocalizationLanguage
+            });
+
+            var sellableIds = sellable.GetProductSellableResponse.ProductSellableArray.Select(p => p.productId).ToList();
+            foreach (var productId in sellableIds)
+            {
+                try
+                {
+                    await PopulateMedia(mediaClient, productId, mediaTypeType.Image);
+                    await PopulateMedia(mediaClient, productId, mediaTypeType.Video);
+                    await PopulateMedia(mediaClient, productId, mediaTypeType.Document);
+                    await PopulateMedia(mediaClient, productId, mediaTypeType.Audio);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            var nonSellable = await client.getProductSellableAsync(new GetProductSellableRequest()
+            {
+                wsVersion = _config.WsVersion,
+                id = _config.Id,
+                password = _config.Password,
+                isSellable = false,
+                localizationCountry = _config.LocalizationCountry,
+                localizationLanguage = _config.LocalizationLanguage
+            });
+            var nonSellableIds = nonSellable.GetProductSellableResponse.ProductSellableArray.Select(p => p.productId).ToList();
+            foreach (var productId in nonSellableIds)
+            {
+                try
+                {
+                    var product = await client.getProductAsync(new GetProductRequest
+                    {
+                        wsVersion = _config.WsVersion,
+                        id = _config.Id,
+                        password = _config.Password,
+                        localizationCountry = _config.LocalizationCountry,
+                        localizationLanguage = _config.LocalizationLanguage,
+                        productId = productId
+                    });
+                    var extendedProduct = JsonSerializer.Deserialize<ProductExtended>(JsonSerializer.Serialize(product));
+                    extendedProduct.isSellable = false;
+                    await _productService.InsertUpdateProduct(extendedProduct);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
+
+        private async Task PopulateMedia(MediaContentServiceClient mediaClient, string productId, mediaTypeType type)
+        {
+            var images = await mediaClient.getMediaContentAsync(new GetMediaContentRequest()
+            {
+                wsVersion = "1.0.0",
+                id = _config.Id,
+                password = _config.Password,
+                productId = productId,
+                mediaType = type
+            });
+            var list = new List<Core.MediaContent.ServiceReference.MediaContent>();
+            if (images?.GetMediaContentResponse?.MediaContentArray != null)
+            {
+                if (images?.GetMediaContentResponse?.MediaContentArray.Length > 0)
+                {
+                    foreach (var item in images?.GetMediaContentResponse?.MediaContentArray)
+                    {
+                        list.Add(JsonSerializer.Deserialize<Core.MediaContent.ServiceReference.MediaContent>(
+                            JsonSerializer.Serialize(item)));
+                    }
+                    Enum.TryParse<Core.MediaContent.ServiceReference.mediaTypeType>(type.ToString(), out var mediaType);
+                    var extendedProduct = new MediaContentExtended()
+                    {
+                        MediaContent = list,
+                        MediaType = mediaType,
+                        ProductId = productId
+                    };
+                    await _mediaContentService.InsertUpdate(extendedProduct);
+                }
+            }
+        }
 
         //private async Task Inventory()
         //{
@@ -234,6 +323,6 @@ namespace PromoStandards.REST.MongoDBApp
         //        }
         //    }
         //}
-    
+
     }
 }
