@@ -43,6 +43,9 @@ namespace PromoStandards.REST.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CollectionResponse<Product>>> GetProducts(DateTime? dateModified, bool? closeOut, bool? sellable, [FromQuery] PagingRequest paging)
         {
+            paging ??= new PagingRequest();
+            if (paging.pageSize > 20)
+                paging.pageSize = 20;
             var result = await _productDataService.GetProducts(sellable, closeOut, dateModified, paging.page, paging.pageSize);
             return result;
         }
