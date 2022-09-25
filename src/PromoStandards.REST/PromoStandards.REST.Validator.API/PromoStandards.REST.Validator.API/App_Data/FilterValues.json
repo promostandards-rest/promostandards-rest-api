@@ -1,0 +1,128 @@
+{
+  "definitions": {
+    "Filter": {
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "partIdArray": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "labelSizeArray": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "Item2XL",
+              "Item2XS",
+              "Item3XL",
+              "Item3XS",
+              "Item4XL",
+              "Item4XS",
+              "Item5XL",
+              "Item5XS",
+              "Item6XL",
+              "Item6XS",
+              "CUSTOM",
+              "L",
+              "M",
+              "OSFA",
+              "S",
+              "XL",
+              "XS"
+            ]
+          }
+        },
+        "partColorArray": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "GetFilterValuesResponseFilterValues": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "productId": {
+          "type": "string", "minLength":1
+        },
+        "filter": {
+          "$ref": "#/definitions/Filter"
+        }
+      },
+      "required": [
+        "productId",
+        "filter"
+      ]
+    },
+    "ServiceMessage": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Error",
+            "Information",
+            "Warning"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "description",
+        "severity"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "filterValues": {
+      "$ref": "#/definitions/GetFilterValuesResponseFilterValues"
+    },
+    "serviceMessageArray": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ServiceMessage"
+      }
+    }
+  }
+  
+}
