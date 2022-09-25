@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -22,6 +23,7 @@ public partial class Color
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType = "token", Order = 1)]
     [Required]
+    [SwaggerSchema(Title = "Color")]
     public string colorName {
         get {
             return this.colorNameField;
@@ -35,8 +37,8 @@ public partial class Color
     /// The standard color that best describes this color. Eventually may become an enumeration.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=0)]
-    public string standardColorName
-    {
+    [SwaggerSchema(Title = "Standard Color Name")]
+    public string standardColorName {
         get
         {
             return this.standardColorNameField;
@@ -51,8 +53,8 @@ public partial class Color
     /// The HEX code representation.  This is not a supplement for product color but data used for generating web user interfaces.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=1)]
-    public string hex
-    {
+    [SwaggerSchema(Title = "Hex Code")]
+    public string hex {
         get
         {
             return this.hexField;
@@ -67,8 +69,8 @@ public partial class Color
     /// The PMS code representation.  This is not a supplement for product color.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
-    public string approximatePms
-    {
+    [SwaggerSchema(Title = "PMS Code")]
+    public string approximatePms {
         get
         {
             return this.approximatePmsField;

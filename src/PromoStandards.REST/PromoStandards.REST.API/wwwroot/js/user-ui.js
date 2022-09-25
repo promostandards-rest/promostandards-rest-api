@@ -42,11 +42,12 @@
             // Builds the config used for the grid's column
 
             let field = currentSchema.properties[fieldName];
+            title = title || field.title || fieldName;
             let controlsActive = title?.trim().length > 0;
 
             let config = {
                 field: fieldName,
-                title: title || fieldName,
+                title: title,
                 sortable: controlsActive,
                 resizable: controlsActive,
                 filterable: controlsActive
@@ -157,6 +158,7 @@
                 let field = schema.properties[fieldName];
                 let data = {
                     fieldName: fieldName,
+                    title: field.title || fieldName,
                     description: field.description,
                     datatype: field.type,
                     required: schema.required?.some(r => r == fieldName) ?? false
@@ -181,7 +183,8 @@
                 columnResizeHandleWidth: 5,
                 columns: [
                     column("selectable", " ", "50px"),
-                    column("fieldName", "Field", "250px"),
+                    column("fieldName", "Field", "150px"),
+                    column("title", "Title", "200px"),
                     column("description", "Description"),
                     column("datatype", "Type", "100px"),
                     column("required", "Required", "100px")
