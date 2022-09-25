@@ -1,0 +1,73 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<div id="container" class="container">
+    <div id="header">
+        <h2 id="title">PromoStandards REST APIs</h2>
+        <fieldset id="api-section">
+            <label for='input-url'>Select an API</label>
+            <a target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>
+            </a>
+            <select class="form-select">
+                <option value="/api/products"
+                        data-id="Product"
+                        data-title="Product">
+                    Get All Products
+                </option>
+                <option value="/api/products?sellable=true"
+                        data-id="Product"
+                        data-title="Product">
+                    Get Sellable Products
+                </option>
+                <option value="/api/products?closeout=true"
+                        data-id="Product"
+                        data-title="Product">
+                    Get Close Out Products
+                </option>
+                <option value="/api/products/1"
+                        data-id="Product"
+                        data-title="Product">
+                    Get Product by ID Sample
+                </option>
+                <option value="/api/products/1/inventory"
+                        data-id="PartInventoryArray"
+                        data-title="Product Inventory">
+                    Get Product Inventory
+                </option>
+                <option value="/api/products/1/sizes"
+                        data-id="ApparelSize"
+                        data-title="Product Sizes">
+                    Get Product Sizes
+                </option>
+                <option value="/api/products/1/colors"
+                        data-id="Color"
+                        data-title="Product Colors">
+                    Get Product Colors
+                </option>
+            </select>
+            <div class="input-group" id="select">
+                <input type="text" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="btn-call-api">
+                        <i class="fa fa-play"></i>
+                        <span>Call</span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div id="splitter">
+        <div id="schemaGrid">
+            <h5></h5>
+            <div class="grid"></div>
+        </div>
+        <div id="dataGrid">
+            <h5></h5>
+            <div class="grid"></div>
+        </div>
+    </div>
+</div>

@@ -6,26 +6,23 @@ using PromoStandards.REST.Core.MediaContent.ServiceReference;
 using PromoStandards.REST.Core.ProductData.Models;
 using PromoStandards.REST.Core.ProductData.ServiceReference;
 
-namespace PromoStandards.REST.API.Controllers
-{
+namespace PromoStandards.REST.API.Controllers {
     [ApiController]
     [Tags("Inventory")]
     [Route("api/products")]
-    public class InventoryController : ControllerBase
-    {
+    public class InventoryController : ControllerBase {
         private readonly IProductDataService _productDataService;
         private readonly IMyInventoryService _inventoryService;
         private readonly IMyInventoryFilterService _inventoryFilterService;
         private readonly IMediaContentService _mediaContentService;
 
-        public InventoryController(IProductDataService productDataService, IMyInventoryService inventoryService, IMediaContentService mediaContentService, IMyInventoryFilterService inventoryFilterService)
-        {
+        public InventoryController(IProductDataService productDataService, IMyInventoryService inventoryService, IMediaContentService mediaContentService, IMyInventoryFilterService inventoryFilterService) {
             _productDataService = productDataService;
             _inventoryService = inventoryService;
             _inventoryFilterService = inventoryFilterService;
             _mediaContentService = mediaContentService;
         }
-       
+
         /// <summary>
         /// Provides the available color options for a specific ProductId provided in the request.
         /// </summary>
@@ -38,10 +35,8 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/colors")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CollectionResponse<string>>> GetProductColors(string productId)
-        {
-            var result = await _productDataService.GetProduct(new GetProductRequest()
-            {
+        public async Task<ActionResult<CollectionResponse<Color>>> GetProductColors(string productId) {
+            var result = await _productDataService.GetProduct(new GetProductRequest() {
                 productId = productId
             });
             if (result == null)
@@ -50,9 +45,9 @@ namespace PromoStandards.REST.API.Controllers
             if (result?.Product?.ProductPartArray == null)
                 return new NoContentResult();
 
-            var colorArray = result.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray);
-            var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
-            return new CollectionResponse<string>(colorList); ;
+            var colorArray = result.Product.ProductPartArray.Where(p => p.ColorArray != null).SelectMany(p => p.ColorArray).ToList();
+            //var colorList = colorArray.Select(p => p.colorName).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToList();
+            return new CollectionResponse<Color>(colorArray);
         }
 
         /// <summary>
@@ -67,10 +62,8 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/sizes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CollectionResponse<ApparelSizeLabelSize>>> GetProductSizes(string productId)
-        {
-            var result = await _productDataService.GetProduct(new GetProductRequest()
-            {
+        public async Task<ActionResult<CollectionResponse<ApparelSize>>> GetProductSizes(string productId) {
+            var result = await _productDataService.GetProduct(new GetProductRequest() {
                 productId = productId
             });
             if (result == null)
@@ -78,10 +71,10 @@ namespace PromoStandards.REST.API.Controllers
 
             if (result.Product.ProductPartArray == null)
                 return new NoContentResult();
-
-            var sizeArray = result.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize);
-            var sizeList = sizeArray.Select(p => p.labelSize).Distinct().ToList();
-            return new CollectionResponse<ApparelSizeLabelSize>(sizeList);
+            //ApparelSizeLabelSize
+            var sizeArray = result.Product.ProductPartArray.Where(p => p.ApparelSize != null).Select(p => p.ApparelSize).ToList();
+            //var sizeList = sizeArray.Select(p => p.labelSize).Distinct().ToList();
+            return new CollectionResponse<ApparelSize>(sizeArray);
         }
 
         /// <summary>
@@ -96,10 +89,8 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/parts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CollectionResponse<string>>> GetProductParts(string productId)
-        {
-            var result = await _productDataService.GetProduct(new GetProductRequest()
-            {
+        public async Task<ActionResult<CollectionResponse<string>>> GetProductParts(string productId) {
+            var result = await _productDataService.GetProduct(new GetProductRequest() {
                 productId = productId
             });
             if (result == null)
@@ -130,16 +121,12 @@ namespace PromoStandards.REST.API.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(productId))
-                {
+        public async Task<ActionResult<CollectionResponse<PartInventoryArray>>> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter) {
+            try {
+                if (string.IsNullOrEmpty(productId)) {
                     return BadRequest("ProductId Required");
                 }
-                var request = new GetInventoryLevelsRequest()
-                {
+                var request = new GetInventoryLevelsRequest() {
                     wsVersion = wsVersion.Item200,
                     productId = productId.ToUpper(),
                     Filter = new Filter()
@@ -149,47 +136,38 @@ namespace PromoStandards.REST.API.Controllers
                 var filterColors = Helpers.GetStringList(filter.PartColors);
                 //var filterSizes = Helpers.GetStringList(filter.PartSizes);
 
-                if (Helpers.ObjectsAny(filterPartIds) | Helpers.ObjectsAny(filterColors))
-                {
+                if (Helpers.ObjectsAny(filterPartIds) | Helpers.ObjectsAny(filterColors)) {
                     var validatorFilter = await _inventoryFilterService.GetFilterValues(wsVersion.Item200, productId.Trim().ToUpper());
-                    if (validatorFilter != null)
-                    {
-                        if (validatorFilter.FilterValues == null || validatorFilter.FilterValues.Filter == null)
-                        {
+                    if (validatorFilter != null) {
+                        if (validatorFilter.FilterValues == null || validatorFilter.FilterValues.Filter == null) {
                             return BadRequest("FilterValues.Filter not supported for this product");
                         }
 
-                        if (Helpers.ObjectsAny(filterPartIds))
-                        {
+                        if (Helpers.ObjectsAny(filterPartIds)) {
                             var validatorPartIds = validatorFilter.FilterValues.Filter.partIdArray;
-                            if (!Helpers.ObjectsAny(validatorPartIds))
-                            {
+                            if (!Helpers.ObjectsAny(validatorPartIds)) {
                                 return BadRequest("Invalid PartIds");
                             }
 
                             var invalidPartIds = filterPartIds.Except(validatorPartIds);
-                            if (Helpers.ObjectsAny(invalidPartIds))
-                            {
+                            if (Helpers.ObjectsAny(invalidPartIds)) {
                                 return BadRequest("Invalid PartIds: " + string.Join(",", invalidPartIds));
                             }
                             request.Filter.partIdArray = filterPartIds.ToArray();
                         }
 
 
-                        if (Helpers.ObjectsAny(filterColors))
-                        {
+                        if (Helpers.ObjectsAny(filterColors)) {
                             var validatorColors = validatorFilter.FilterValues.Filter.PartColorArray;
 
-                            if (!Helpers.ObjectsAny(validatorColors))
-                            {
+                            if (!Helpers.ObjectsAny(validatorColors)) {
                                 return BadRequest("Invalid Colors");
                             }
                             var upercaseColors = validatorColors.Select(x => x.ToUpperInvariant()).ToArray();
 
                             var invalidColors = filterColors.Except(upercaseColors);
 
-                            if (Helpers.ObjectsAny(invalidColors))
-                            {
+                            if (Helpers.ObjectsAny(invalidColors)) {
                                 return BadRequest("Invalid Colors: " + string.Join(",", invalidColors));
                             }
 
@@ -199,15 +177,12 @@ namespace PromoStandards.REST.API.Controllers
                 }
 
                 var response = await _inventoryService.GetInventoryLevels(request);
-                if (response == null)
-                {
+                if (response == null) {
                     //return new StatusCodeResult(StatusCodes.Status204NoContent);
                     return Ok("No Content for the Specified Product");
                 }
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
+                return Ok(new CollectionResponse<PartInventoryArray>(response.PartInventoryArray.ToList()));
+            } catch (Exception ex) {
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
@@ -249,7 +224,7 @@ namespace PromoStandards.REST.API.Controllers
         //}
 
         #endregion
-        
+
 
     }
 }

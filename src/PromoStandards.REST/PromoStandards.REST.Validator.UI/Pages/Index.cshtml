@@ -16,9 +16,9 @@
                 </select>
             </div>*@
             <div class="col-md-12">
-                <label for='input-url'>Endpoint URL</label>
+                <label for='input-url'>URL</label>
                 <div class="input-group">
-                    <input type='url' class="form-control" id="input-url">
+                    <input type='url' class="form-control" id="input-url" value="https://localhost:62849/api/products">
                     <div class="input-group-append">
                         <button class="btn btn-success" type="button" id="validate">
                             <i class="fa fa-play"></i>
@@ -32,8 +32,7 @@
     <fieldset id="request-response">
         <div class="row">
             <div class="col-md-12">
-                <label>Response</label>
-                <code id="response"></code>
+                <div id="my-grid"></div>
             </div>
         </div>
     </fieldset>

@@ -104,6 +104,8 @@ namespace PromoStandards.REST.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -118,8 +120,6 @@ namespace PromoStandards.REST.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

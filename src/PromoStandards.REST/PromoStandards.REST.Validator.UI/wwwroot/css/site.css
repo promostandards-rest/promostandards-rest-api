@@ -84,3 +84,11 @@ code {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+.responses-inner > div + .responses-table {
+    display: none;
+}
+
+.responses-inner > div > div + h4 {
+    display: none;
+}
