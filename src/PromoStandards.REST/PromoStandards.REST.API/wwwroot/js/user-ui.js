@@ -174,6 +174,7 @@
             $("#schemaGrid .grid").html("");
             $("#schemaGrid .grid").kendoGrid({
                 width: "100%",
+                height: "calc(100% - 40px)",
                 sortable: true,
                 filterable: true,
                 resizable: true,
@@ -255,6 +256,7 @@
                 $("#dataGrid .grid").html("");
                 $("#dataGrid .grid").kendoGrid({
                     width: "100%",
+                    height: "calc(100% - 55px)",
                     filterable: true,
                     sortable: true,
                     resizable: true,
