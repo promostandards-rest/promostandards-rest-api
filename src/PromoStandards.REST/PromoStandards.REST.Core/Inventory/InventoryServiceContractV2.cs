@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.Inventory {
 
@@ -616,6 +617,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [JsonIgnore]
         public bool labelSizeSpecified {
             get {
                 return this.labelSizeFieldSpecified;
@@ -694,6 +696,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [JsonIgnore]
         public bool replenishmentLeadTimeSpecified {
             get {
                 return this.replenishmentLeadTimeFieldSpecified;
@@ -745,6 +748,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [JsonIgnore]
         public bool lastModifiedSpecified {
 
             get {
@@ -916,6 +920,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [JsonIgnore]
         public bool countrySpecified {
             get {
                 return this.countryFieldSpecified;

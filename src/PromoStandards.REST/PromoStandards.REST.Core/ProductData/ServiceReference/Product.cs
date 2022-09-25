@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -137,6 +138,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool priceExpiresDateSpecified
     {
         get
@@ -308,6 +310,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool unspscCommodityCodeSpecified
     {
         get

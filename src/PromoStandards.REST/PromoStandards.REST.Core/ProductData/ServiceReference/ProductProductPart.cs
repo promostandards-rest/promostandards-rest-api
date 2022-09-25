@@ -1,6 +1,7 @@
 ﻿using PromoStandards.REST.Core.ProductData.ServiceReference;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Text.Json.Serialization;
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -133,7 +134,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    //[SwaggerExcludeAttribute]
+    [JsonIgnore]
     public bool countryOfOriginSpecified
     {
         get
@@ -262,6 +263,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool leadTimeSpecified
     {
         get
@@ -458,6 +460,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool nmfcCodeSpecified
     {
         get

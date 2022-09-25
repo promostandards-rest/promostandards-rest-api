@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductPricingConfiguration.ServiceReference;
+﻿using System.Text.Json.Serialization;
+
+namespace PromoStandards.REST.Core.ProductPricingConfiguration.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -193,6 +195,7 @@ public partial class Decoration
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool itemPartQuantityLTMSpecified
     {
         get
@@ -235,6 +238,7 @@ public partial class Decoration
     }
     
     /// <remarks/>
+    [JsonIgnore]
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public bool decorationUnitsIncludedSpecified
     {
@@ -319,6 +323,7 @@ public partial class Decoration
     }
     
     /// <remarks/>
+    [JsonIgnore]
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public bool leadTimeSpecified
     {
@@ -345,8 +350,9 @@ public partial class Decoration
             this.rushLeadTimeField = value;
         }
     }
-    
+
     /// <remarks/>
+    [JsonIgnore]
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public bool rushLeadTimeSpecified
     {

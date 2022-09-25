@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -55,6 +56,7 @@ public partial class ProductPrice
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool quantityMaxSpecified
     {
         get
