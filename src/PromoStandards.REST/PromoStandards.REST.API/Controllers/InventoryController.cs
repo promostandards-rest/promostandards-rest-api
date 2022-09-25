@@ -121,7 +121,7 @@ namespace PromoStandards.REST.API.Controllers {
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{productId}/inventory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CollectionResponse<PartInventoryArray>>> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter) {
+        public async Task<ActionResult<CollectionResponse<PartInventoryArrayPartInventory>>> GetInventoryLevels(string productId, [FromQuery] GetInventoryFilter filter) {
             try {
                 if (string.IsNullOrEmpty(productId)) {
                     return BadRequest("ProductId Required");
@@ -181,7 +181,7 @@ namespace PromoStandards.REST.API.Controllers {
                     //return new StatusCodeResult(StatusCodes.Status204NoContent);
                     return Ok("No Content for the Specified Product");
                 }
-                return Ok(new CollectionResponse<PartInventoryArray>(response.PartInventoryArray.ToList()));
+                return Ok(new CollectionResponse<PartInventoryArrayPartInventory>(response.PartInventoryArray.ToList()));
             } catch (Exception ex) {
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
