@@ -6,6 +6,7 @@
 
         let schemas = [];
         let currentSchema = {};
+        let currentId = "";
 
         $("#splitter").kendoSplitter({
             orientation: "vertical"
@@ -32,7 +33,18 @@
 
         // Upon dropdown selection, set the url into the textbox
         $("#api-section select").on("change", function () {
-            $("#api-section input[type='text']").val($("#api-section select option:selected").val());
+
+            let selectedOption = $("select option:selected");
+            let url = selectedOption.val();
+            let refID = selectedOption.data("ref-id");
+
+            if (url.includes("{id}")) {
+                url = url.replace("{id}", refID || "207BLX");
+            }
+
+            // Add link to screen
+            $("#api-section input[type='text']").val(url);
+
         });
         $("#api-section input[type='text']").val($("#api-section select option:selected").val());
 
@@ -71,9 +83,21 @@
         function callApi() {
 
             let selectedOption = $("select option:selected");
-            let url = $("#api-section input[type='text']").val() || selectedOption.val();
+            let selectedUrl = selectedOption.val();
+            let url = $("#api-section input[type='text']").val() || selectedUrl;
             let title = selectedOption.data("title");
+            let refID = selectedOption.data("ref-id");
             currentSchema = schemas[selectedOption.data("id")];
+
+            if (selectedUrl.includes("{id}")) {
+                let indexStart = selectedUrl.indexOf("{id}");
+                let indexEnd = url.indexOf("/", indexStart);
+                if (indexEnd <= 0) indexEnd = url.length;
+                refID = url.substring(indexStart, indexEnd);
+                url = url.replace("{id}", refID || "207BLX");
+            }
+
+            currentId = refID;
 
             // Add link to screen
             $("#api-section a").attr("href", urlDomain + url);
@@ -106,9 +130,23 @@
                 async: false,
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
+                    if (!response) {
+                        let selection = $("select option:selected");
+                        let message = "No content found for " + selection.data("title");
+                        let refID = selection.data("ref-id");
+                        if (refID) message += " using ID " + (currentId || refID);
+                        toastr.warning(message);
+                        return;
+                    }
+
                     buildGrids(transformData(response.data || [response]));
                 },
                 error: function (xhr, status) {
+                    if (xhr?.status == "404") {
+                        toastr.error($("select option:selected").data("title") + " Not Found");
+                        return;
+                    }
+
                     let inputUrl = $("#api-section input[type='text']").val();
                     let selectUrl = $("#api-section select option:selected").val();
                     if (inputUrl == selectUrl) {
