@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.MediaContent.ServiceReference;
 
@@ -155,6 +156,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool fileSizeSpecified
     {
         get
@@ -185,6 +187,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool widthSpecified
     {
         get
@@ -215,6 +218,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool heightSpecified
     {
         get
@@ -245,6 +249,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool dpiSpecified
     {
         get
@@ -326,6 +331,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool decorationIdSpecified
     {
         get
@@ -389,6 +395,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool changeTimeStampSpecified
     {
         get

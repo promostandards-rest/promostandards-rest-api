@@ -1,4 +1,6 @@
-﻿namespace PromoStandards.REST.Core.ProductPricingConfiguration.ServiceReference;
+﻿using System.Text.Json.Serialization;
+
+namespace PromoStandards.REST.Core.ProductPricingConfiguration.ServiceReference;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -111,6 +113,7 @@ public partial class GetDecorationColorsRequest
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [JsonIgnore]
     public bool decorationIdSpecified
     {
         get
