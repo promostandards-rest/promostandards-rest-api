@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
 
 namespace PromoStandards.REST.Core.Inventory {
 
