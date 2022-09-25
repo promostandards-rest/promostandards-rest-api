@@ -46,6 +46,8 @@ namespace PromoStandards.REST.API.Controllers
             paging ??= new PagingRequest();
             if (paging.pageSize > 20)
                 paging.pageSize = 20;
+            if (paging.pageSize < 1)
+                paging.pageSize = 20;
             var result = await _productDataService.GetProducts(sellable, closeOut, dateModified, paging.page, paging.pageSize);
             return result;
         }
