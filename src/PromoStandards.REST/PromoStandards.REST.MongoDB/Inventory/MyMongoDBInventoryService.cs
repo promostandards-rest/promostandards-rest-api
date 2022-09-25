@@ -23,7 +23,7 @@ namespace PromoStandards.REST.MongoDB.Inventory
             var inventory = await GetInventory(request.productId);
             if (inventory == null) return null;
 
-            IEnumerable<PartInventoryArrayPartInventory> results = inventory.PartInventoryArray;
+            IEnumerable<PartInventoryArray> results = inventory.PartInventoryArray;
             if (request.Filter != null)
             {
                 if (request.Filter.partIdArray != null)
