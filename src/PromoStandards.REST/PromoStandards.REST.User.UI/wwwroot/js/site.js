@@ -5,7 +5,7 @@
         const defaultDisplayedFieldCount = 5;
 
         let schemas = [];
-        let currentObject = "";
+        let currentSchema = {};
 
         $("#splitter").kendoSplitter({
             orientation: "vertical"
@@ -41,7 +41,7 @@
         let column = function (fieldName, title, width) {
             // Builds the config used for the grid's column
 
-            let field = schemas[currentObject].properties[fieldName];
+            let field = currentSchema.properties[fieldName];
             let controlsActive = title?.trim().length > 0;
 
             let config = {
@@ -72,7 +72,7 @@
             let selectedOption = $("select option:selected");
             let url = $("#api-section input[type='text']").val() || selectedOption.val();
             let title = selectedOption.data("title");
-            currentObject = selectedOption.data("id");
+            currentSchema = schemas[selectedOption.data("id")];
 
             // Add link to screen
             $("#api-section a").attr("href", urlDomain + url);
@@ -124,32 +124,26 @@
         function transformData(data) {
             // Any client side changes to the data should gets done here
 
+            data.forEach(obj => {
 
-            if (Array.isArray(data)) {
+                Object.keys(obj).forEach(fieldName => {
+                    let fieldSchema = currentSchema.properties[fieldName];
 
-            } else
-                data.forEach(obj => {
-
-                    let schema = schemas[currentObject];
-
-                    Object.keys(obj).forEach(fieldName => {
-                        let fieldSchema = schema.properties[fieldName];
-
-                        if (fieldSchema.type == "array") {
-                            if (fieldSchema.items.type == "string") {
-                                // Comma separate fields that are array of type string
-                                obj[fieldName] = obj[fieldName].join(", ");
-                            } else {
-                                //delete obj[fieldName];
-                                obj[fieldName] = "[Array]";
-                            }
+                    if (fieldSchema.type == "array") {
+                        if (fieldSchema.items.type == "string") {
+                            // Comma separate fields that are array of type string
+                            obj[fieldName] = obj[fieldName].join(", ");
+                        } else {
+                            //delete obj[fieldName];
+                            obj[fieldName] = "[Array]";
                         }
+                    }
 
-                        if (fieldSchema.format == "date-time")
-                            // Transform date string into javascript date
-                            obj[fieldName] = new Date(obj[fieldName]);
-                    });
+                    if (fieldSchema.format == "date-time")
+                        // Transform date string into javascript date
+                        obj[fieldName] = new Date(obj[fieldName]);
                 });
+            });
 
             return data;
         }
@@ -175,28 +169,24 @@
 
         function buildGrids(data) {
 
-            let schemaCols = [
-                column("selectable", " ", "50px"),
-                column("fieldName", "Field", "250px"),
-                column("description", "Description"),
-                column("datatype", "Type", "100px"),
-                column("required", "Required", "100px")
-            ];
-            let schemaData = transformSchema(schemas[currentObject]);
-
             let schemaGrid = $("#schemaGrid .grid").data("kendoGrid");
-
             schemaGrid?.destroy();
-
+            $("#schemaGrid .grid").html("");
             $("#schemaGrid .grid").kendoGrid({
                 width: "100%",
                 sortable: true,
                 filterable: true,
                 resizable: true,
                 columnResizeHandleWidth: 5,
-                columns: schemaCols,
+                columns: [
+                    column("selectable", " ", "50px"),
+                    column("fieldName", "Field", "250px"),
+                    column("description", "Description"),
+                    column("datatype", "Type", "100px"),
+                    column("required", "Required", "100px")
+                ],
                 dataSource: {
-                    data: schemaData
+                    data: transformSchema(currentSchema)
                 },
                 change: function () {
                     let dataGrid = $("#dataGrid .grid").data("kendoGrid");
@@ -216,9 +206,9 @@
                     selectQuery += `tr:eq(${i})`;
                 }
                 schemaGrid.select(selectQuery)
+                rebuildDataGrid(data);
             });
 
-            rebuildDataGrid(data);
         }
 
         function rebuildDataGrid(dataSet, rebuildColumns) {
@@ -233,7 +223,7 @@
             let cols = [];
             // Build array of columns
             Object.keys(dataSet[0]).forEach(fieldName => {
-                let fieldSchema = schemas[currentObject].properties[fieldName];
+                //let fieldSchema = currentSchema.properties[fieldName];
                 //if (fieldSchema.type != "array") {
                 if (rebuildColumns || !rebuildColumns && cols.length < defaultDisplayedFieldCount) {
                     cols.push(column(fieldName));
