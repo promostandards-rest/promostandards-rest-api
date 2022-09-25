@@ -54,7 +54,7 @@
             // Builds the config used for the grid's column
 
             let field = currentSchema.properties[fieldName];
-            title = title || field.title || fieldName;
+            title = title || field?.title || fieldName;
             let controlsActive = title?.trim().length > 0;
 
             let config = {
