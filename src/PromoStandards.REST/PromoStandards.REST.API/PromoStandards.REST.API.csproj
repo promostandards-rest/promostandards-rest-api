@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="wwwroot\custom.css" />
+		<None Include="wwwroot\css\swagger-ui.css" />
 	</ItemGroup>
 
 </Project>

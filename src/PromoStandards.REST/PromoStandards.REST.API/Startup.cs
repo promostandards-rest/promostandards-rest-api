@@ -95,6 +95,8 @@ namespace PromoStandards.REST.API
             //services.AddSingleton<IMyInventoryService, StaticInventoryService>();
             //services.AddSingleton<IMyInventoryFilterService, StaticInventoryFilterService>();
             //services.AddSingleton<IMediaContentService, StaticMediaService>();
+
+            services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -111,8 +113,8 @@ namespace PromoStandards.REST.API
             {
                 //c.RoutePrefix = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PromoStandards.REST.API v1");
-                c.InjectStylesheet("/custom.css");
-                c.InjectJavascript("/custom.js");
+                c.InjectStylesheet("/css/swagger-ui.css");
+                c.InjectJavascript("/js/swagger-ui.js");
             });
 
             app.UseStaticFiles();
@@ -122,10 +124,11 @@ namespace PromoStandards.REST.API
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
