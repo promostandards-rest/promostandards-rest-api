@@ -96,7 +96,7 @@ namespace PromoStandards.REST.API.Controllers {
             if (result == null)
                 return new NoContentResult();
 
-            if (result.Product.ProductPartArray == null)
+            if (result.Product?.ProductPartArray == null)
                 return new NoContentResult();
 
             var partList = result.Product.ProductPartArray.Select(p => p.partId).ToList();

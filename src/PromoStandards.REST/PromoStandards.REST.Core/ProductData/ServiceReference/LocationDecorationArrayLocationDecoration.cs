@@ -53,7 +53,7 @@ public partial class LocationDecorationArrayLocationDecoration
 
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool maxImprintColorsSpecified
+    public bool maxImprintColorsSpecified
     {
         get
         {

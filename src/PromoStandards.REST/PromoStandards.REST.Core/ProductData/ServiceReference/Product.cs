@@ -137,7 +137,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool priceExpiresDateSpecified
+    public bool priceExpiresDateSpecified
     {
         get
         {
@@ -308,7 +308,7 @@ public partial class Product
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool unspscCommodityCodeSpecified
+    public bool unspscCommodityCodeSpecified
     {
         get
         {

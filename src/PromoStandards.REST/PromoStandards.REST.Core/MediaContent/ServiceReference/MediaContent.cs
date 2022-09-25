@@ -155,7 +155,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool fileSizeSpecified
+    public bool fileSizeSpecified
     {
         get
         {
@@ -185,7 +185,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool widthSpecified
+    public bool widthSpecified
     {
         get
         {
@@ -215,7 +215,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool heightSpecified
+    public bool heightSpecified
     {
         get
         {
@@ -245,7 +245,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool dpiSpecified
+    public bool dpiSpecified
     {
         get
         {
@@ -326,7 +326,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool decorationIdSpecified
+    public bool decorationIdSpecified
     {
         get
         {
@@ -389,7 +389,7 @@ public partial class MediaContent
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool changeTimeStampSpecified
+    public bool changeTimeStampSpecified
     {
         get
         {

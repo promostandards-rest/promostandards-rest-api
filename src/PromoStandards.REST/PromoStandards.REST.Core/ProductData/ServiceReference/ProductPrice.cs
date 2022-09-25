@@ -55,7 +55,7 @@ public partial class ProductPrice
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool quantityMaxSpecified
+    public bool quantityMaxSpecified
     {
         get
         {

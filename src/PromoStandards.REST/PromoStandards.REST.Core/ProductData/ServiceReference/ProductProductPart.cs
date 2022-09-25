@@ -134,7 +134,7 @@ public partial class ProductProductPart
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     //[SwaggerExcludeAttribute]
-    internal bool countryOfOriginSpecified
+    public bool countryOfOriginSpecified
     {
         get
         {
@@ -262,7 +262,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool leadTimeSpecified
+    public bool leadTimeSpecified
     {
         get
         {
@@ -458,7 +458,7 @@ public partial class ProductProductPart
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    internal bool nmfcCodeSpecified
+    public bool nmfcCodeSpecified
     {
         get
         {

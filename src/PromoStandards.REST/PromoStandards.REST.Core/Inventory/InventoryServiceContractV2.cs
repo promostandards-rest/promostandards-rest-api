@@ -616,7 +616,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        internal bool labelSizeSpecified {
+        public bool labelSizeSpecified {
             get {
                 return this.labelSizeFieldSpecified;
             }
@@ -694,7 +694,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        internal bool replenishmentLeadTimeSpecified {
+        public bool replenishmentLeadTimeSpecified {
             get {
                 return this.replenishmentLeadTimeFieldSpecified;
             }
@@ -745,7 +745,7 @@ namespace PromoStandards.REST.Core.Inventory {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        internal bool lastModifiedSpecified {
+        public bool lastModifiedSpecified {
 
             get {
                 return this.lastModifiedFieldSpecified;
