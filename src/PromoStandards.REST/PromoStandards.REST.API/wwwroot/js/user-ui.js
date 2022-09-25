@@ -6,6 +6,7 @@
 
         let schemas = [];
         let currentSchema = {};
+        let currentId = "";
 
         $("#splitter").kendoSplitter({
             orientation: "vertical"
@@ -32,7 +33,18 @@
 
         // Upon dropdown selection, set the url into the textbox
         $("#api-section select").on("change", function () {
-            $("#api-section input[type='text']").val($("#api-section select option:selected").val());
+
+            let selectedOption = $("select option:selected");
+            let url = selectedOption.val();
+            let refID = selectedOption.data("ref-id");
+
+            if (url.includes("{id}")) {
+                url = url.replace("{id}", refID || "207BLX");
+            }
+
+            // Add link to screen
+            $("#api-section input[type='text']").val(url);
+
         });
         $("#api-section input[type='text']").val($("#api-section select option:selected").val());
 
@@ -42,11 +54,12 @@
             // Builds the config used for the grid's column
 
             let field = currentSchema.properties[fieldName];
+            title = title || field.title || fieldName;
             let controlsActive = title?.trim().length > 0;
 
             let config = {
                 field: fieldName,
-                title: title || fieldName,
+                title: title,
                 sortable: controlsActive,
                 resizable: controlsActive,
                 filterable: controlsActive
@@ -70,9 +83,21 @@
         function callApi() {
 
             let selectedOption = $("select option:selected");
-            let url = $("#api-section input[type='text']").val() || selectedOption.val();
+            let selectedUrl = selectedOption.val();
+            let url = $("#api-section input[type='text']").val() || selectedUrl;
             let title = selectedOption.data("title");
+            let refID = selectedOption.data("ref-id");
             currentSchema = schemas[selectedOption.data("id")];
+
+            if (selectedUrl.includes("{id}")) {
+                let indexStart = selectedUrl.indexOf("{id}");
+                let indexEnd = url.indexOf("/", indexStart);
+                if (indexEnd <= 0) indexEnd = url.length;
+                refID = url.substring(indexStart, indexEnd);
+                url = url.replace("{id}", refID || "207BLX");
+            }
+
+            currentId = refID;
 
             // Add link to screen
             $("#api-section a").attr("href", urlDomain + url);
@@ -105,9 +130,23 @@
                 async: false,
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
+                    if (!response) {
+                        let selection = $("select option:selected");
+                        let message = "No content found for " + selection.data("title");
+                        let refID = selection.data("ref-id");
+                        if (refID) message += " using ID " + (currentId || refID);
+                        toastr.warning(message);
+                        return;
+                    }
+
                     buildGrids(transformData(response.data || [response]));
                 },
                 error: function (xhr, status) {
+                    if (xhr?.status == "404") {
+                        toastr.error($("select option:selected").data("title") + " Not Found");
+                        return;
+                    }
+
                     let inputUrl = $("#api-section input[type='text']").val();
                     let selectUrl = $("#api-section select option:selected").val();
                     if (inputUrl == selectUrl) {
@@ -157,6 +196,7 @@
                 let field = schema.properties[fieldName];
                 let data = {
                     fieldName: fieldName,
+                    title: field.title || fieldName,
                     description: field.description,
                     datatype: field.type,
                     required: schema.required?.some(r => r == fieldName) ?? false
@@ -181,7 +221,8 @@
                 columnResizeHandleWidth: 5,
                 columns: [
                     column("selectable", " ", "50px"),
-                    column("fieldName", "Field", "250px"),
+                    column("fieldName", "Field", "150px"),
+                    column("title", "Title", "200px"),
                     column("description", "Description"),
                     column("datatype", "Type", "100px"),
                     column("required", "Required", "100px")

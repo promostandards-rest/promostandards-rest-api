@@ -52,6 +52,7 @@ namespace PromoStandards.REST.API
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PromoStandards.REST.Core.xml"));
 
+                c.EnableAnnotations();
             });
 
             services.AddOptions();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
@@ -77,8 +78,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType = "token", Order = 0)]
     [Required]
-    public string productId
-    {
+    [SwaggerSchema(Title="Product ID")]
+    public string productId {
         get
         {
             return this.productIdField;
@@ -93,6 +94,7 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=1)]
     [Required]
+    [SwaggerSchema(Title="Product Name")]
     public string productName
     {
         get
@@ -109,8 +111,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute("description", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=2)]
     [Required]
-    public string[] description
-    {
+    [SwaggerSchema(Title="Description")]
+    public string[] description {
         get
         {
             return this.descriptionField;
@@ -124,8 +126,8 @@ public partial class Product
     /// The date that the pricing in the ProductPriceGroupArray portion of the response expires.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=3)]
-    public System.Nullable<System.DateTime> priceExpiresDate
-    {
+    [SwaggerSchema(Title="Price Expiry Date")]
+    public System.Nullable<System.DateTime> priceExpiresDate {
         get
         {
             return this.priceExpiresDateField;
@@ -156,8 +158,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=4)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductMarketingPoint", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
-    public ProductMarketingPoint[] ProductMarketingPointArray
-    {
+    [SwaggerSchema(Title="Product Marketing Points")]
+    public ProductMarketingPoint[] ProductMarketingPointArray {
         get
         {
             return this.productMarketingPointArrayField;
@@ -172,8 +174,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=5)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductKeyword", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
-    public ProductKeyword[] ProductKeywordArray
-    {
+    [SwaggerSchema(Title="Product Keywords")]
+    public ProductKeyword[] ProductKeywordArray {
         get
         {
             return this.productKeywordArrayField;
@@ -187,8 +189,8 @@ public partial class Product
     /// The specific product brand
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=6)]
-    public string productBrand
-    {
+    [SwaggerSchema(Title="Product Brand")]
+    public string productBrand {
         get
         {
             return this.productBrandField;
@@ -203,8 +205,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
     [Required]
-    public System.Nullable<bool> export
-    {
+    [SwaggerSchema(Title="Export")]
+    public System.Nullable<bool> export {
         get
         {
             return this.exportField;
@@ -219,8 +221,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=8)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductCategory", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
-    public ProductCategory[] ProductCategoryArray
-    {
+    [SwaggerSchema(Title="Product Categories")]
+    public ProductCategory[] ProductCategoryArray {
         get
         {
             return this.productCategoryArrayField;
@@ -235,8 +237,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=9)]
     [System.Xml.Serialization.XmlArrayItemAttribute("RelatedProduct", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
-    public RelatedProduct[] RelatedProductArray
-    {
+    [SwaggerSchema(Title="Related Products")]
+    public RelatedProduct[] RelatedProductArray {
         get
         {
             return this.relatedProductArrayField;
@@ -250,8 +252,8 @@ public partial class Product
     /// The URL of the product’s primary image. Any valid URL can be returned including prefixes like http and ftp.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=10)]
-    public string primaryImageUrl
-    {
+    [SwaggerSchema(Title="Primary Image URL")]
+    public string primaryImageUrl {
         get
         {
             return this.primaryImageUrlField;
@@ -266,8 +268,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlArrayAttribute(Order=11)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPriceGroup", Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=false)]
-    public ProductPriceGroup[] ProductPriceGroupArray
-    {
+    [SwaggerSchema(Title="Product Price Groups")]
+    public ProductPriceGroup[] ProductPriceGroupArray {
         get
         {
             return this.productPriceGroupArrayField;
@@ -281,8 +283,8 @@ public partial class Product
     /// Indicates if there is information about this product via the Product Safety and Compliance service.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=12)]
-    public System.Nullable<bool> complianceInfoAvailable
-    {
+    [SwaggerSchema(Title="Compliance Info Available")]
+    public System.Nullable<bool> complianceInfoAvailable {
         get
         {
             return this.complianceInfoAvailableField;
@@ -296,8 +298,8 @@ public partial class Product
     /// The United Nations Standard Products and Services Code® (UNSPSC®) that best describes this product. Note that the enumerated values are the UNSPSC "Commodity" codes. For more information, refer to https://www.unspsc.org.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-    public int unspscCommodityCode
-    {
+    [SwaggerSchema(Title= "UNSPSC Commodity Code")]
+    public int unspscCommodityCode {
         get
         {
             return this.unspscCommodityCodeField;
@@ -329,8 +331,8 @@ public partial class Product
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=14)]
     [System.Xml.Serialization.XmlArrayItemAttribute("LocationDecoration", IsNullable=false)]
     [Required]
-    public LocationDecorationArrayLocationDecoration[] LocationDecorationArray
-    {
+    [SwaggerSchema(Title= "Location Decorations")]
+    public LocationDecorationArrayLocationDecoration[] LocationDecorationArray {
         get
         {
             return this.locationDecorationArrayField;
@@ -346,8 +348,8 @@ public partial class Product
     [System.Xml.Serialization.XmlArrayAttribute(Order=15)]
     [System.Xml.Serialization.XmlArrayItemAttribute("ProductPart", IsNullable=false)]
     [Required]
-    public ProductProductPart[] ProductPartArray
-    {
+    [SwaggerSchema(Title= "Product Parts")]
+    public ProductProductPart[] ProductPartArray {
         get
         {
             return this.productPartArrayField;
@@ -362,8 +364,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=16)]
     [Required]
-    public System.DateTime lastChangeDate
-    {
+    [SwaggerSchema(Title= "Date Last Changed")]
+    public System.DateTime lastChangeDate {
         get
         {
             return this.lastChangeDateField;
@@ -378,8 +380,8 @@ public partial class Product
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=17)]
     [Required]
-    public System.DateTime creationDate
-    {
+    [SwaggerSchema(Title= "Date Created")]
+    public System.DateTime creationDate {
         get
         {
             return this.creationDateField;
@@ -393,8 +395,8 @@ public partial class Product
     /// The date this part expires from supplier availability in ISO 8601 format
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=18)]
-    public System.Nullable<System.DateTime> endDate
-    {
+    [SwaggerSchema(Title= "End Date")]
+    public System.Nullable<System.DateTime> endDate {
         get
         {
             return this.endDateField;
@@ -408,8 +410,8 @@ public partial class Product
     /// The Date this Part initially becomes available from the Supplier in ISO 8601 format
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=19)]
-    public System.Nullable<System.DateTime> effectiveDate
-    {
+    [SwaggerSchema(Title= "Effective Date")]
+    public System.Nullable<System.DateTime> effectiveDate {
         get
         {
             return this.effectiveDateField;
@@ -423,8 +425,8 @@ public partial class Product
     /// Cautionary status to review for specific warnings about using product data
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=20)]
-    public System.Nullable<bool> isCaution
-    {
+    [SwaggerSchema(Title= "Cautious Product")]
+    public System.Nullable<bool> isCaution {
         get
         {
             return this.isCautionField;
@@ -438,8 +440,8 @@ public partial class Product
     /// Cautionary comments
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=21)]
-    public string cautionComment
-    {
+    [SwaggerSchema(Title= "Cautious Comment")]
+    public string cautionComment {
         get
         {
             return this.cautionCommentField;
@@ -453,8 +455,8 @@ public partial class Product
     /// Indicates if a closeout
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", IsNullable=true, Order=22)]
-    public System.Nullable<bool> isCloseout
-    {
+    [SwaggerSchema(Title= "Product Closed Out")]
+    public System.Nullable<bool> isCloseout {
         get
         {
             return this.isCloseoutField;
@@ -468,8 +470,8 @@ public partial class Product
     /// The line name (ex : Trimark, Hit)
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=23)]
-    public string lineName
-    {
+    [SwaggerSchema(Title= "Line Name")]
+    public string lineName {
         get
         {
             return this.lineNameField;
@@ -483,8 +485,8 @@ public partial class Product
     /// The default setup charge for this product. Can be a textual description.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=24)]
-    public string defaultSetupCharge
-    {
+    [SwaggerSchema(Title= "Default Setup Charge")]
+    public string defaultSetupCharge {
         get
         {
             return this.defaultSetupChargeField;
@@ -498,8 +500,8 @@ public partial class Product
     /// The default RUN charge for this product. Can be a textual description
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=25)]
-    public string defaultRunCharge
-    {
+    [SwaggerSchema(Title= "Default Run Charge")]
+    public string defaultRunCharge {
         get
         {
             return this.defaultRunChargeField;
@@ -513,8 +515,8 @@ public partial class Product
     /// The imprint size
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", DataType="token", Order=26)]
-    public string imprintSize
-    {
+    [SwaggerSchema(Title= "Imprint Size")]
+    public string imprintSize {
         get
         {
             return this.imprintSizeField;
@@ -530,8 +532,8 @@ public partial class Product
     [System.Xml.Serialization.XmlArrayAttribute(Namespace="http://www.promostandards.org/WSDL/ProductDataService/2.0.0/SharedObjects/", Order=27)]
     [System.Xml.Serialization.XmlArrayItemAttribute("FobPoint", IsNullable=false)]
     [Required]
-    public FobPoint[] FobPointArray
-    {
+    [SwaggerSchema(Title= "Fob Points")]
+    public FobPoint[] FobPointArray {
         get
         {
             return this.fobPointArrayField;

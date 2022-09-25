@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PromoStandards.REST.Core.ProductData.ServiceReference;
 
@@ -20,6 +21,7 @@ public partial class ApparelSize
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     [Required]
+    [SwaggerSchema(Title = "Style")]
     public ApparelSizeApparelStyle apparelStyle
     {
         get
@@ -37,6 +39,7 @@ public partial class ApparelSize
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     [Required]
+    [SwaggerSchema(Title = "Size Code")]
     public ApparelSizeLabelSize labelSize {
         get
         {
@@ -52,8 +55,8 @@ public partial class ApparelSize
     /// Used to communicate custom size when labelSize is CUSTOM.
     /// </summary>
     [System.Xml.Serialization.XmlElementAttribute(DataType="token", Order=2)]
-    public string customSize
-    {
+    [SwaggerSchema(Title = "Custom Size Name")]
+    public string customSize {
         get
         {
             return this.customSizeField;
