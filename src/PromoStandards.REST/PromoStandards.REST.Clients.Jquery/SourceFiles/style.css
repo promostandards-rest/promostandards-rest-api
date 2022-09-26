@@ -1,0 +1,22 @@
+.btn {
+    background-color: aliceblue;
+}
+#rest{
+    position: relative;
+    right: -40%;
+}
+#soap{
+    max-width:10%;
+    max-height:auto;
+}
+.myButtons{
+    position:relative;
+    top:-200;
+}
+.stuff{
+    position:relative;
+    top:-200;
+}
+.sel {
+    visibility: hidden;
+}
