@@ -2,175 +2,39 @@
 @inject IConfiguration configuration
 @model PromoStandards.REST.API.Pages.IndexModel
 @{
+    ViewData["js"] = "productview.js";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PromoStandards.REST.API</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/user-ui.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.913/styles/kendo.default-main.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/devextreme/22.1.5/css/dx.carmine.compact.css" rel="stylesheet">
-</head>
-<body>
-
-    <div id="container" class="container">
-        <div id="header">
-            <h2 id="title">PromoStandards REST APIs</h2>
-            <fieldset id="api-section">
-                <label for='input-url'>Enter a product id</label>
-                <a target="_blank">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    <span>
-                </a>
-
-                <div class="input-group" id="select">
-                    <input type="text" class="form-control" id="product-id" value="BG349" />
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button" id="btn-call-product-view">
-                            <i class="fa fa-play"></i>
-                            <span>Call</span>
-                        </button>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="product-view" style="margin-top: 20px">
-            <div id="product-details" style="text-align: center">
-                <h4 id="product-name">Product Name</h4>
-                <p id="product-description">Product description</p>
-                <div id="product-parts" style="text-align: left"></div>
-            </div>
-            <div id="product-inventory"></div>
-            <div id="product-images">
-                <div class="widget-container">
-                    <div id="gallery"></div>
+<div class="container">
+    <div id="header">
+        <h2 id="title">Product View Demo</h2>
+        <fieldset id="api-section">
+            <label for='input-url'>Enter a product id</label>
+            <div class="input-group" id="select">
+                <input type="text" class="form-control" id="product-id" value="BG349" />
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="btn-call-product-view">
+                        <i class="fa fa-play"></i>
+                        <span>Call</span>
+                    </button>
                 </div>
             </div>
-            <div id="product-videos"></div>
-            <div id="product-documents"></div>
-            <div id="product-audios"></div>
-        </div>
+        </fieldset>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://kendo.cdn.telerik.com/2022.3.913/js/kendo.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/devextreme/22.1.5/js/dx.all.js"></script>
-    <script type="text/javascript">
-        const urlDomain = "";
-        //const urlDomain = "@configuration.GetSection("api-url")?.Value";
-        $('#btn-call-product-view').click(function() {
-            $('#product-parts').html("");
-            var productId = $('#product-id').val();
-            buildProductDetails(productId);
-            buildImages(productId);
-        });
-
-        const galleryWidget = $('#gallery').dxGallery({
-            dataSource: [],
-            height: 300,
-            loop: true,
-            slideshowDelay: 2000,
-            showNavButtons: true,
-            showIndicator: true,
-            itemTemplate(item) {
-                const result = $('<div>');
-                $('<img width="auto" height="300">').attr('src', item.url).appendTo(result);
-                return result;
-            },
-        }).dxGallery('instance');
-
-        function buildProductDetails(productId) {
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                url: "/api/products/" + productId,
-                crossDomain: true,
-                cache: false,
-                xhrFields: {
-                    withCredentials: true
-                },
-                async: false,
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    $('#product-name').html(response.productName);
-                    var description = "";
-                    $('#product-description').html(response.description.join(","));
-                    var parts = $("<ul>");
-                    for (var i = 0; i < response.productPartArray.length; i++) {
-                        var partData = response.productPartArray[i];
-                        var color = "";
-                        if (partData.colorArray.length > 0) {
-                            color = partData.colorArray[0].colorName;
-                        }
-                        const part = $("<li>").attr("id",partData.partId);
-                        part.html(partData.partId + ": " + color + " - " + partData.description.join(","));
-                        parts.append(part);
-                    }
-                    $('#product-parts').append(parts);
-                    buildInventory(productId);
-                },
-                error: function (xhr, status) {
-                    toastr.error(status, "An error has occured");
-                }
-            });
-        }
-        function buildInventory(productId) {
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                url: "/api/products/" + productId + "/inventory",
-                crossDomain: true,
-                cache: false,
-                xhrFields: {
-                    withCredentials: true
-                },
-                async: false,
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    console.log(response);
-                    for (var i = 0; i < response.data.length; i++) {
-                        $('#' + response.data[i].partId).append(" - Quantity: " + response.data[i].quantityAvailable.quantity.value);
-                    }
-                },
-                error: function (xhr, status) {
-                    toastr.error(status, "An error has occured");
-                }
-            });
-        }
-        function buildImages(productId) {
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                url: "/api/products/" + productId + "/images",
-                crossDomain: true,
-                cache: false,
-                xhrFields: {
-                    withCredentials: true
-                },
-                async: false,
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    galleryWidget.option("dataSource", response.data);
-                },
-                error: function (xhr, status) {
-                    toastr.error(status, "An error has occured");
-                }
-            });
-        }
-        function buildDocuments() {
-
-        }
-        function buildVideos() {
-
-        }
-    </script>
-</body>
-</html>
+    <div id="product-view" style="margin-top: 20px">
+        <div id="product-details" style="text-align: center">
+            <h4 id="product-name">Product Name</h4>
+            <p id="product-description">Product description</p>
+            <div id="product-parts" style="text-align: left"></div>
+        </div>
+        <div id="product-inventory"></div>
+        <div id="product-images">
+            <div class="widget-container">
+                <div id="gallery"></div>
+            </div>
+        </div>
+        <div id="product-videos"></div>
+        <div id="product-documents"></div>
+        <div id="product-audios"></div>
+    </div>
+</div>

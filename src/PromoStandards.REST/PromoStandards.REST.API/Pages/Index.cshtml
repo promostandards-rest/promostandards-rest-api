@@ -2,102 +2,79 @@
 @inject IConfiguration configuration
 @model PromoStandards.REST.API.Pages.IndexModel
 @{
+    ViewData["js"] = "user-ui.js";
+    ViewData["css"] = "user-ui.css";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PromoStandards.REST.API</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/user-ui.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.913/styles/kendo.default-main.min.css">
-</head>
-<body>
-
-    <div id="container" class="container">
-        <div id="header">
-            <h2 id="title">PromoStandards REST APIs</h2>
-            <fieldset id="api-section">
-                <label for='input-url'>Select an API</label>
-                <a target="_blank">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    <span>
-                </a>
-                <select class="form-select">
-                    <option value="/api/products"
-                            data-id="Product"
-                            data-title="Product">
-                        Get All Products
-                    </option>
-                    <option value="/api/products?sellable=true"
-                            data-id="Product"
-                            data-title="Product">
-                        Get Sellable Products
-                    </option>
-                    <option value="/api/products?closeout=true"
-                            data-id="Product"
-                            data-title="Product">
-                        Get Close Out Products
-                    </option>
-                    <option value="/api/products/{id}"
-                            data-id="Product"
-                            data-ref-id="207BLX"
-                            data-title="Product">
-                        Get Product by ID Sample
-                    </option>
-                    <option value="/api/products/{id}/inventory"
-                            data-id="PartInventoryArrayPartInventory"
-                            data-ref-id="207BLX"
-                            data-title="Product Inventory">
-                        Get Product Inventory
-                    </option>
-                    <option value="/api/products/{id}/sizes"
-                            data-id="ApparelSize"
-                            data-ref-id="207BLX"
-                            data-title="Product Sizes">
-                        Get Product Sizes
-                    </option>
-                    <option value="/api/products/{id}/colors"
-                            data-id="Color"
-                            data-title="Product Colors">
-                        Get Product Colors
-                    </option>
-                </select>
-                <div class="input-group" id="select">
-                    <input type="text" class="form-control" />
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button" id="btn-call-api">
-                            <i class="fa fa-play"></i>
-                            <span>Call</span>
-                        </button>
-                    </div>
+<div class="container">
+    <div id="header">
+        <h2 id="title">PromoStandards REST APIs</h2>
+        <fieldset id="api-section">
+            <label for='input-url'>Select an API</label>
+            <a target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>
+            </a>
+            <select class="form-select">
+                <option value="/api/products"
+                        data-id="Product"
+                        data-title="Product">
+                    Get All Products
+                </option>
+                <option value="/api/products?sellable=true"
+                        data-id="Product"
+                        data-title="Product">
+                    Get Sellable Products
+                </option>
+                <option value="/api/products?closeout=true"
+                        data-id="Product"
+                        data-title="Product">
+                    Get Close Out Products
+                </option>
+                <option value="/api/products/{id}"
+                        data-id="Product"
+                        data-ref-id="207BLX"
+                        data-title="Product">
+                    Get Product by ID Sample
+                </option>
+                <option value="/api/products/{id}/inventory"
+                        data-id="PartInventoryArrayPartInventory"
+                        data-ref-id="207BLX"
+                        data-title="Product Inventory">
+                    Get Product Inventory
+                </option>
+                <option value="/api/products/{id}/sizes"
+                        data-id="ApparelSize"
+                        data-ref-id="207BLX"
+                        data-title="Product Sizes">
+                    Get Product Sizes
+                </option>
+                <option value="/api/products/{id}/colors"
+                        data-id="Color"
+                        data-title="Product Colors">
+                    Get Product Colors
+                </option>
+            </select>
+            <div class="input-group" id="select">
+                <input type="text" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="btn-call-api">
+                        <i class="fa fa-play"></i>
+                        <span>Call</span>
+                    </button>
                 </div>
-            </fieldset>
+            </div>
+        </fieldset>
+    </div>
+    <div id="splitter">
+        <div id="schemaGrid">
+            <h5></h5>
+            <div class="grid"></div>
         </div>
-        <div id="splitter">
-            <div id="schemaGrid">
-                <h5></h5>
-                <div class="grid"></div>
-            </div>
-            <div id="dataGrid">
-                <h5></h5>
-                <div class="grid"></div>
-            </div>
+        <div id="dataGrid">
+            <h5></h5>
+            <div class="grid"></div>
         </div>
     </div>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/user-ui.js" asp-append-version="true"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://kendo.cdn.telerik.com/2022.3.913/js/kendo.all.min.js"></script>
-    <script type="text/javascript">
-        const urlDomain = "";
-        //const urlDomain = "@configuration.GetSection("api-url")?.Value";
-    </script>
-</body>
-</html>

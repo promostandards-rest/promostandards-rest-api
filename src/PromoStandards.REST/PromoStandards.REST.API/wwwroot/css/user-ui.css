@@ -1,101 +1,7 @@
-﻿html {
-    font-size: 14px;
+﻿
+#splitter .k-pane:not(:first-child) h5 {
+    margin-top: 20px;
 }
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-#container {
-    padding: 34px 15px;
-}
-
-    #container #header {
-        display: flex;
-        display: flex;
-        align-items: center;
-    }
-
-        #container #header #title {
-            margin-right: 20px;
-        }
-
-        #container #header fieldset {
-            border: 1px solid #d1d1d1;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            flex-grow: 1;
-        }
-
-#splitter {
-    height: calc(100vh - 200px);
-    border: 0;
-}
-
-    #splitter .k-pane:not(:first-child) h5 {
-        margin-top: 20px;
-    }
-
-code {
-    margin: 0;
-    max-width: 100%;
-    min-width: 100px;
-    min-height: 200px;
-    max-height: calc(100vh - 415px);
-    display: block;
-    background: none;
-    white-space: pre;
-    overflow: auto;
-    height: 100%;
-    width: 100%;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #1b1b1b;
-    color: white;
-}
-
-.json-key {
-    color: #ff2525;
-}
-
-.json-value {
-    color: #14d8ff;
-}
-
-.json-string {
-    color: #dada3a;
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
 
 .responses-inner > div + .responses-table {
     display: none;
@@ -103,10 +9,6 @@ code {
 
 .responses-inner > div > div + h4 {
     display: none;
-}
-
-.k-grid td.k-selected, .k-grid tr.k-selected > td {
-    background-color: rgb(255 211 88 / 25%) !important;
 }
 
 #api-section a {
