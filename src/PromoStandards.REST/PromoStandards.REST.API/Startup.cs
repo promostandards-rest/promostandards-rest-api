@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using AutoBogus;
 using PromoStandards.REST.MongoDB.MediaContent;
 using PromoStandards.REST.StaticImplementation;
+using PromoStandards.REST.API.Services;
 
 namespace PromoStandards.REST.API
 {
@@ -56,6 +57,8 @@ namespace PromoStandards.REST.API
             });
 
             services.AddOptions();
+
+            services.AddSingleton<ISchemaService, SchemaService>();
 
             services.AddSingleton<IMongoClient>(c => new MongoClient(Configuration["MongoDB:Url"]))
                 .AddScoped(c => c.GetService<IMongoClient>().StartSession());
