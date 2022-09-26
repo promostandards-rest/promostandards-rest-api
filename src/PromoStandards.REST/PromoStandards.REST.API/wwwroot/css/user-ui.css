@@ -1,4 +1,6 @@
-﻿
+﻿#splitter {
+    height: calc(100vh - 165px);
+}
 #splitter .k-pane:not(:first-child) h5 {
     margin-top: 20px;
 }

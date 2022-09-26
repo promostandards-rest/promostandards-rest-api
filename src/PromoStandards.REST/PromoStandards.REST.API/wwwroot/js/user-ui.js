@@ -15,7 +15,7 @@
         $.ajax({
             type: "GET",
             dataType: 'json',
-            url: urlDomain + "/swagger/v1/swagger.json",
+            url: "/swagger/v1/swagger.json",
             crossDomain: true,
             cache: false,
             xhrFields: {
@@ -100,7 +100,7 @@
             currentId = refID;
 
             // Add link to screen
-            $("#api-section a").attr("href", urlDomain + url);
+            $("#api-section a").attr("href", url);
             $("#api-section a span").html(url);
             $("#api-section input[type='text']").val(url);
 
@@ -108,7 +108,7 @@
             $("#schemaGrid h5").html(`Schema for ${title} Object`);
             $("#dataGrid h5").html(`${title} Data Collection`);
 
-            getDataAndbuildGrids(urlDomain + url);
+            getDataAndbuildGrids(url);
         }
 
         function getDataAndbuildGrids(url) {

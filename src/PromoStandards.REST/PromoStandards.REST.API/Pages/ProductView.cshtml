@@ -3,6 +3,7 @@
 @model PromoStandards.REST.API.Pages.IndexModel
 @{
     ViewData["js"] = "productview.js";
+    ViewData["css"] = "productview.css";
 }
 
 <div class="container">
@@ -21,8 +22,8 @@
             </div>
         </fieldset>
     </div>
-    <div id="product-view" style="margin-top: 20px">
-        <div id="product-details" style="text-align: center">
+    <div id="product-view" class="section">
+        <div id="product-details">
             <h4 id="product-name">Product Name</h4>
             <p id="product-description">Product description</p>
             <div id="product-parts" style="text-align: left"></div>

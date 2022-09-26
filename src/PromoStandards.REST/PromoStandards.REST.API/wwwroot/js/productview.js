@@ -33,7 +33,7 @@
                 async: false,
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    $('#product-name').html(response.productName);
+                    $('#product-name').html("Product: " + response.productName);
                     var description = "";
                     $('#product-description').html(response.description.join(","));
                     var parts = $("<ul>");
